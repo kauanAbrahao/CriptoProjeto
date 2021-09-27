@@ -17,4 +17,7 @@ public class MoedaBusiness {
     public String adicionarMoeda(){
         return moedaDAO.adicionaMoeda();
     }
+
+    @RequestMapping("/remove")
+    public String removerMoeda(){ return moedaDAO.removeMoedas();}
 }

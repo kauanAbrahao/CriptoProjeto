@@ -1,15 +1,30 @@
 package com.example.CriptoProjeto.dao;
 
-import org.springframework.context.annotation.Bean;
+import com.opengamma.elsql.ElSql;
+import com.opengamma.elsql.ElSqlConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan
-public class AbstractDAO {
+public abstract class AbstractDAO {
+
+     ElSql elSqlBundle;
+     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    protected AbstractDAO(Class<?> classe) {
+        try{
+            namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(mysqlDataSource());
+            elSqlBundle = ElSql.of(ElSqlConfig.MYSQL, classe);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public DataSource mysqlDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -19,6 +34,11 @@ public class AbstractDAO {
         dataSource.setPassword("cr1pP@ss21");
 
         return dataSource;
+    }
+
+    protected String getSql(String sqlQuery){
+        String sql = elSqlBundle.getSql(sqlQuery);
+        return sql;
     }
 
 }
