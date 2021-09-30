@@ -1,7 +1,6 @@
 package com.example.CriptoProjeto.dao;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MoedaDAOImpl extends AbstractDAO {
 
-
-    protected MoedaDAOImpl() {
-        super(MoedaDAOImpl.class);
-    }
 
     public String adicionaMoeda(){
         SimpleJdbcInsert insert = new SimpleJdbcInsert(mysqlDataSource()).withTableName("tab_cripto");
@@ -32,16 +27,7 @@ public class MoedaDAOImpl extends AbstractDAO {
 
     }
 
-    public String removeMoedas(){
-        String sql = getSql("removeMoedas");
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("idCripto", "TST");
-        try {
-            namedParameterJdbcTemplate.update(sql, params);
-            return "moeda excluida";
-        } catch ( Exception e){
-            return "deu merda";
-        }
-
+    public String removerMoeda(){
+       return ("Você está no removerMoeda da Classe MoedaDAOImpl");
     }
 }

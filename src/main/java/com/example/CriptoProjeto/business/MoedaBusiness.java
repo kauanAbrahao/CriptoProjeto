@@ -2,12 +2,10 @@ package com.example.CriptoProjeto.business;
 
 import com.example.CriptoProjeto.dao.MoedaDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@Component
+@Controller
 public class MoedaBusiness {
 
     @Autowired
@@ -15,9 +13,21 @@ public class MoedaBusiness {
 
     @RequestMapping("/")
     public String adicionarMoeda(){
-        return moedaDAO.adicionaMoeda();
+        try{
+            return "index";
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    @RequestMapping("/remove")
-    public String removerMoeda(){ return moedaDAO.removeMoedas();}
+    @RequestMapping("/formRemove")
+    public String mostraFormParaRemover(){
+        return "formRemover";
+    }
+
+    @RequestMapping("/formProcessa")
+    public String processaForm(){
+        return "olá, deu certo :)";
+    }
 }
