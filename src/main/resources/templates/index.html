@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
-<html>
-    <head>
-        <title>me mata plz</title>
-    </head>
-    <body>
-        <h1>HELLO WORLD! <br><br> Página Inicial</h1>
-        <h2>Seja bem vindo à nossa página!</h2>
-    </body>
-
-    <form action="/formRemove">
-        <input type="submit" value="Remover Moeda"/>
-    </form>
-
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Inserir moeda no banco</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Form</h1>
+<form action="#" th:action="@{/testaBanco}" th:object="${criptomoeda}" method="post">
+    <p>Id: <input type="text" th:field="*{id}" /></p>
+    <p>Nome: <input type="text" th:field="*{nome}" /></p>
+    <p>Mkt-cap: <input type="number" th:field="*{mrkCapt}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
 </html>

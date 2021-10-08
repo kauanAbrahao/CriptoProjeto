@@ -1,28 +1,27 @@
 package com.example.CriptoProjeto.dao;
 
+import com.example.CriptoProjeto.entity.Criptomoeda;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 
 
 @Component
 public class MoedaDAOImpl extends AbstractDAO {
 
 
-    public String adicionaMoeda(){
-        SimpleJdbcInsert insert = new SimpleJdbcInsert(mysqlDataSource()).withTableName("tab_cripto");
+    public String adicionaMoeda(Criptomoeda criptomoeda){
+        String sql = getSql("insertMoeda");
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("ID_Cripto", "BTC");
-        params.addValue("Nome_Cripto", "Bitcoin");
-        params.addValue("MKT_Cap_Rank", 200);
-
-
-        try {
-            insert.execute(params);
-            return "moeda adicionada";
-        } catch (Exception e) {
+        params.addValue("ID_Cripto", criptomoeda.getId());
+        params.addValue("Nome_Cripto", criptomoeda.getNome());
+        params.addValue("MKT_Cap_Rank", criptomoeda.getMrkCapt());
+        try{
+            namedParameterJdbcTemplate.update(sql, params);
+            return "deubom";
+        } catch (Exception e){
             e.printStackTrace();
-            return "erro no processo";
+            return "deuruim";
         }
 
     }
