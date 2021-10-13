@@ -13,7 +13,7 @@ public class CriptomoedaRowMapper implements RowMapper<Criptomoeda> {
     public Criptomoeda mapRow(ResultSet resultSet, int i) throws SQLException {
         Criptomoeda criptomoeda = new Criptomoeda();
         criptomoeda.setId(resultSet.getString("ID_Cripto"));
-        criptomoeda.setNome(resultSet.getString("Nome_Cripto"));
+        criptomoeda.setName(resultSet.getString("Nome_Cripto"));
         criptomoeda.setMrkCapt(resultSet.getInt("MKT_Cap_Rank"));
         return criptomoeda;
     }

@@ -3,7 +3,7 @@ package com.example.CriptoProjeto.entity;
 public class Criptomoeda {
 
     private String id;
-    private String nome;
+    private String name;
     private Integer mrkCapt;
 
     public String getId() {
@@ -14,12 +14,12 @@ public class Criptomoeda {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getMrkCapt() {

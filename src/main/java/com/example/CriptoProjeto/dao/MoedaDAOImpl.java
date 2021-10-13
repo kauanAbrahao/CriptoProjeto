@@ -4,7 +4,6 @@ import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
 import com.example.CriptoProjeto.entity.Criptomoeda;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class MoedaDAOImpl extends AbstractDAO {
         String sql = getSql("insertMoeda");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptomoeda.getId());
-        params.addValue("Nome_Cripto", criptomoeda.getNome());
+        params.addValue("Nome_Cripto", criptomoeda.getName());
         params.addValue("MKT_Cap_Rank", criptomoeda.getMrkCapt());
         try{
             namedParameterJdbcTemplate.update(sql, params);
