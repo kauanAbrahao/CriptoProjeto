@@ -1,18 +1,18 @@
 package com.example.CriptoProjeto.entrypoint;
 
-import com.example.CriptoProjeto.entity.Criptomoeda;
+import com.example.CriptoProjeto.entity.CriptoModelo;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class GsonReceiver {
 
    final String COIN_GECKO = "https://api.coingecko.com/api/v3/coins/list";
-    final String COIN_BITCOIN = "https://api.coingecko.com/api/v3/coins/bitcoin";
+   final String COIN_BITCOIN = "https://api.coingecko.com/api/v3/coins/bitcoin";
    final String TEST_POST = "https://jsonplaceholder.typicode.com/posts/1";
+   final String COIN_EXTREMOS = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
    public String getCriptoJson() throws IOException {
 
@@ -38,6 +38,30 @@ public class GsonReceiver {
 
    }
 
+    public String getCriptoJsonMarkets() throws IOException {
+
+        URL url = new URL(COIN_EXTREMOS);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod(RequestMethod.GET.toString());
+        connection.setRequestProperty("Accept", "application/json");
+
+        if(connection.getResponseCode() > 299){
+            throw new IOException("Erro código HTTP: " + connection.getResponseCode());
+        }
+
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuffer saida = new StringBuffer();
+        String line;
+        while ((line = bufferedReader.readLine()) != null){
+            saida.append(line);
+        }
+        bufferedReader.close();
+
+        System.out.println("Response HTTP: " + connection.getResponseCode());
+        return saida.toString();
+
+    }
+
     public String getListCriptoJson() throws IOException {
 
         URL url = new URL(COIN_GECKO);
@@ -62,7 +86,7 @@ public class GsonReceiver {
 
     }
 
-   public String postTeste(Criptomoeda criptomoeda) throws IOException {
+   public String postTeste(CriptoModelo criptomoeda) throws IOException {
 
        //Definindo a conexão
        URL url = new URL(TEST_POST);

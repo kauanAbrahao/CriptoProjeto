@@ -1,7 +1,7 @@
 package com.example.CriptoProjeto.dao;
 
 import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
-import com.example.CriptoProjeto.entity.Criptomoeda;
+import com.example.CriptoProjeto.entity.CriptoModelo;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
@@ -15,12 +15,12 @@ public class MoedaDAOImpl extends AbstractDAO {
     final CriptomoedaRowMapper criptomoedaRowMapper = new CriptomoedaRowMapper();
 
 
-    public String adicionaMoeda(Criptomoeda criptomoeda){
+    public String adicionaMoeda(CriptoModelo criptoModelo){
         String sql = getSql("insertMoeda");
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("ID_Cripto", criptomoeda.getId());
-        params.addValue("Nome_Cripto", criptomoeda.getName());
-        params.addValue("MKT_Cap_Rank", criptomoeda.getMrkCapt());
+        params.addValue("ID_Cripto", criptoModelo.getId());
+        params.addValue("Nome_Cripto", criptoModelo.getName());
+        params.addValue("MKT_Cap_Rank", criptoModelo.getMrkCapt());
         try{
             namedParameterJdbcTemplate.update(sql, params);
             return "deubom";
@@ -35,7 +35,7 @@ public class MoedaDAOImpl extends AbstractDAO {
        return ("Você está no removerMoeda da Classe MoedaDAOImpl");
     }
 
-    public List<Criptomoeda> buscarMoedas() {
+    public List<CriptoModelo> buscarMoedas() {
         String sql = getSql("buscarMoedas");
 
         try {
@@ -46,7 +46,7 @@ public class MoedaDAOImpl extends AbstractDAO {
         }
     }
 
-    public Criptomoeda buscarCriptoPorId(String idCripto) {
+    public CriptoModelo buscarCriptoPorId(String idCripto) {
         String sql = getSql("buscaMoedaPorId");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("idCripto", idCripto);

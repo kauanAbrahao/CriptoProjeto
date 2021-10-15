@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto.entity;
+package com.example.CriptoProjeto.entity.enums;
 
 public enum EnumCripto {
 

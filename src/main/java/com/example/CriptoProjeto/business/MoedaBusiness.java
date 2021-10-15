@@ -1,7 +1,7 @@
 package com.example.CriptoProjeto.business;
 
 import com.example.CriptoProjeto.dao.MoedaDAOImpl;
-import com.example.CriptoProjeto.entity.Criptomoeda;
+import com.example.CriptoProjeto.entity.CriptoModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ public class MoedaBusiness {
 
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("criptomoeda", new Criptomoeda());
+        model.addAttribute("criptomoeda", new CriptoModelo());
         try{
             return "index";
         } catch (Exception e){
@@ -26,8 +26,8 @@ public class MoedaBusiness {
     }
 
     @RequestMapping("/testaBanco")
-    public String testaBancoInserindoMoeda(@ModelAttribute Criptomoeda criptomoeda){
-        return moedaDAO.adicionaMoeda(criptomoeda);
+    public String testaBancoInserindoMoeda(@ModelAttribute CriptoModelo criptoModelo){
+        return moedaDAO.adicionaMoeda(criptoModelo);
     }
 
     @RequestMapping("/formRemove")

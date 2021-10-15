@@ -1,7 +1,7 @@
 package com.example.CriptoProjeto.business;
 
 import com.example.CriptoProjeto.dao.MoedaDAOImpl;
-import com.example.CriptoProjeto.entity.Criptomoeda;
+import com.example.CriptoProjeto.entity.CriptoModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +22,13 @@ public class DevolveMoedaBusiness {
     MoedaDAOImpl moedaDAO;
 
     @GetMapping("/jsonCripto")
-    public List<Criptomoeda> buscaCriptomoedas(){
+    public List<CriptoModelo> buscaCriptomoedas(){
         return moedaDAO.buscarMoedas();
     }
 
     @GetMapping("/jsonMoedaEspecifica/{idCripto}")
-    public ResponseEntity<Criptomoeda> buscaCriptomoedaPorId(@PathVariable(value = "idCripto") String idCripto){
-        Criptomoeda criptomoeda = moedaDAO.buscarCriptoPorId(idCripto);
-        return ResponseEntity.ok().body(criptomoeda);
+    public ResponseEntity<CriptoModelo> buscaCriptomoedaPorId(@PathVariable(value = "idCripto") String idCripto){
+        CriptoModelo criptoModelo = moedaDAO.buscarCriptoPorId(idCripto);
+        return ResponseEntity.ok().body(criptoModelo);
     }
 }

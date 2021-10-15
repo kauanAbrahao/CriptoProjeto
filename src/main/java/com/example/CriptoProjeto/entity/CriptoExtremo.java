@@ -48,4 +48,14 @@ public class CriptoExtremo {
     public void setData_hr(LocalDateTime data_hr) {
         this.data_hr = data_hr;
     }
+
+    @Override
+    public String toString() {
+        return "CriptoExtremo{" +
+                "id='" + id + '\'' +
+                ", high_24h=" + high_24h +
+                ", low_24h=" + low_24h +
+                ", data_hr=" + data_hr +
+                '}';
+    }
 }

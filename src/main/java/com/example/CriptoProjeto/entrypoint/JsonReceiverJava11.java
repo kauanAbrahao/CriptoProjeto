@@ -15,7 +15,7 @@ public class JsonReceiverJava11 {
         client.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
 //                .thenAccept(System.out::println)
-                .thenApply(JsonParser::parseJson)
+//                .thenApply(JsonParser::parseJson)
                 .join();
     }
 }
