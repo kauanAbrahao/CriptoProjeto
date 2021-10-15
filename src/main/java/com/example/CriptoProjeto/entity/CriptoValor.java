@@ -1,22 +1,31 @@
 package com.example.CriptoProjeto.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class CriptoValor {
 
     private String id;
-    private BigDecimal current_price;
-    private Long market_cap;
-    private Long total_volume;
-    private LocalDateTime data_hr;
+
+    @SerializedName("current_price")
+    private BigDecimal currentPrice;
+
+    @SerializedName("market_cap")
+    private Long mktCap;
+
+    @SerializedName("total_volume")
+    private Long totalVolume;
+
+    private LocalDateTime dthrInclusao;
 
     public CriptoValor(String id, BigDecimal current_price, Long market_cap, Long total_volume, LocalDateTime data_hr) {
         this.id = id;
-        this.current_price = current_price;
-        this.market_cap = market_cap;
-        this.total_volume = total_volume;
-        this.data_hr = data_hr;
+        this.currentPrice = current_price;
+        this.mktCap = market_cap;
+        this.totalVolume = total_volume;
+        this.dthrInclusao = data_hr;
     }
 
     public String getId() {
@@ -27,46 +36,46 @@ public class CriptoValor {
         this.id = id;
     }
 
-    public BigDecimal getCurrent_price() {
-        return current_price;
+    public BigDecimal getCurrentPrice() {
+        return currentPrice;
     }
 
-    public void setCurrent_price(BigDecimal current_price) {
-        this.current_price = current_price;
+    public void setCurrentPrice(BigDecimal currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
-    public Long getMarket_cap() {
-        return market_cap;
+    public Long getMktCap() {
+        return mktCap;
     }
 
-    public void setMarket_cap(Long market_cap) {
-        this.market_cap = market_cap;
+    public void setMktCap(Long mktCap) {
+        this.mktCap = mktCap;
     }
 
-    public Long getTotal_volume() {
-        return total_volume;
+    public Long getTotalVolume() {
+        return totalVolume;
     }
 
-    public void setTotal_volume(Long total_volume) {
-        this.total_volume = total_volume;
+    public void setTotalVolume(Long totalVolume) {
+        this.totalVolume = totalVolume;
     }
 
-    public LocalDateTime getData_hr() {
-        return data_hr;
+    public LocalDateTime getDthrInclusao() {
+        return dthrInclusao;
     }
 
-    public void setData_hr(LocalDateTime data_hr) {
-        this.data_hr = data_hr;
+    public void setDthrInclusao(LocalDateTime dthrInclusao) {
+        this.dthrInclusao = dthrInclusao;
     }
 
     @Override
     public String toString() {
         return "CriptoValor{" +
                 "id='" + id + '\'' +
-                ", current_price=" + current_price +
-                ", market_cap=" + market_cap +
-                ", total_volume=" + total_volume +
-                ", data_hr=" + data_hr +
+                ", current_price=" + currentPrice +
+                ", market_cap=" + mktCap +
+                ", total_volume=" + totalVolume +
+                ", data_hr=" + dthrInclusao +
                 '}';
     }
 }

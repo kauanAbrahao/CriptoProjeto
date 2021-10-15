@@ -36,7 +36,7 @@ public class GsonParser {
 
     public static List<CriptoExtremo> jsonToObjectList(String json){
         Gson gson = new Gson();
-        TypeToken<List<CriptoExtremo>> token = new TypeToken<List<CriptoExtremo>>(){};
+        TypeToken<List<CriptoExtremo>> token = new TypeToken<>(){};
         Type type = token.getType();
 
         return gson.fromJson(json, type);

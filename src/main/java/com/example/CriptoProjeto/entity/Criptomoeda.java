@@ -1,5 +1,7 @@
 package com.example.CriptoProjeto.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.time.LocalDateTime;
 
 public class Criptomoeda {
@@ -7,9 +9,12 @@ public class Criptomoeda {
     private String id;
     private String symbol;
     private String name;
-    private int market_cap_rank;
+
+    @SerializedName("market_cap_rank")
+    private int mktCapRank;
+
     private CriptoValor criptoValor;
-    private LocalDateTime data_hr;
+    private LocalDateTime dthrInclusao;
 
     public Criptomoeda(){
 
@@ -18,7 +23,7 @@ public class Criptomoeda {
         this.id = id;
         this.symbol = symbol;
         this.name = name;
-        this.market_cap_rank = market_cap_rank;
+        this.mktCapRank = market_cap_rank;
         this.criptoValor = valor;
     }
 
@@ -46,12 +51,12 @@ public class Criptomoeda {
         this.name = name;
     }
 
-    public int getMarket_cap_rank() {
-        return market_cap_rank;
+    public int getMktCapRank() {
+        return mktCapRank;
     }
 
-    public void setMarket_cap_rank(int market_cap_rank) {
-        this.market_cap_rank = market_cap_rank;
+    public void setMktCapRank(int mktCapRank) {
+        this.mktCapRank = mktCapRank;
     }
 
     public CriptoValor getCriptoValor() {
@@ -68,7 +73,7 @@ public class Criptomoeda {
                 "id='" + id + '\'' +
                 ", symbol='" + symbol + '\'' +
                 ", name='" + name + '\'' +
-                ", market_cap_rank=" + market_cap_rank +
+                ", market_cap_rank=" + mktCapRank +
                 ", criptoValor=" + criptoValor +
                 '}';
     }

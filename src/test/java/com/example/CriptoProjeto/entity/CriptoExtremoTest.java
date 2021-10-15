@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto;
+package com.example.CriptoProjeto.entity;
 
 import com.example.CriptoProjeto.entity.*;
 import com.example.CriptoProjeto.entity.enums.EnumCripto;
@@ -29,18 +29,6 @@ public class CriptoExtremoTest {
         Assert.assertTrue(criptoExtremoList.size() > 1);
         Assert.assertTrue(criptoExtremoList.get(0).getId().equals(EnumCripto.BITCOIN.getId()));
         Assert.assertTrue(criptoExtremoList.get(1).getId().equals(EnumCripto.ETHEREUM.getId()));
-
-    }
-
-    @Test
-    public void criptoValor_preencheListaDeObjetos() throws IOException {
-        String jsonValor = gsonReceiver.getCriptoJsonMarkets();
-        List<CriptoValor> criptoValorList = GsonParser.jsonToObjectList(jsonValor, true);
-        System.out.println(criptoValorList.get(0).toString());
-        Assert.assertTrue(criptoValorList.size() > 1);
-        Assert.assertTrue(criptoValorList.get(0).getId().equals(EnumCripto.BITCOIN.getId()));
-        Assert.assertTrue(criptoValorList.get(1).getId().equals(EnumCripto.ETHEREUM.getId()));
-        Assert.assertNotNull(criptoValorList.get(0).getMarket_cap());
 
     }
 }
