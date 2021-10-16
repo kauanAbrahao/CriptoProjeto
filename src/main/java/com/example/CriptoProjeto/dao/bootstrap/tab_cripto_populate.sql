@@ -71,8 +71,10 @@ INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES 
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('helium', 'Helium', 71);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('dash', 'Dash', 72);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('omisego', 'OMG Network', 73);
+INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('compound-governance-token', 'Compound', 74);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('celo', 'Celo', 75);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('chiliz', 'Chiliz', 76);
+INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('havven', 'Synthetix Network Token', 77);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('magic-internet-money', 'Magic Internet Money', 78);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('holotoken', 'Holo', 79);
 INSERT INTO modocripto.tab_cripto (ID_Cripto, Nome_Cripto, MKT_Cap_Rank) VALUES ('decred', 'Decred', 80);
