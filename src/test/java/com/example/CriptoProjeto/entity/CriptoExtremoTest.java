@@ -1,28 +1,27 @@
 package com.example.CriptoProjeto.entity;
 
-import com.example.CriptoProjeto.entity.*;
 import com.example.CriptoProjeto.entity.enums.EnumCripto;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;
 import org.junit.Assert;
 import org.junit.Test;
-import java.util.List;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CriptoExtremoTest {
 
     GsonReceiver gsonReceiver = new GsonReceiver();
 
     @Test
-    public void criptoExtremo_retornaJson_listaDeExtremos() throws IOException {
+    public void criptoExtremo_retornaJson_listaDeExtremosTeste() throws IOException {
         String jsonExtremos = gsonReceiver.getCriptoJsonMarkets();
         Assert.assertNotNull(jsonExtremos);
 
     }
 
     @Test
-    public void criptoExtremo_preencheListaDeObjetos() throws IOException {
+    public void criptoExtremo_preencheListaDeObjetosTeste() throws IOException {
         String jsonExtremos = gsonReceiver.getCriptoJsonMarkets();
         List<CriptoExtremo> criptoExtremoList = GsonParser.jsonToObjectList(jsonExtremos);
         System.out.println(criptoExtremoList.get(0).toString());

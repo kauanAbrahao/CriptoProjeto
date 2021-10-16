@@ -16,11 +16,11 @@ public class CriptoValor {
     private Long mktCap;
 
     @SerializedName("total_volume")
-    private Long totalVolume;
+    private BigDecimal totalVolume;
 
     private LocalDateTime dthrInclusao;
 
-    public CriptoValor(String id, BigDecimal current_price, Long market_cap, Long total_volume, LocalDateTime data_hr) {
+    public CriptoValor(String id, BigDecimal current_price, Long market_cap, BigDecimal total_volume, LocalDateTime data_hr) {
         this.id = id;
         this.currentPrice = current_price;
         this.mktCap = market_cap;
@@ -52,11 +52,11 @@ public class CriptoValor {
         this.mktCap = mktCap;
     }
 
-    public Long getTotalVolume() {
+    public BigDecimal getTotalVolume() {
         return totalVolume;
     }
 
-    public void setTotalVolume(Long totalVolume) {
+    public void setTotalVolume(BigDecimal totalVolume) {
         this.totalVolume = totalVolume;
     }
 
