@@ -16,9 +16,8 @@ public class Criptomoeda {
     private CriptoValor criptoValor;
     private LocalDateTime dthrInclusao;
 
-    public Criptomoeda(){
+    public Criptomoeda(){}
 
-    }
     public Criptomoeda(String id, String symbol, String name, int market_cap_rank, CriptoValor valor) {
         this.id = id;
         this.symbol = symbol;

@@ -29,12 +29,12 @@ public abstract class AbstractDAO {
 
     public String getSql(String query){
         switch (query){
-            case "insertMoeda":
-                return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank)";
             case "buscarMoedas":
                 return "SELECT * FROM tab_cripto";
             case "buscaMoedaPorId":
                 return "SELECT * FROM tab_cripto WHERE ID_Cripto = :idCripto";
+            case "insertMoedas":
+                return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank)";
 
         }
 

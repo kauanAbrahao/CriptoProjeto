@@ -49,4 +49,12 @@ public class GsonParser {
 
         return gson.fromJson(json, type);
     }
+
+    public static List<Criptomoeda> jsonToCriptomoedaList(String json){
+        Gson gson = new Gson();
+        TypeToken<List<Criptomoeda>> token = new TypeToken<>(){};
+        Type type = token.getType();
+
+        return gson.fromJson(json, type);
+    }
 }

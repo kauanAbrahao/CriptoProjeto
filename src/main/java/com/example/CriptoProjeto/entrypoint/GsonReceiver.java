@@ -1,12 +1,14 @@
 package com.example.CriptoProjeto.entrypoint;
 
 import com.example.CriptoProjeto.entity.CriptoModelo;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+@Component
 public class GsonReceiver {
 
    final String COIN_GECKO = "https://api.coingecko.com/api/v3/coins/list";
