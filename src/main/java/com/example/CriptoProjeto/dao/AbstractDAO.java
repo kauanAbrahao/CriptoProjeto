@@ -32,7 +32,10 @@ public abstract class AbstractDAO {
                 return "SELECT * FROM tab_cripto WHERE ID_Cripto = :idCripto";
             case "insertMoedas":
                 return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank)";
-
+            case "insertCriptoValor":
+                return "INSERT INTO tab_valor VALUES(:ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume, CURRENT_TIMESTAMP()";
+            case "insertCriptoExtremo":
+                return "INSERT INTO tab_extremos VALUES (:ID_Cripto, :High_low, :Valor, CURRENT_TIMESTAMP()";
         }
 
         return null;

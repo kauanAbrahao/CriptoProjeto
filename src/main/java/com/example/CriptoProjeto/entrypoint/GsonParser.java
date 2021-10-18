@@ -42,7 +42,7 @@ public class GsonParser {
         return gson.fromJson(json, type);
     }
 
-    public static List<CriptoValor> jsonToObjectList(String json, boolean euEstouAquiPorFavorMeRetire){
+    public static List<CriptoValor> jsonToObjectList(String json, boolean isCriptoValor){
         Gson gson = new Gson();
         TypeToken<List<CriptoValor>> token = new TypeToken<>(){};
         Type type = token.getType();

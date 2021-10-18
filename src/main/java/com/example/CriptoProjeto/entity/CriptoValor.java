@@ -20,6 +20,8 @@ public class CriptoValor {
 
     private LocalDateTime dthrInclusao;
 
+    public CriptoValor(){}
+
     public CriptoValor(String id, BigDecimal current_price, Long market_cap, BigDecimal total_volume, LocalDateTime data_hr) {
         this.id = id;
         this.currentPrice = current_price;
