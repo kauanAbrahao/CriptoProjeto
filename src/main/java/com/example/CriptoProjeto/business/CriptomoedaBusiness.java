@@ -23,7 +23,7 @@ public class CriptomoedaBusiness {
         GsonReceiver gsonReceiver = new GsonReceiver();
         String json = gsonReceiver.getCriptoJsonMarkets();
 
-         List<CriptoValor> criptomoedaList = GsonParser.jsonToObjectList(json, true);
+         List<CriptoValor> criptomoedaList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
          System.out.println(criptomoedaList.get(0).toString());
     }
 
@@ -32,7 +32,7 @@ public class CriptomoedaBusiness {
         GsonReceiver gsonReceiver = new GsonReceiver();
         String json = gsonReceiver.getCriptoJsonMarkets();
 
-        List<CriptoValor> criptomoedaList = GsonParser.jsonToObjectList(json, true);
+        List<CriptoValor> criptomoedaList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
         System.out.println(criptomoedaList.get(0).toString());
     }
 

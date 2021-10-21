@@ -23,7 +23,7 @@ public class CriptoExtremoTest {
     @Test
     public void criptoExtremo_preencheListaDeObjetosTeste() throws IOException {
         String jsonExtremos = gsonReceiver.getCriptoJsonMarkets();
-        List<CriptoExtremo> criptoExtremoList = GsonParser.jsonToObjectList(jsonExtremos);
+        List<CriptoExtremo> criptoExtremoList = GsonParser.jsonToObjectList(jsonExtremos, CriptoExtremo[].class);
         System.out.println(criptoExtremoList.get(0).toString());
         Assert.assertTrue(criptoExtremoList.size() > 1);
         Assert.assertTrue(criptoExtremoList.get(0).getId().equals(EnumCripto.BITCOIN.getId()));

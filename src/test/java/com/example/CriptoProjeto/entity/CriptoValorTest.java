@@ -1,14 +1,10 @@
 package com.example.CriptoProjeto.entity;
 
-import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.enums.EnumCripto;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +17,7 @@ public class CriptoValorTest {
     @Test
     public void criptoValor_preencheListaDeObjetosTeste() throws IOException {
         String jsonValor = gsonReceiver.getCriptoJsonMarkets();
-        List<CriptoValor> criptoValorList = GsonParser.jsonToObjectList(jsonValor, true);
+        List<CriptoValor> criptoValorList = GsonParser.jsonToObjectList(jsonValor, CriptoValor[].class);
         System.out.println(criptoValorList.get(0).toString());
         Assert.assertTrue(criptoValorList.size() > 1);
         Assert.assertTrue(criptoValorList.get(0).getId().equals(EnumCripto.BITCOIN.getId()));

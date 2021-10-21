@@ -29,4 +29,6 @@ public class CriptoModelo {
     public void setMrkCapt(Integer mrkCapt) {
         this.mrkCapt = mrkCapt;
     }
+
+
 }

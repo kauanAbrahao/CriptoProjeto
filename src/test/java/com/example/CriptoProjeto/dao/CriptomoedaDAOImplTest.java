@@ -6,14 +6,12 @@ import com.example.CriptoProjeto.entrypoint.GsonReceiver;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.util.List;
 
 @SpringBootTest
-@DataJdbcTest
 public class CriptomoedaDAOImplTest extends AbstractDAOTest {
 
     @Autowired
@@ -33,7 +31,7 @@ public class CriptomoedaDAOImplTest extends AbstractDAOTest {
 
         //Dado que um JSON foi buscado e transformado em CriptoValor
         String json = gsonReceiver.getCriptoJsonMarkets();
-        List<CriptoValor> criptoValorList = GsonParser.jsonToObjectList(json, true);
+        List<CriptoValor> criptoValorList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
         try{
             for (CriptoValor criptoValor : criptoValorList){
                 criptomoedaDAO.adicionarCriptoValor(criptoValor);

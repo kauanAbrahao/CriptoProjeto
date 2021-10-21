@@ -11,7 +11,7 @@ import java.net.URL;
 @Component
 public class GsonReceiver {
 
-   final String COIN_GECKO = "https://api.coingecko.com/api/v3/coins/list";
+   final String COIN_GECKO_LIST_ALL_CRIPTO = "https://api.coingecko.com/api/v3/coins/list";
    final String COIN_BITCOIN = "https://api.coingecko.com/api/v3/coins/bitcoin";
    final String TEST_POST = "https://jsonplaceholder.typicode.com/posts/1";
    final String COIN_EXTREMOS = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
@@ -64,9 +64,9 @@ public class GsonReceiver {
 
     }
 
-    public String getListCriptoJson() throws IOException {
+    public String getJsonAllCriptoList() throws IOException {
 
-        URL url = new URL(COIN_GECKO);
+        URL url = new URL(COIN_GECKO_LIST_ALL_CRIPTO);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod(RequestMethod.GET.toString());
         connection.setRequestProperty("Accept", "application/json");
@@ -83,7 +83,6 @@ public class GsonReceiver {
         }
         bufferedReader.close();
 
-        System.out.println("Response HTTP: " + connection.getResponseCode());
         return saida.toString();
 
     }
