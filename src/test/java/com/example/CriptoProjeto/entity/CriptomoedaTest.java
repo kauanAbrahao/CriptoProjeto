@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class CriptomoedaTest {
 
@@ -16,12 +14,12 @@ public class CriptomoedaTest {
 
     @Test
     public void criptoValor_preencheListaDeObjetosTeste() throws IOException {
-        //Pegando uma criptomoeda em específico (bitcoiN)
+        //Pegando uma criptomoeda em específico (bitcoin)
         String json = gsonReceiver.getCriptoJson();
 
         Criptomoeda criptomoeda = (Criptomoeda) GsonParser.jsonToObject(json, Criptomoeda.class);
         Assert.assertNotNull(criptomoeda);
-        Assert.assertEquals(criptomoeda.getId().toLowerCase(), "bitcoin");
+        Assert.assertEquals(criptomoeda.getId().toLowerCase(), EnumCripto.BITCOIN.getId());
 
     }
 }

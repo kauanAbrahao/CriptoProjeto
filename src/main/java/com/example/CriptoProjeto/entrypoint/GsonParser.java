@@ -31,8 +31,8 @@ public class GsonParser {
 //        Type type = token.getType();
 //
 //        return gson.fromJson(json, type);
-        T obj = gson.fromJson(json, tClass);
-        return obj;
+        return gson.fromJson(json, tClass);
+
     }
 
 }

@@ -18,7 +18,7 @@ public class CriptomoedaBusiness {
 
     final String tempoReq = "6000";
 
-   //  @Scheduled(fixedDelayString = tempoReq)
+    @Scheduled(fixedDelayString = tempoReq)
     public void buscaJsonCriptoValorScheduler() throws IOException {
         GsonReceiver gsonReceiver = new GsonReceiver();
         String json = gsonReceiver.getCriptoJsonMarkets();
