@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import java.io.IOException;
 import java.util.List;
 
-//@Controller
-//@EnableScheduling
+@Controller
+@EnableScheduling
 public class CriptomoedaBusiness {
 
     final String tempoReq = "6000";
