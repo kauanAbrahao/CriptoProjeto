@@ -3,7 +3,9 @@ package com.example.CriptoProjeto.dao;
 import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,18 +28,23 @@ public class CriptomoedaDAOImplTest extends AbstractDAOTest {
         Assert.assertNotNull(gsonReceiver);
     }
 
+
+    @After
+    public void limpaBase(){
+        super.limpaBase("tab_valor");
+    }
+
     @Test
     public void adicionarCriptoValorTest() throws IOException {
-
         //Dado que um JSON foi buscado e transformado em CriptoValor
         String json = gsonReceiver.getCriptoJsonMarkets();
         List<CriptoValor> criptoValorList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
         try{
-            for (CriptoValor criptoValor : criptoValorList){
-                criptomoedaDAO.adicionarCriptoValor(criptoValor);
-            }
+            criptomoedaDAO.adicionarCriptoValor(criptoValorList.get(0));
+            CriptoValor criptoValor = super.buscaCriptoValorTestAux(criptoValorList.get(0));
+            Assert.assertNotNull(criptoValor);
         } catch (Exception e){
-            Assert.fail("Exception no Insert");
+            Assert.fail("Exception na chamada do DAO");
         }
 
     }
