@@ -11,3 +11,4 @@ ALTER TABLE tab_valor MODIFY COLUMN Total_Volume BIGINT;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+ALTER TABLE tab_cripto ADD Symbol Varchar(10);

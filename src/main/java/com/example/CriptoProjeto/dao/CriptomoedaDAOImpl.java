@@ -1,11 +1,19 @@
 package com.example.CriptoProjeto.dao;
 
+import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
 import com.example.CriptoProjeto.entity.CriptoExtremo;
+import com.example.CriptoProjeto.entity.CriptoModelo;
 import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.Criptomoeda;
 import com.example.CriptoProjeto.entity.enums.EnumHighLow;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
 
 @Component
 public class CriptomoedaDAOImpl extends AbstractDAO {
@@ -14,6 +22,7 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         String sql = getSql("insertMoedas");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptomoeda.getId());
+        params.addValue("Symbol", criptomoeda.getSymbol());
         params.addValue("Nome_Cripto", criptomoeda.getName());
         params.addValue("MKT_Cap_Rank", criptomoeda.getMktCapRank());
         try{
@@ -48,6 +57,27 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+
+    public List<Criptomoeda> getCriptoInfo() {
+        String sql = getSql("buscarMoedas");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        List<Criptomoeda> c = null;
+        try{
+            c = (namedParameterJdbcTemplate.query(sql, new CriptomoedaRowMapper()));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return c;
+//        Connection con = null;
+//        con = connection.Con
+//        ResultSet rset = null;
+//        PreparedStatement pstm = null;
+//        String sql = getSql("buscarMoedas");
+//        pstm = conn.pre
+//        rset = pstm.executeQuery(sql);
 
     }
 }
