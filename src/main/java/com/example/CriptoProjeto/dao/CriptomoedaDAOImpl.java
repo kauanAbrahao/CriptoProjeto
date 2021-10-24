@@ -71,13 +71,5 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
             e.printStackTrace();
         }
         return c;
-//        Connection con = null;
-//        con = connection.Con
-//        ResultSet rset = null;
-//        PreparedStatement pstm = null;
-//        String sql = getSql("buscarMoedas");
-//        pstm = conn.pre
-//        rset = pstm.executeQuery(sql);
-
     }
 }

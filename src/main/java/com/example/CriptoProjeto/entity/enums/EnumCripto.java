@@ -1,6 +1,7 @@
 package com.example.CriptoProjeto.entity.enums;
 
 public enum EnumCripto {
+    AAVE("aave","aave","Aave"),
     ALGORAND("algorand","algo","Algorand"),
     AMPTOKEN("amp-token","amp","Amp"),
     ARWEAVE("arweave","ar","Arweave"),

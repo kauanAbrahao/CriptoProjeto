@@ -29,15 +29,28 @@ public class CriptomoedaBusiness {
 
     final String tempoReq = "6000";
 
-    @Scheduled(fixedDelayString = tempoReq)
-    public void buscaJsonCriptoValorScheduler() throws IOException {
+//    @Scheduled(fixedDelayString = tempoReq)
+//    public void buscaJsonCriptoValorScheduler() throws IOException {
+//        String json = gsonReceiver.getCriptoJsonMarkets();
+//         List<CriptoValor> criptovalorList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
+//         for (CriptoValor criptovalor : criptovalorList) {
+//             if (isInEnum(criptovalor.getId(), EnumCripto.class) == true){
+//                 moedaDao.adicionarCriptoValor(criptovalor);
+//             }
+//         }
+//    }
+
+    @Scheduled(cron = "0 50 20 * * ?")
+    public void buscaJsonCriptoExtremo() throws IOException {
         String json = gsonReceiver.getCriptoJsonMarkets();
-         List<CriptoValor> criptovalorList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
-         for (CriptoValor m : criptovalorList) {
-             if (isInEnum(m.getId(), EnumCripto.class) == true){
-                 moedaDao.adicionarCriptoValor(m);
-             }
-         }
+        List<CriptoExtremo> criptoextremoList = GsonParser.jsonToObjectList(json, CriptoExtremo[].class);
+        for (CriptoExtremo criptoextremo : criptoextremoList) {
+            if (isInEnum(criptoextremo.getId(), EnumCripto.class) == true){
+               moedaDao.adicionarCriptoExtremo(criptoextremo, false);
+               moedaDao.adicionarCriptoExtremo(criptoextremo, true);
+               // System.out.println(criptoextremo.getId() + criptoextremo.getHighValueDay());
+            }
+        }
     }
 
       //  @Scheduled(fixedDelayString = tempoReq)
@@ -54,18 +67,6 @@ public class CriptomoedaBusiness {
         for (Criptomoeda c : criptomoedaList){
             System.out.println(c.getId().toUpperCase(Locale.ROOT)+"(\""+c.getId()+"\",\"" +c.getSymbol()+"\",\""+c.getName()+"\"),");
         }
-    }
-
-
-
-
-   // @Scheduled(cron = "0 50 20 * * ?")
-    public void buscaJsonCriptoExtremosScheduler() throws IOException {
-        GsonReceiver gsonReceiver = new GsonReceiver();
-        String json = gsonReceiver.getCriptoJsonMarkets();
-
-        List<CriptoValor> criptomoedaList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
-        System.out.println(criptomoedaList.get(0).toString());
     }
 
     public boolean isInEnum(String value, Class <EnumCripto> enumClass) {
