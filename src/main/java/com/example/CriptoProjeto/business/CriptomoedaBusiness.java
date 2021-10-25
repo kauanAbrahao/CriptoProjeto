@@ -34,7 +34,7 @@ public class CriptomoedaBusiness {
 //        String json = gsonReceiver.getCriptoJsonMarkets();
 //         List<CriptoValor> criptovalorList = GsonParser.jsonToObjectList(json, CriptoValor[].class);
 //         for (CriptoValor criptovalor : criptovalorList) {
-//             if (isInEnum(criptovalor.getId(), EnumCripto.class) == true){
+//             if (isInEnum(criptovalor.getId(), EnumCripto.class)){
 //                 moedaDao.adicionarCriptoValor(criptovalor);
 //             }
 //         }
@@ -45,7 +45,7 @@ public class CriptomoedaBusiness {
         String json = gsonReceiver.getCriptoJsonMarkets();
         List<CriptoExtremo> criptoextremoList = GsonParser.jsonToObjectList(json, CriptoExtremo[].class);
         for (CriptoExtremo criptoextremo : criptoextremoList) {
-            if (isInEnum(criptoextremo.getId(), EnumCripto.class) == true){
+            if (isInEnum(criptoextremo.getId(), EnumCripto.class)){
                moedaDao.adicionarCriptoExtremo(criptoextremo, false);
                moedaDao.adicionarCriptoExtremo(criptoextremo, true);
                // System.out.println(criptoextremo.getId() + criptoextremo.getHighValueDay());
