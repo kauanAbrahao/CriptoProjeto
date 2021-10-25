@@ -22,9 +22,7 @@ public class CriptoValorRowMapper implements RowMapper<CriptoValor> {
         criptoValor.setCurrentPrice(resultSet.getBigDecimal("CRT_Price"));
         criptoValor.setMktCap(resultSet.getLong("MKT_Cap"));
         criptoValor.setTotalVolume(resultSet.getBigDecimal("Total_Volume"));
-        criptoValor.setDthrInclusao((resultSet.getDate("DataHR_Inc")).toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime());
+        criptoValor.setDthrInclusao(resultSet.getObject("DataHR_Inc", LocalDateTime.class));
         return criptoValor;
     }
 }

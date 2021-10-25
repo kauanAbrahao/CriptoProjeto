@@ -3,10 +3,7 @@ package com.example.CriptoProjeto.dao;
 import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,17 +19,20 @@ public class CriptomoedaDAOImplTest extends AbstractDAOTest {
     @Autowired
     CriptomoedaDAOImpl criptomoedaDAO;
 
+
+    @After
+    public void limpaBase(){
+        super.limpaTabValor();
+    }
+
     @Test
+    @Ignore
     public void contextLoads(){
         Assert.assertNotNull(criptomoedaDAO);
         Assert.assertNotNull(gsonReceiver);
     }
 
 
-    @After
-    public void limpaBase(){
-        super.limpaBase("tab_valor");
-    }
 
     @Test
     public void adicionarCriptoValorTest() throws IOException {

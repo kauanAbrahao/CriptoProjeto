@@ -47,16 +47,15 @@ public abstract class AbstractDAOTest {
         switch (query) {
             case "buscaCriptoValor":
                 return "SELECT * FROM tab_valor WHERE ID_Cripto = :ID_Cripto LIMIT 1";
-            case "limpaBase":
-                return "DELETE FROM :Nome_Tabela WHERE 1=1";
+            case "limpaTabValor":
+                return "DELETE FROM tab_valor WHERE 1=1";
         }
         return null;
     }
 
-    public void limpaBase(String nomeTabela){
-        String sql = getSql("buscaCriptoValor");
+    public void limpaTabValor(){
+        String sql = getSql("limpaTabValor");
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("Nome_Tabela", nomeTabela);
         namedParameterJdbcTemplate.update(sql, params);
     }
 
