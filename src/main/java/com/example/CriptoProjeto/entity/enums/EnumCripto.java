@@ -1,5 +1,7 @@
 package com.example.CriptoProjeto.entity.enums;
 
+import java.util.Arrays;
+
 public enum EnumCripto {
     AAVE("aave","aave","Aave"),
     ALGORAND("algorand","algo","Algorand"),
@@ -110,6 +112,10 @@ public enum EnumCripto {
         this.id = id;
         this.name = name;
         this.symbol = symbol;
+    }
+
+    public static boolean isInEnum(String value, Class <EnumCripto> enumClass) {
+        return Arrays.stream(enumClass.getEnumConstants()).anyMatch(e -> e.getId().equals(value));
     }
 
     public String getId() {
