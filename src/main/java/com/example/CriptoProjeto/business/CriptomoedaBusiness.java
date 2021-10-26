@@ -27,6 +27,10 @@ public class CriptomoedaBusiness {
     CriptomoedaDAOImpl moedaDao;
 
 
+    /**
+     * Requisição feita a cada 2 minutos. Busca dados atuais de cada Criptomoeda
+     * @throws IOException
+     */
     @Scheduled(fixedDelayString = "${schedule.timeRequest}")
     public void buscaJsonCriptoValorScheduler() throws IOException {
         String json = gsonReceiver.getCriptoJsonMarkets();
@@ -38,7 +42,11 @@ public class CriptomoedaBusiness {
          }
     }
 
-    @Scheduled(cron = "0 50 20 * * ?")
+    /**
+     * Requisição feita ao final do dia. Captura o maior e menor valor de cada criptomoeda para o dia de referência
+     * @throws IOException
+     */
+    @Scheduled(cron = "0 59 23 * * ?")
     public void buscaJsonCriptoExtremo() throws IOException {
         String json = gsonReceiver.getCriptoJsonMarkets();
         List<CriptoExtremo> criptoextremoList = GsonParser.jsonToObjectList(json, CriptoExtremo[].class);
@@ -55,16 +63,15 @@ public class CriptomoedaBusiness {
      * Busca lista de Criptomoedas. Não é necessário rodar esse método, uma vez populado o banco.
      * @throws IOException
      */
-//    @Scheduled(fixedDelayString = "${schedule.timeRequest}")
-//    public void buscaJsonCriptomoedaScheduler() throws IOException {
-//        String json = gsonReceiver.getCriptoJsonMarkets();
-//         List<Criptomoeda> criptovalorList = GsonParser.jsonToObjectList(json, Criptomoeda[].class);
-//         for (Criptomoeda m : criptovalorList) {
-//                 moedaDao.adicionaCriptomoedas(m);
-//         }
-//    }
+ /*   @Scheduled(fixedDelayString = "${schedule.timeRequest}")
+    public void buscaJsonCriptomoedaScheduler() throws IOException {
+        String json = gsonReceiver.getCriptoJsonMarkets();
+         List<Criptomoeda> criptovalorList = GsonParser.jsonToObjectList(json, Criptomoeda[].class);
+         for (Criptomoeda m : criptovalorList) {
+                 moedaDao.adicionaCriptomoedas(m);
+         }
+    }   */
 
-    //@Scheduled(fixedDelayString = tempoReq)
     public void getEnumValues () throws IOException{
         List <Criptomoeda> criptomoedaList = moedaDao.getCriptoInfo();
         for (Criptomoeda c : criptomoedaList){

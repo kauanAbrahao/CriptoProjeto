@@ -1,2 +1,2 @@
 schedule:
-  timeRequest: '2000'
+  timeRequest: '120000';
