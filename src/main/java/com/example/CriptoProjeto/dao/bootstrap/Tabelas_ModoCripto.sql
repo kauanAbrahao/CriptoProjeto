@@ -51,3 +51,8 @@ ALTER TABLE TAB_VALOR_HIST
                                                                                     DataHR_Inc);
 
 ALTER TABLE tab_cripto ADD Symbol Varchar(10);
+
+ALTER TABLE tab_valor_hist MODIFY COLUMN Total_Volume BIGINT;
+ALTER TABLE tab_valor_hist MODIFY COLUMN MKT_Cap BIGINT;
+ALTER TABLE tab_valor MODIFY COLUMN CRT_Price decimal(16,8);
+ALTER TABLE tab_valor_hist MODIFY COLUMN CRT_Price decimal(16,8);

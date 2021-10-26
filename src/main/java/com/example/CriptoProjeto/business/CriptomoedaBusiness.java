@@ -46,7 +46,7 @@ public class CriptomoedaBusiness {
      * Requisição feita ao final do dia. Captura o maior e menor valor de cada criptomoeda para o dia de referência
      * @throws IOException
      */
-    @Scheduled(cron = "0 59 23 * * ?")
+    @Scheduled(cron = "59 59 23 * * ?")
     public void buscaJsonCriptoExtremo() throws IOException {
         String json = gsonReceiver.getCriptoJsonMarkets();
         List<CriptoExtremo> criptoextremoList = GsonParser.jsonToObjectList(json, CriptoExtremo[].class);
