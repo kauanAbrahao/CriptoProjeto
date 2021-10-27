@@ -16,6 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     public static final String CRIPTO_VALOR = "Cripto Valor";
+    public static final String CRIPTOMOEDAS = "Criptomoedas";
 
     @Bean
     public Docket api() {
@@ -24,7 +25,8 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.example.CriptoProjeto.business.endpoint"))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag(CRIPTO_VALOR, "Buscar current price, market cap etc"))
+                .tags(new Tag(CRIPTOMOEDAS, "Buscar lista de criptomoedas suportadas", 0))
+                .tags(new Tag(CRIPTO_VALOR, "Buscar current price, market cap etc", 1))
                 .apiInfo(apiInfo());
     }
 

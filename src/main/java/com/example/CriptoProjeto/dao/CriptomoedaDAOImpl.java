@@ -61,8 +61,8 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
     }
 
 
-    public List<Criptomoeda> getCriptoInfo() {
-        String sql = getSql("buscarMoedas");
+    public List<Criptomoeda> getAll() {
+        String sql = getSql("buscarCriptomoedas");
         MapSqlParameterSource params = new MapSqlParameterSource();
         List<Criptomoeda> c = null;
         try{

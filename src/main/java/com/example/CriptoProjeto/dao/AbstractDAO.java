@@ -26,7 +26,7 @@ public abstract class AbstractDAO {
 
     public String getSql(String query){
         switch (query){
-            case "buscarMoedas":
+            case "buscarCriptomoedas":
                 return "SELECT * FROM tab_cripto";
             case "buscaMoedaPorId":
                 return "SELECT * FROM tab_cripto WHERE ID_Cripto = :idCripto";
@@ -39,7 +39,7 @@ public abstract class AbstractDAO {
             case "getAllCriptoValor":
                 return "SELECT * FROM tab_valor";
             case "getPorIdCriptoValor":
-                return "SELECT * FROM tab_valor WHERE ID_Cripto = :idCripto";
+                return "SELECT * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc LIMIT 1; ";
         }
 
         return null;

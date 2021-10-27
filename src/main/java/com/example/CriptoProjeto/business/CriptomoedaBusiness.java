@@ -73,7 +73,7 @@ public class CriptomoedaBusiness {
     }   */
 
     public void getEnumValues () throws IOException{
-        List <Criptomoeda> criptomoedaList = moedaDao.getCriptoInfo();
+        List <Criptomoeda> criptomoedaList = moedaDao.getAll();
         for (Criptomoeda c : criptomoedaList){
             System.out.println(c.getId().toUpperCase(Locale.ROOT)+"(\""+c.getId()+"\",\"" +c.getSymbol()+"\",\""+c.getName()+"\"),");
         }

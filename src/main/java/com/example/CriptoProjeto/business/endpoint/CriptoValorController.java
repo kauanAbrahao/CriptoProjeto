@@ -28,7 +28,7 @@ public class CriptoValorController {
 
     @ApiOperation(value = "Retorna informações em tempo real de todas as criptomoedas disponíveis")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorDTO.class),
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorDTO[].class),
             @ApiResponse(code = 404, message = "No cripto price today")
     })
     @GetMapping(produces = JSON)
@@ -48,7 +48,7 @@ public class CriptoValorController {
     public ResponseEntity<?> getPorId(
             @PathVariable (name = "id")
             @ApiParam(name = "id", example = "bitcoin", type = "String", required = true,
-                value = "id da criptomoeda; pode ser obtido através do GET anterior") String idCriptoValor){
+                value = "id da criptomoeda \n *faz referência a /v1/api-criptomoedas") String idCriptoValor){
         CriptoValorDTO criptoValorDTO = criptoValorService.getCriptoValorPorId(idCriptoValor);
         if(Objects.isNull(criptoValorDTO)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
