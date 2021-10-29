@@ -22,9 +22,13 @@ CREATE TABLE TAB_VALOR
 CREATE TABLE TAB_VALOR_HIST
 (
     ID_Cripto VARCHAR(20),
-    CRT_Price DECIMAL,
-    MKT_Cap INTEGER,
-    Total_Volume INTEGER,
+    Open_Price DECIMAL(16,8),
+    Avg_Price DECIMAL(16,8),
+    Close_Price DECIMAL(16,8),
+    Open_Mkt_Cap BIGINT,
+    Avg_Mkt_Cap BIGINT,
+    Close_Mkt_Cap BIGINT,
+    Total_Volume BIGINT,
     DataHR_Inc TIMESTAMP,
     CONSTRAINT PK_TAB_VALOR_HIST PRIMARY KEY (ID_Cripto,DataHR_Inc)
 );
