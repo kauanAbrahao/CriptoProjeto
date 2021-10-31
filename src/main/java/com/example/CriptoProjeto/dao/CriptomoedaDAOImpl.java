@@ -83,4 +83,14 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         }
     }
 
+    public void deletarCriptoValor () {
+        String sql = getSql("deleteValorHist");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        try{
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

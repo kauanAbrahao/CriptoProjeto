@@ -27,6 +27,7 @@ public class HistBusiness {
     @Scheduled(cron = "00 00 00 * * ?")
     public void insereTabValorCripto() {
         moedaDao.adicionarCriptoValorHistorico();
-
+        moedaDao.deletarCriptoValor();
     }
+
 }
