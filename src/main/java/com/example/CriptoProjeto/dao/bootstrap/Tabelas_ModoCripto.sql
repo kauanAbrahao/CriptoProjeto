@@ -11,17 +11,17 @@ CREATE TABLE TAB_CRIPTO
 
 CREATE TABLE TAB_VALOR
 (
-    ID_Cripto VARCHAR(20),
-    CRT_Price DECIMAL,
+    ID_Cripto VARCHAR(100),
+    CRT_Price DECIMAL(16,8),
     MKT_Cap INTEGER,
-    Total_Volume INTEGER,
-    DataHR_Inc TIMESTAMP,
+    Total_Volume BIGINT,
+    DataHR_Inc BIGINT,
     CONSTRAINT PK_TAB_VALOR PRIMARY KEY (ID_Cripto,DataHR_Inc)
 );
 
 CREATE TABLE TAB_VALOR_HIST
 (
-    ID_Cripto VARCHAR(20),
+    ID_Cripto VARCHAR(100),
     Open_Price DECIMAL(16,8),
     Avg_Price DECIMAL(16,8),
     Close_Price DECIMAL(16,8),
@@ -50,13 +50,6 @@ ALTER TABLE TAB_EXTREMOS
     ADD CONSTRAINT FK_TAB_CRIPTO_EXTREMOS FOREIGN KEY (ID_Cripto) REFERENCES TAB_CRIPTO(ID_CRIPTO);
 
 ALTER TABLE TAB_VALOR_HIST
-    ADD CONSTRAINT FK_TAB_CRIPTO_HIST FOREIGN KEY (ID_Cripto,
-                                                   DataHR_Inc) REFERENCES TAB_Valor(ID_Cripto,
-                                                                                    DataHR_Inc);
+    ADD CONSTRAINT FK_TAB_CRIPTO_HIST FOREIGN KEY (ID_Cripto) REFERENCES TAB_Valor(ID_Cripto);
 
 ALTER TABLE tab_cripto ADD Symbol Varchar(10);
-
-ALTER TABLE tab_valor_hist MODIFY COLUMN Total_Volume BIGINT;
-ALTER TABLE tab_valor_hist MODIFY COLUMN MKT_Cap BIGINT;
-ALTER TABLE tab_valor MODIFY COLUMN CRT_Price decimal(16,8);
-ALTER TABLE tab_valor_hist MODIFY COLUMN CRT_Price decimal(16,8);

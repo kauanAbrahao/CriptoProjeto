@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +27,7 @@ public class CriptomoedaBusiness {
     @Autowired
     CriptomoedaDAOImpl moedaDao;
 
-
+    @Transactional
     /**
      * Requisição feita a cada 2 minutos. Busca dados atuais de cada Criptomoeda
      * @throws IOException

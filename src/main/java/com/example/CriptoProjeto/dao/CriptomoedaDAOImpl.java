@@ -72,4 +72,15 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         }
         return c;
     }
+
+    public void adicionarCriptoValorHistorico () {
+        String sql = getSql("insertValorHist");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        try{
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

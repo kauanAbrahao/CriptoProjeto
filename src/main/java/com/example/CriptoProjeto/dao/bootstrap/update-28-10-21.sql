@@ -18,6 +18,4 @@ ALTER TABLE TAB_VALOR_HIST ADD Datahr_Inc TIMESTAMP;
 
 
 ALTER TABLE TAB_VALOR_HIST
-    ADD CONSTRAINT FK_TAB_CRIPTO_HIST FOREIGN KEY (ID_Cripto,
-                                                   DataHR_Inc) REFERENCES TAB_Valor(ID_Cripto,
-                                                                                    DataHR_Inc);
+    ADD CONSTRAINT FK_TAB_CRIPTO_HIST FOREIGN KEY (ID_Cripto) REFERENCES TAB_Valor(ID_Cripto);

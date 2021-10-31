@@ -40,6 +40,8 @@ public abstract class AbstractDAO {
                 return "SELECT * FROM tab_valor";
             case "getPorIdCriptoValor":
                 return "SELECT * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc LIMIT 1; ";
+            case "insertValorHist":
+                return "call to_valor_hist();";
         }
 
         return null;
