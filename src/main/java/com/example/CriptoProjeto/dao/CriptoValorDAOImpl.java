@@ -34,4 +34,16 @@ public class CriptoValorDAOImpl extends AbstractDAO {
             return null;
         }
     }
+
+    public List<CriptoValor> getCriptoValorListPorRank(Integer mktRank) {
+        String sql = getSql("getCriptoValorListPorRank");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("mktRank", mktRank);
+        try {
+            return namedParameterJdbcTemplate.query(sql, params, criptoValorRowMapper);
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

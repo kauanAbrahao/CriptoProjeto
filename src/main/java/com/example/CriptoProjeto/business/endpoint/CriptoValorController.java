@@ -6,6 +6,7 @@ import com.example.CriptoProjeto.service.CriptoValorService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,47 +15,33 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@Api(tags = {SwaggerConfig.CRIPTO_VALOR})
 @RequestMapping("v1/api-criptovalor")
-public class CriptoValorController {
+public class CriptoValorController implements CriptoValorResource {
 
-    final static String NOT_FOUND_BODY = " {\"code\": 404, \"message\": \"Not found\"} ";
-    final static String BAD_REQUEST = " {\"message\": \"invalid id\"} ";
-    final static String JSON = "application/json";
     final static String API_RESPONSE_BITCOIN = " {\"id\": \"bitcoin\", \"current_price\": 61089, \"market_cap\": 1151848890506, \"total_volume\": 34432896570} ";
 
     @Autowired
     CriptoValorService criptoValorService;
 
-    @ApiOperation(value = "Retorna informações em tempo real de todas as criptomoedas disponíveis")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorDTO[].class),
-            @ApiResponse(code = 404, message = "No cripto price today")
-    })
-    @GetMapping(produces = JSON)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(){
-        List<CriptoValorDTO> criptoValorList = criptoValorService.getAllCriptoValor();
-        if(criptoValorList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_FOUND_BODY);
-        }
-        else{
-            return ResponseEntity.ok(criptoValorList);
-        }
+        return criptoValorService.getAllCriptoValor();
     }
 
-    @ApiOperation(value = "Retorna informações em tempo real de uma criptomoeda específica")
-    @GetMapping(path = "/{id}", produces = JSON )
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "OK", response = CriptoValorDTO.class)})
-    public ResponseEntity<?> getPorId(
-            @PathVariable (name = "id")
-            @ApiParam(name = "id", example = "bitcoin", type = "String", required = true,
-                value = "id da criptomoeda \n *faz referência a /v1/api-criptomoedas") String idCriptoValor){
-        CriptoValorDTO criptoValorDTO = criptoValorService.getCriptoValorPorId(idCriptoValor);
-        if(Objects.isNull(criptoValorDTO)){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
-        }
-        else{
-            return ResponseEntity.ok(criptoValorDTO);
-        }
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<?> getPorId(@PathVariable(name = "id")
+                                      @ApiParam(name = "id", example = "bitcoin", type = "String", required = true,
+                                              value = "id da criptomoeda \n *faz referência a /v1/api-criptomoedas") String idCriptoValor){
+        return criptoValorService.getCriptoValorPorId(idCriptoValor);
+
+    }
+
+    @GetMapping(path = "/mktRank", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAcimaRank(
+                      @RequestParam(name = "mkt_cap_rank")
+                      @ApiParam(name = "mkt_cap_rank", example = "2", type = "Integer", required = true,
+                            value = "market cap rank da criptomoeda \n *faz referência a /v1/api-criptomoedas")
+                            Integer mkt_cap_rank) {
+        return criptoValorService.getCriptoValorListPorRank(mkt_cap_rank);
     }
 }

@@ -28,22 +28,37 @@ public abstract class AbstractDAO {
         switch (query){
             case "buscarCriptomoedas":
                 return "SELECT * FROM tab_cripto";
-            case "buscaMoedaPorId":
-                return "SELECT * FROM tab_cripto WHERE ID_Cripto = :idCripto";
-            case "insertMoedas":
+
+            case "insertCriptomoedas":
                 return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank, :Symbol)";
+
             case "insertCriptoValor":
                 return "INSERT INTO tab_valor VALUES (:ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume, CURRENT_TIMESTAMP())";
+
             case "insertCriptoExtremo":
                 return "INSERT INTO tab_extremos VALUES (:ID_Cripto, :High_low, :Valor, CURRENT_TIMESTAMP())";
+
             case "getAllCriptoValor":
-                return "SELECT * FROM tab_valor";
+                return "WITH top_row AS (\n" +
+                        "  SELECT *, ROW_NUMBER() OVER (PARTITION BY tv.ID_Cripto ORDER BY tv.DataHR_Inc DESC) AS rn\n" +
+                        "  FROM tab_valor tv)\n" +
+                        " SELECT * from top_row WHERE rn=1;";
+
             case "getPorIdCriptoValor":
                 return "SELECT * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc LIMIT 1; ";
             case "insertValorHist":
                 return "call to_valor_hist();";
             case "deleteTabValor":
                 return "DELETE FROM Tab_Valor WHERE DATAHR_INC < DATE_sub(curdate(), interval 1 day);";
+
+            case "getCriptoValorListPorRank":
+                return "WITH top_row AS (\n" +
+                        "  SELECT tv.*, ROW_NUMBER() OVER (PARTITION BY tv.ID_Cripto ORDER BY tv.DataHR_Inc DESC) AS rn\n" +
+                        "  FROM tab_valor AS tv\n" +
+                        ")\n" +
+                        "SELECT * FROM top_row\n" +
+                        "    JOIN tab_cripto tc ON (top_row.ID_Cripto = tc.ID_Cripto)\n" +
+                        "  WHERE tc.MKT_Cap_Rank <= :mktRank and rn = 1;";
         }
 
         return null;

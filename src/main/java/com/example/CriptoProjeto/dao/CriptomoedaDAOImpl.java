@@ -19,7 +19,7 @@ import java.util.List;
 public class CriptomoedaDAOImpl extends AbstractDAO {
 
     public void adicionaCriptomoedas(Criptomoeda criptomoeda){
-        String sql = getSql("insertMoedas");
+        String sql = getSql("insertCriptomoedas");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptomoeda.getId());
         params.addValue("Symbol", criptomoeda.getSymbol());
