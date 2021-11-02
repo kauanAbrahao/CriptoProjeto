@@ -2,6 +2,7 @@ package com.example.CriptoProjeto.business.endpoint;
 
 import com.example.CriptoProjeto.SwaggerConfig;
 import com.example.CriptoProjeto.entity.dto.CriptoValorDTO;
+import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public interface CriptoValorResource {
 
     @ApiOperation(value = "Retorna informações para determinada data para todas as criptomoedas disponíveis")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorDTO[].class),
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorHistDTO[].class),
             @ApiResponse(code = 400, message = "Bad Request - Invalid date"),
             @ApiResponse(code = 404, message = "Not found - Invalid date"),
             @ApiResponse(code = 503, message = "Service Unavailable"),
