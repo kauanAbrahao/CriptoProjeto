@@ -1,7 +1,9 @@
 package com.example.CriptoProjeto.service;
 
 import com.example.CriptoProjeto.dao.CriptoValorDAOImpl;
+import com.example.CriptoProjeto.dao.CriptoValorHistDAOImpl;
 import com.example.CriptoProjeto.dao.CriptomoedaDAOImpl;
+import com.example.CriptoProjeto.dao.rowmapper.CriptoValorHistRowMapper;
 import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.dto.CriptoValorDTO;
 import io.swagger.models.Response;
@@ -10,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.zip.DataFormatException;
 
 @Service
 public class CriptoValorService {
@@ -23,6 +27,9 @@ public class CriptoValorService {
 
     @Autowired
     CriptoValorDAOImpl criptoValorDAO;
+
+    @Autowired
+    CriptoValorHistDAOImpl criptoValorHistDAO;
 
     public ResponseEntity<?> getAllCriptoValor() {
         return this.returnListOrNotFound(criptoValorDAO.getAll());
@@ -62,4 +69,5 @@ public class CriptoValorService {
             return ResponseEntity.ok(new CriptoValorDTO().convertoToDTO(criptoValor));
         }
     }
+
 }

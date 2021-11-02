@@ -46,8 +46,10 @@ public abstract class AbstractDAO {
 
             case "getPorIdCriptoValor":
                 return "SELECT * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc LIMIT 1; ";
+
             case "insertValorHist":
                 return "call to_valor_hist();";
+
             case "deleteTabValor":
                 return "DELETE FROM Tab_Valor WHERE DATAHR_INC < DATE_sub(curdate(), interval 1 day);";
 
@@ -59,6 +61,11 @@ public abstract class AbstractDAO {
                         "SELECT * FROM top_row\n" +
                         "    JOIN tab_cripto tc ON (top_row.ID_Cripto = tc.ID_Cripto)\n" +
                         "  WHERE tc.MKT_Cap_Rank <= :mktRank and rn = 1;";
+
+            case "getAllDate":
+                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh \n "+
+                        "JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n"+
+                    " WHERE DATE (tvh.Datahr_Inc) = :dtRef and DATE(te.DataHR_Inc) = :dtRef;";
         }
 
         return null;

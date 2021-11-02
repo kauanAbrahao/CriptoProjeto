@@ -1,0 +1,30 @@
+package com.example.CriptoProjeto.dao;
+
+import com.example.CriptoProjeto.dao.rowmapper.CriptoValorHistRowMapper;
+import com.example.CriptoProjeto.entity.CriptoValor;
+import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Component
+public class CriptoValorHistDAOImpl extends AbstractDAO {
+
+    @Autowired
+    CriptoValorHistRowMapper criptoValorHistRowMapper;
+
+    public List<CriptoValorHistDTO> getAllDate(LocalDate dtRef) {
+        String sql = getSql("getAllDate");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("dtRef", dtRef.toString());
+        try {
+            return namedParameterJdbcTemplate.query(sql, params, criptoValorHistRowMapper);
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

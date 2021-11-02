@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @Api(tags = {SwaggerConfig.CRIPTO_VALOR})
 public interface CriptoValorResource {
 
@@ -21,6 +24,19 @@ public interface CriptoValorResource {
             @ApiResponse(code = 504, message = "Timeout")
     })
     public ResponseEntity<?> getAll();
+
+    @ApiOperation(value = "Retorna informações para determinada data para todas as criptomoedas disponíveis")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorDTO[].class),
+            @ApiResponse(code = 400, message = "Bad Request - Invalid date"),
+            @ApiResponse(code = 404, message = "Not found - Invalid date"),
+            @ApiResponse(code = 503, message = "Service Unavailable"),
+            @ApiResponse(code = 504, message = "Timeout")
+    })
+
+    public ResponseEntity<?> getAllDate(@PathVariable(name = "date")
+                                            @ApiParam(name = "date", example = "2021-11-01", type = "Date", required = true,
+                                                    value = "data de referência (formato yyyy-MM-dd)") String dataRef);
 
 
 
@@ -45,4 +61,6 @@ public interface CriptoValorResource {
     ResponseEntity<?> getAcimaRank(@RequestParam(name = "mktRank")
                                @ApiParam(name = "mkt_cap_rank", example = "2", type = "Integer", required = true,
                                        value = "market cap rank da criptomoeda \n *faz referência a /v1/api-criptomoedas") Integer mktRank);
+
+
 }

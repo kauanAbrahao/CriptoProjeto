@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping("v1/api-criptomoedas")
 public class CriptomoedaController implements CriptomoedaResource {
 
-    final static String NOT_FOUND_BODY = " {\"code\": 404, \"message\": \"Not found\"} ";
 
     @Autowired
     CriptomoedaService criptomoedaService;
@@ -30,13 +29,7 @@ public class CriptomoedaController implements CriptomoedaResource {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(){
 
-        List<CriptomoedaDTO> criptomoedaDTOList = criptomoedaService.getAll();
-        if (criptomoedaDTOList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_FOUND_BODY);
-        }
-        else{
-            return ResponseEntity.ok(criptomoedaDTOList);
-        }
+        return criptomoedaService.getAll();
     }
 
 

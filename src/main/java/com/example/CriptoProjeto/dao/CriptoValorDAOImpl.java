@@ -3,8 +3,11 @@ package com.example.CriptoProjeto.dao;
 import com.example.CriptoProjeto.dao.rowmapper.CriptoValorRowMapper;
 import com.example.CriptoProjeto.entity.CriptoValor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
