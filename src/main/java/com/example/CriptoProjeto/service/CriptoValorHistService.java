@@ -34,6 +34,18 @@ public class CriptoValorHistService {
         }
     }
 
+    public ResponseEntity<?> getCriptoValorDatePorId(String idCripto, String dataRef) {
+        try {
+            LocalDate dtRef = LocalDate.parse(dataRef);
+            if(!dtRef.isBefore(LocalDate.now())){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
+            }
+            return returnListOrNotFound(criptoValorHistDAO.getIdDate(idCripto, dtRef));
+        } catch (Exception ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
+        }
+    }
+
     private ResponseEntity<?> returnListOrNotFound(List<CriptoValorHistDTO> criptoList){
         if(criptoList.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_FOUND_BODY);

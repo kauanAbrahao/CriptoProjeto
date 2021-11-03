@@ -33,19 +33,23 @@ public class CriptoValorController implements CriptoValorResource {
         return criptoValorService.getAllCriptoValor();
     }
 
-    @GetMapping(path = "/refdate/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllDate(@PathVariable(name = "date") String dataRef) {
-        return criptoValorHistService.getAllCriptoValorDate(dataRef);
-    }
-
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<?> getPorId(@PathVariable(name = "id") String idCriptoValor){
         return criptoValorService.getCriptoValorPorId(idCriptoValor);
-
     }
 
     @GetMapping(path = "/mktRank", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAcimaRank(@RequestParam(name = "mkt_cap_rank") Integer mkt_cap_rank) {
         return criptoValorService.getCriptoValorListPorRank(mkt_cap_rank);
+    }
+
+    @GetMapping(path = "/refdate/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAllDate(@PathVariable(name = "date") String dataRef) {
+        return criptoValorHistService.getAllCriptoValorDate(dataRef);
+    }
+
+    @GetMapping(path = "/refdate/{id}/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getDateId(@PathVariable(name = "id") String idCripto, @PathVariable(name="date") String dataRef){
+        return criptoValorHistService.getCriptoValorDatePorId(idCripto, dataRef);
     }
 }

@@ -27,4 +27,17 @@ public class CriptoValorHistDAOImpl extends AbstractDAO {
             return null;
         }
     }
+
+    public List<CriptoValorHistDTO> getIdDate(String idCripto, LocalDate dtRef) {
+        String sql = getSql("getIdDate");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("dtRef", dtRef.toString());
+        params.addValue("idCripto", idCripto);
+        try {
+            return namedParameterJdbcTemplate.query(sql, params, criptoValorHistRowMapper);
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

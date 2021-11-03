@@ -66,6 +66,13 @@ public abstract class AbstractDAO {
                 return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh \n "+
                         "JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n"+
                     " WHERE DATE (tvh.Datahr_Inc) = :dtRef and DATE(te.DataHR_Inc) = :dtRef;";
+
+            case "getIdDate":
+                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                        " WHERE DATE (tvh.Datahr_Inc) = :dtRef\n" +
+                        "   and DATE(te.DataHR_Inc) = :dtRef\n" +
+                        "   and tvh.ID_Cripto = :idCripto;";
         }
 
         return null;
