@@ -73,6 +73,9 @@ public abstract class AbstractDAO {
                         " WHERE DATE (tvh.Datahr_Inc) = :dtRef\n" +
                         "   and DATE(te.DataHR_Inc) = :dtRef\n" +
                         "   and tvh.ID_Cripto = :idCripto;";
+
+            case "updateCriptomoeda":
+                return "UPDATE Tab_Cripto SET MKT_Cap_Rank = :MKT_Cap_Rank WHERE ID_Cripto = :idCripto ";
         }
 
         return null;

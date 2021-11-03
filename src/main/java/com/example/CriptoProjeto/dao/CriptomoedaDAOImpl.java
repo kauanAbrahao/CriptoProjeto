@@ -32,6 +32,20 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         }
     }
 
+    public void atualizarCriptomoedas(Criptomoeda criptomoeda){
+        String sql = getSql("updateCriptomoeda");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ID_Cripto", criptomoeda.getId());
+        params.addValue("Symbol", criptomoeda.getSymbol());
+        params.addValue("Nome_Cripto", criptomoeda.getName());
+        params.addValue("MKT_Cap_Rank", criptomoeda.getMktCapRank());
+        try{
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void adicionarCriptoValor(CriptoValor criptoValor){
         String sql = getSql("insertCriptoValor");
         MapSqlParameterSource params = new MapSqlParameterSource();

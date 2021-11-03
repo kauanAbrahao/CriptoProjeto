@@ -72,6 +72,16 @@ public class CriptomoedaBusiness {
                  moedaDao.adicionaCriptomoedas(m);
          }
     }   */
+    @Scheduled(cron = "0 44 20 * * ?")
+    public void buscaJsonCriptomoedaScheduler() throws IOException {
+        String json = gsonReceiver.getCriptoJsonMarkets();
+        List<Criptomoeda> criptomoedaList = GsonParser.jsonToObjectList(json, Criptomoeda[].class);
+        for (Criptomoeda criptomoeda : criptomoedaList) {
+            if (EnumCripto.isInEnum(criptomoeda.getId(), EnumCripto.class)){
+                moedaDao.atualizarCriptomoedas(criptomoeda);
+            }
+        }
+    }
 
     public void getEnumValues () throws IOException{
         List <Criptomoeda> criptomoedaList = moedaDao.getAll();
