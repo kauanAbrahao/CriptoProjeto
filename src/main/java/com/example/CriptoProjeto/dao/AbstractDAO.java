@@ -74,6 +74,17 @@ public abstract class AbstractDAO {
                         "   and DATE(te.DataHR_Inc) = :dtRef\n" +
                         "   and tvh.ID_Cripto = :idCripto;";
 
+            case "getRangeDate":
+                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                        " WHERE DATE (tvh.Datahr_Inc) BETWEEN :dtInicial and :dtFim;";
+
+            case "getRangeDateId":
+                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                        " WHERE DATE (tvh.Datahr_Inc) BETWEEN :dtInicial and :dtFim\n" +
+                        " and tvh.ID_Cripto = :idCripto;";
+
             case "updateCriptomoeda":
                 return "UPDATE Tab_Cripto SET MKT_Cap_Rank = :MKT_Cap_Rank WHERE ID_Cripto = :idCripto ";
         }

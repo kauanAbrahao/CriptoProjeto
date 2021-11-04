@@ -21,6 +21,7 @@ public class SwaggerConfig {
 
     public static final String CRIPTO_VALOR = "Cripto Valor";
     public static final String CRIPTOMOEDAS = "Criptomoedas";
+    public static final String PING = "Ping";
 
     @Bean
     public Docket api() {
@@ -29,8 +30,9 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("com.example.CriptoProjeto.business.endpoint"))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag(CRIPTOMOEDAS, "Buscar lista de criptomoedas suportadas", 0))
-                .tags(new Tag(CRIPTO_VALOR, "Buscar current price, market cap etc", 1))
+                .tags(new Tag(PING, "Verifica o status do servidor da API", 0))
+                .tags(new Tag(CRIPTOMOEDAS, "Buscar lista de criptomoedas suportadas", 1))
+                .tags(new Tag(CRIPTO_VALOR, "Buscar current price, market cap etc", 2))
                 .apiInfo(apiInfo());
     }
 

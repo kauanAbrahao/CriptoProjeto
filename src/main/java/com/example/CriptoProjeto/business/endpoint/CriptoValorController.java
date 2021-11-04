@@ -52,4 +52,18 @@ public class CriptoValorController implements CriptoValorResource {
     public ResponseEntity<?> getDateId(@PathVariable(name = "id") String idCripto, @PathVariable(name="date") String dataRef){
         return criptoValorHistService.getCriptoValorDatePorId(idCripto, dataRef);
     }
+
+    @GetMapping(path ="/history", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRangeDate(@RequestParam(name = "from") String dtInicial,
+                                          @RequestParam(name = "to") String dtFim) {
+        return criptoValorHistService.getCriptoValorRangeDate(dtInicial, dtFim);
+    }
+
+    @GetMapping(path="/history/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getRangeDateId(@PathVariable(name = "id") String idCripto,
+                                            @RequestParam(name = "from") String dtInicial,
+                                            @RequestParam(name = "to") String dtFim) {
+
+        return criptoValorHistService.getCriptoValorRangeDateId(dtInicial, dtFim, idCripto);
+    }
 }
