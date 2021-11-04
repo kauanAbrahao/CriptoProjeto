@@ -72,7 +72,7 @@ public class CriptomoedaBusiness {
                  moedaDao.adicionaCriptomoedas(m);
          }
     }   */
-    @Scheduled(cron = "0 44 20 * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void buscaJsonCriptomoedaScheduler() throws IOException {
         String json = gsonReceiver.getCriptoJsonMarkets();
         List<Criptomoeda> criptomoedaList = GsonParser.jsonToObjectList(json, Criptomoeda[].class);
