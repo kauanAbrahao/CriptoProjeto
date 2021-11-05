@@ -1,17 +1,13 @@
 package com.example.CriptoProjeto.service;
 
 import com.example.CriptoProjeto.dao.CriptoValorHistDAOImpl;
-import com.example.CriptoProjeto.entity.CriptoValor;
-import com.example.CriptoProjeto.entity.dto.CriptoValorDTO;
 import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto.business.endpoint;
+package com.example.CriptoProjeto.business.endpoint.resource;
 
 import com.example.CriptoProjeto.SwaggerConfig;
 import com.example.CriptoProjeto.entity.dto.CriptomoedaDTO;

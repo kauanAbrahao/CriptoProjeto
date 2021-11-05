@@ -87,6 +87,9 @@ public abstract class AbstractDAO {
 
             case "updateCriptomoeda":
                 return "UPDATE Tab_Cripto SET MKT_Cap_Rank = :MKT_Cap_Rank WHERE ID_Cripto = :idCripto ";
+
+            case "getAllCriptoExtremo":
+                return "SELECT * from tab_extremos where DATE(DataHR_Inc) = :dtRef;";
         }
 
         return null;
