@@ -20,6 +20,8 @@ import java.util.Arrays;
 public class SwaggerConfig {
 
     public static final String CRIPTO_VALOR = "Cripto Valor";
+    public static final String CRIPTO_VALOR_HIST = "Cripto Valor Histórico";
+    public static final String CRIPTO_EXTREMOS = "High & Low";
     public static final String CRIPTOMOEDAS = "Criptomoedas";
     public static final String PING = "Ping";
 
@@ -31,8 +33,10 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .tags(new Tag(PING, "Verifica o status do servidor da API", 0))
-                .tags(new Tag(CRIPTOMOEDAS, "Buscar lista de criptomoedas suportadas", 1))
-                .tags(new Tag(CRIPTO_VALOR, "Buscar current price, market cap etc", 2))
+                .tags(new Tag(CRIPTOMOEDAS, "Busca lista de criptomoedas suportadas", 1))
+                .tags(new Tag(CRIPTO_EXTREMOS, "Busca maior e menor valor para a data", 2))
+                .tags(new Tag(CRIPTO_VALOR, "Busca dados: current price, market cap etc", 3))
+                .tags(new Tag(CRIPTO_VALOR_HIST, "Busca dadoos históricos: current price, market cap etc", 4))
                 .apiInfo(apiInfo());
     }
 
