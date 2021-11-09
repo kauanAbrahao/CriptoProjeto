@@ -35,7 +35,7 @@ public class HistBusiness {
         moedaDao.deletarCriptoValor();
     }
 
-    @Scheduled(cron = "00 18 22 * * ?")
+    @Scheduled(cron = "00 45 19 * * ?")
     public void populaTabValorHist() throws IOException, InterruptedException {
        // gsonReceiver.getHistoryJson()
        LocalDate localDate = LocalDate.of(2021,11,06);
