@@ -87,6 +87,9 @@ public abstract class AbstractDAO {
 
             case "updateCriptomoeda":
                 return "UPDATE Tab_Cripto SET MKT_Cap_Rank = :MKT_Cap_Rank WHERE ID_Cripto = :idCripto ";
+
+            case "insertDadosHist":
+                return "INSERT INTO tab_valor_hist (ID_Cripto, Close_Price, Total_Volume, Close_Mkt_Cap, DataHR_Inc) VALUES (:ID_Cripto, :CRT_Price, :Total_Volume, :MKT_Cap, :DataHR_Inc )";
         }
 
         return null;

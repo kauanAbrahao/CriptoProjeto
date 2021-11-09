@@ -46,16 +46,31 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         }
     }
 
-    public void adicionarCriptoValor(CriptoValor criptoValor){
+    public void adicionarCriptoValor(CriptoValor criptoValor) {
         String sql = getSql("insertCriptoValor");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptoValor.getId());
         params.addValue("CRT_Price", criptoValor.getCurrentPrice());
         params.addValue("MKT_Cap", criptoValor.getMktCap());
         params.addValue("Total_Volume", criptoValor.getTotalVolume());
-        try{
+        try {
             namedParameterJdbcTemplate.update(sql, params);
-        } catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void adicionarCriptoValorHist(CriptoValor criptoValor, String DataHR) {
+        String sql = getSql("insertDadosHist");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ID_Cripto", criptoValor.getId());
+        params.addValue("CRT_Price", criptoValor.getCurrentPrice());
+        params.addValue("MKT_Cap", criptoValor.getMktCap());
+        params.addValue("Total_Volume", criptoValor.getTotalVolume());
+        params.addValue("DataHR_Inc", DataHR);
+        try {
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
