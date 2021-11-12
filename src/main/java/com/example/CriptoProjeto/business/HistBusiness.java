@@ -1,12 +1,11 @@
 package com.example.CriptoProjeto.business;
 
 import com.example.CriptoProjeto.dao.CriptomoedaDAOImpl;
-import com.example.CriptoProjeto.entity.CriptoExtremo;
-import com.example.CriptoProjeto.entity.CriptoValor;
+import com.example.CriptoProjeto.entity.dto.CriptoValorHistParser;
 import com.example.CriptoProjeto.entity.enums.EnumCripto;
 import com.example.CriptoProjeto.entrypoint.GsonHistory;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
-import com.example.CriptoProjeto.entrypoint.GsonReceiver;
+import com.example.CriptoProjeto.service.RestTemplateConsumerExemple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Transactional
@@ -29,33 +27,39 @@ public class HistBusiness {
     @Autowired
     CriptomoedaDAOImpl moedaDao;
 
+    @Autowired
+    RestTemplateConsumerExemple rest;
+
+
     @Scheduled(cron = "00 00 00 * * ?")
     public void insereTabValorCripto() {
         moedaDao.adicionarCriptoValorHistorico();
         moedaDao.deletarCriptoValor();
     }
 
-    @Scheduled(cron = "00 45 19 * * ?")
+    @Scheduled(cron = "0 15 15 * * ?")
     public void populaTabValorHist() throws IOException, InterruptedException {
        // gsonReceiver.getHistoryJson()
-       LocalDate localDate = LocalDate.of(2021,11,06);
+       LocalDate localDate = LocalDate.of(2021,01,01);
        String ld = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         for (EnumCripto e : EnumCripto.values()) {
-            localDate = LocalDate.of(2021,11,06);
+            localDate = LocalDate.of(2021,9,8);
             while(localDate.isBefore(LocalDate.now())) {
                 ld = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-               String json = gsonReceiver.getHistoryJson(e.getId(), ld);
+                CriptoValorHistParser criptovalor = rest.meuObjeto(e.getId(), ld);
+                TimeUnit.SECONDS.sleep(3);
+                if (criptovalor.getId() == null) {
+                    criptovalor = rest.meuObjeto(e.getId(), ld);
+                }
                 ld = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                CriptoValor criptovalor = (CriptoValor) GsonParser.jsonToObject(json, CriptoValor.class);
-                System.out.println( criptovalor.getId()+ " "+ criptovalor.getCurrentPrice() + ld);
-             //   if (criptovalor.getCurrentPrice() != null && criptovalor.getMktCap() != null && criptovalor.getTotalVolume() != null){
-                moedaDao.adicionarCriptoValorHist(criptovalor, ld);
-          //      }
+                System.out.println(criptovalor.getId() + " "+ ld);
+                if (criptovalor.getMarketData() !=  null && criptovalor.getMarketData().getCurrentPrice().getBrl() != null && criptovalor.getMarketData().getMarketCap().getBrl() != null && criptovalor.getMarketData().getTotalVolume().getBrl() != null){
+                   moedaDao.adicionarCriptoValorHist(criptovalor, ld);
+              }
                 localDate = localDate.plusDays(1);
-                TimeUnit.SECONDS.sleep(4);
             }
         }
-        // moedaDao.
     }
 
 }
