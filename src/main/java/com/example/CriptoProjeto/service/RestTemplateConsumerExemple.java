@@ -30,7 +30,7 @@ public class RestTemplateConsumerExemple {
     public CriptoValorHistParser meuObjeto(String idCripto, String data){
         CriptoValorHistParser cripto = new CriptoValorHistParser();
         try {
-            cripto = restTemplate.getForObject(PARSE_JSON + "wrapped-bitcoin" + "/history?date=" + data, CriptoValorHistParser.class);
+            cripto = restTemplate.getForObject(PARSE_JSON + "idCripto" + "/history?date=" + data, CriptoValorHistParser.class);
         }catch(ResourceAccessException e){
             System.out.println(e);
         }
