@@ -1,10 +1,8 @@
 package com.example.CriptoProjeto.dao;
 
 import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
-import com.example.CriptoProjeto.entity.CriptoExtremo;
-import com.example.CriptoProjeto.entity.CriptoModelo;
-import com.example.CriptoProjeto.entity.CriptoValor;
-import com.example.CriptoProjeto.entity.Criptomoeda;
+import com.example.CriptoProjeto.entity.*;
+import com.example.CriptoProjeto.entity.dto.CriptoValorHistParser;
 import com.example.CriptoProjeto.entity.enums.EnumHighLow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -46,16 +44,31 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         }
     }
 
-    public void adicionarCriptoValor(CriptoValor criptoValor){
+    public void adicionarCriptoValor(CriptoValor criptoValor) {
         String sql = getSql("insertCriptoValor");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptoValor.getId());
         params.addValue("CRT_Price", criptoValor.getCurrentPrice());
         params.addValue("MKT_Cap", criptoValor.getMktCap());
         params.addValue("Total_Volume", criptoValor.getTotalVolume());
-        try{
+        try {
             namedParameterJdbcTemplate.update(sql, params);
-        } catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void adicionarCriptoValorHist(CriptoValorHistParser criptoValor, String DataHR) {
+        String sql = getSql("insertDadosHist");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ID_Cripto", criptoValor.getId());
+        params.addValue("CRT_Price", criptoValor.getMarketData().getCurrentPrice().getBrl());
+        params.addValue("MKT_Cap", criptoValor.getMarketData().getMarketCap().getBrl());
+        params.addValue("Total_Volume", criptoValor.getMarketData().getTotalVolume().getBrl());
+        params.addValue("DataHR_Inc", DataHR);
+        try {
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -16,6 +16,7 @@ public class GsonReceiver {
    final String TEST_POST = "https://jsonplaceholder.typicode.com/posts/1";
    final String COIN_EXTREMOS = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
 
+
    public String getCriptoJson() throws IOException {
 
        URL url = new URL(COIN_BITCOIN);

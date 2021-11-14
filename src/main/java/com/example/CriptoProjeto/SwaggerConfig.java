@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 .build()
                 .tags(new Tag(PING, "Verifica o status do servidor da API", 0))
                 .tags(new Tag(CRIPTOMOEDAS, "Busca lista de criptomoedas suportadas", 1))
-                .tags(new Tag(CRIPTO_EXTREMOS, "Busca maior e menor valor para a data", 1))
+                .tags(new Tag(CRIPTO_EXTREMOS, "Busca maior e menor valor para a data", 2))
                 .tags(new Tag(CRIPTO_VALOR, "Busca dados: current price, market cap etc", 3))
                 .tags(new Tag(CRIPTO_VALOR_HIST, "Busca dadoos históricos: current price, market cap etc", 4))
                 .apiInfo(apiInfo());
