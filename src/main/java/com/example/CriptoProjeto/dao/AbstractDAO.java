@@ -57,7 +57,7 @@ public abstract class AbstractDAO {
                 return "call to_valor_hist();";
 
             case "deleteTabValor":
-                return "DELETE FROM Tab_Valor WHERE DATAHR_INC < DATE_sub(curdate(), interval 1 day);";
+                return "DELETE FROM Tab_Valor WHERE DATAHR_INC < cast(current_timestamp-1 as date));";
 
             case "getCriptoValorListPorRank":
                 return "WITH top_row AS (\n" +

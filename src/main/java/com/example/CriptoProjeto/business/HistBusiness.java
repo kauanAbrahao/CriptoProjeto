@@ -34,10 +34,12 @@ public class HistBusiness {
     @Scheduled(cron = "00 00 00 * * ?")
     public void insereTabValorCripto() {
         moedaDao.adicionarCriptoValorHistorico();
+        System.out.println("Dados transferidos da Tab_valor para Tab_Valor_Hist");
         moedaDao.deletarCriptoValor();
+        System.out.println("Dados antigos deletados da Tab_valor");
     }
 
-    @Scheduled(cron = "0 15 15 * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void populaTabValorHist() throws IOException, InterruptedException {
        // gsonReceiver.getHistoryJson()
        LocalDate localDate = LocalDate.of(2021,01,01);
@@ -60,6 +62,7 @@ public class HistBusiness {
                 localDate = localDate.plusDays(1);
             }
         }
+
     }
 
 }
