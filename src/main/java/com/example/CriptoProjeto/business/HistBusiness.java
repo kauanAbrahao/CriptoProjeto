@@ -62,6 +62,7 @@ public class HistBusiness {
                 localDate = localDate.plusDays(1);
             }
         }
+        System.out.println("Populando tabela tab_valor_hist");
 
     }
 
