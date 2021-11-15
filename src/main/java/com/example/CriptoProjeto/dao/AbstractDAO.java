@@ -63,26 +63,37 @@ public abstract class AbstractDAO {
                         "  WHERE tc.MKT_Cap_Rank <= :mktRank and rn = 1;";
 
             case "getAllDate":
-                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh \n "+
-                        "JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n"+
-                    " WHERE DATE (tvh.Datahr_Inc) = :dtRef and DATE(te.DataHR_Inc) = :dtRef;";
+//                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh \n "+
+//                        "JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n"+
+//                    " WHERE DATE (tvh.Datahr_Inc) = :dtRef and DATE(te.DataHR_Inc) = :dtRef;";
+                 return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                         "                        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                         "                 WHERE CAST(tvh.Datahr_Inc AS DATE) = :dtRef and CAST(te.DataHR_Inc AS DATE) = :dtRef;";
 
             case "getIdDate":
-                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
-                        " WHERE DATE (tvh.Datahr_Inc) = :dtRef\n" +
-                        "   and DATE(te.DataHR_Inc) = :dtRef\n" +
-                        "   and tvh.ID_Cripto = :idCripto;";
+//                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+//                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+//                        " WHERE DATE (tvh.Datahr_Inc) = :dtRef\n" +
+//                        "   and DATE(te.DataHR_Inc) = :dtRef\n" +
+//                        "   and tvh.ID_Cripto = :idCripto;";
+                    return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                            "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                            " WHERE CAST (tvh.Datahr_Inc AS DATE) = :dtRef\n" +
+                            "   and CAST (te.DataHR_Inc AS DATE) = :dtRef\n" +
+                            "   and tvh.ID_Cripto = :idCripto;";
 
             case "getRangeDate":
-                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
-                        " WHERE DATE (tvh.Datahr_Inc) BETWEEN :dtInicial and :dtFim;";
+//                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+//                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+//                        " WHERE DATE (tvh.Datahr_Inc) BETWEEN :dtInicial and :dtFim;";
+                  return  "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                          "     JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n" +
+                          "                     WHERE CAST (tvh.Datahr_Inc AS DATE) BETWEEN :dtInicial and :dtFim;";
 
             case "getRangeDateId":
                 return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
                         "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
-                        " WHERE DATE (tvh.Datahr_Inc) BETWEEN :dtInicial and :dtFim\n" +
+                        " WHERE CAST (tvh.Datahr_Inc AS DATE) BETWEEN :dtInicial and :dtFim\n" +
                         " and tvh.ID_Cripto = :idCripto;";
 
             case "updateCriptomoeda":
@@ -90,6 +101,10 @@ public abstract class AbstractDAO {
 
             case "insertDadosHist":
                 return "INSERT INTO tab_valor_hist (ID_Cripto, Close_Price, Total_Volume, Close_Mkt_Cap, DataHR_Inc) VALUES (:ID_Cripto, :CRT_Price, :Total_Volume, :MKT_Cap, :DataHR_Inc )";
+
+            case "getAllCriptoExtremo":
+//                return "SELECT * from tab_extremos where DATE(DataHR_Inc) = :dtRef;";
+                  return "SELECT * from tab_extremos where CAST(DataHr_Inc as DATE) = :dtRef;";
         }
 
         return null;
