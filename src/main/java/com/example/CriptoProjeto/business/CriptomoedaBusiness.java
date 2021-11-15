@@ -47,14 +47,13 @@ public class CriptomoedaBusiness {
      * Requisição feita ao final do dia. Captura o maior e menor valor de cada criptomoeda para o dia de referência
      * @throws IOException
      */
-    @Scheduled(cron = "59 59 23 * * ?")
+    @Scheduled(cron = "00 46 17 * * ?")
     public void buscaJsonCriptoExtremo() throws IOException {
         String json = gsonReceiver.getCriptoJsonMarkets();
         List<CriptoExtremo> criptoextremoList = GsonParser.jsonToObjectList(json, CriptoExtremo[].class);
         for (CriptoExtremo criptoextremo : criptoextremoList) {
             if (EnumCripto.isInEnum(criptoextremo.getId(), EnumCripto.class)){
-               moedaDao.adicionarCriptoExtremo(criptoextremo, false);
-               moedaDao.adicionarCriptoExtremo(criptoextremo, true);
+               moedaDao.adicionarCriptoExtremo(criptoextremo);
                // System.out.println(criptoextremo.getId() + criptoextremo.getHighValueDay());
             }
         }
