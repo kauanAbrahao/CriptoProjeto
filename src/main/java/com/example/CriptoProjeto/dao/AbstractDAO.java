@@ -33,10 +33,16 @@ public abstract class AbstractDAO {
                 return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank, :Symbol)";
 
             case "insertCriptoValor":
-                return "INSERT INTO tab_valor VALUES (:ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume, CURRENT_TIMESTAMP)";
+                return "INSERT INTO tab_valor VALUES (:ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume, CURRENT_TIMESTAMP())";
 
             case "insertCriptoExtremo":
-                return "INSERT INTO tab_extremos VALUES (:ID_Cripto, :High_low, :Valor, CURRENT_TIMESTAMP)";
+//                return "INSERT INTO tab_extremos VALUES (:ID_Cripto, :High, :Low, CURRENT_TIMESTAMP())";
+//                return "insert into TAB_EXTREMOS (id_cripto, high, low, datahr_inc) " +
+//                        "select ID_Cripto, max(CRT_Price),min(CRT_Price),cast(DataHR_Inc as date)  " +
+//                        "from tab_valor " +
+//                        "where cast(DataHR_Inc as date) = cast(current_timestamp as date) " +
+//                        "group by id_cripto,cast(DataHR_Inc as date) ;";
+                return "INSERT INTO tab_extremos VALUES (:ID_Cripto,:High, :Low, CURRENT_TIMESTAMP)";
 
             case "getAllCriptoValor":
                 return "WITH top_row AS (\n" +

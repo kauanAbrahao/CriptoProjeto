@@ -73,12 +73,12 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         }
     }
 
-    public void adicionarCriptoExtremo(CriptoExtremo criptoExtremo, boolean isHigh){
+    public void adicionarCriptoExtremo(CriptoExtremo criptoExtremo){
         String sql = getSql("insertCriptoExtremo");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptoExtremo.getId());
-        params.addValue("High_low", isHigh ? EnumHighLow.HIGH.getValue() : EnumHighLow.LOW.getValue());
-        params.addValue("Valor", isHigh ? criptoExtremo.getHighValueDay() : criptoExtremo.getLowValueDay());
+        params.addValue("High", criptoExtremo.getHighValueDay());
+        params.addValue("Low",  criptoExtremo.getLowValueDay());
         try{
             namedParameterJdbcTemplate.update(sql, params);
         } catch (Exception e){

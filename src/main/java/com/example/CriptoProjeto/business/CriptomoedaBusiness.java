@@ -41,6 +41,7 @@ public class CriptomoedaBusiness {
                  moedaDao.adicionarCriptoValor(criptovalor);
              }
          }
+         System.out.println("Request tab_valor");
     }
 
     /**
@@ -53,11 +54,11 @@ public class CriptomoedaBusiness {
         List<CriptoExtremo> criptoextremoList = GsonParser.jsonToObjectList(json, CriptoExtremo[].class);
         for (CriptoExtremo criptoextremo : criptoextremoList) {
             if (EnumCripto.isInEnum(criptoextremo.getId(), EnumCripto.class)){
-               moedaDao.adicionarCriptoExtremo(criptoextremo, false);
-               moedaDao.adicionarCriptoExtremo(criptoextremo, true);
-               // System.out.println(criptoextremo.getId() + criptoextremo.getHighValueDay());
+               moedaDao.adicionarCriptoExtremo(criptoextremo);
+
             }
         }
+        System.out.println("Request Tab_Extremo");
     }
 
     /**
@@ -81,6 +82,7 @@ public class CriptomoedaBusiness {
                 moedaDao.atualizarCriptomoedas(criptomoeda);
             }
         }
+        System.out.println("Request Atualização Mkt_Cap_Rank");
     }
 
     public void getEnumValues () throws IOException{
