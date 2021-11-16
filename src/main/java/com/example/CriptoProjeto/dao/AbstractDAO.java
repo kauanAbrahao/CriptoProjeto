@@ -33,7 +33,7 @@ public abstract class AbstractDAO {
                 return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank, :Symbol)";
 
             case "insertCriptoValor":
-                return "INSERT INTO tab_valor VALUES (:ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume, CURRENT_TIMESTAMP())";
+                return "INSERT INTO tab_valor VALUES (:ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume, CURRENT_TIMESTAMP)";
 
             case "insertCriptoExtremo":
 //                return "INSERT INTO tab_extremos VALUES (:ID_Cripto, :High, :Low, CURRENT_TIMESTAMP())";
@@ -51,7 +51,7 @@ public abstract class AbstractDAO {
                         " SELECT * from top_row WHERE rn=1;";
 
             case "getPorIdCriptoValor":
-                return "SELECT * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc LIMIT 1; ";
+                return "SELECT TOP 1 * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc ; ";
 
             case "insertValorHist":
                 return "call to_valor_hist();";
