@@ -17,7 +17,7 @@ public class CriptoExtremo {
 
     LocalDateTime dthrInclusao;
 
-    CriptoExtremo(){}
+    public CriptoExtremo(){}
 
 
     public CriptoExtremo(String id, Double high_24h, Double low_24h, LocalDateTime data_hr) {

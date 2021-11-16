@@ -54,10 +54,11 @@ public abstract class AbstractDAO {
                 return "SELECT TOP 1 * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc ; ";
 
             case "insertValorHist":
-                return "call to_valor_hist();";
+//                return "call to_valor_hist();";
+                return"exec to_valor_hist;";
 
             case "deleteTabValor":
-                return "DELETE FROM Tab_Valor WHERE DATAHR_INC < cast(current_timestamp-1 as date));";
+                return "DELETE FROM Tab_Valor WHERE DATAHR_INC < cast(current_timestamp-1 as date);";
 
             case "getCriptoValorListPorRank":
                 return "WITH top_row AS (\n" +
@@ -103,7 +104,7 @@ public abstract class AbstractDAO {
                         " and tvh.ID_Cripto = :idCripto;";
 
             case "updateCriptomoeda":
-                return "UPDATE Tab_Cripto SET MKT_Cap_Rank = :MKT_Cap_Rank WHERE ID_Cripto = :idCripto ";
+                return "UPDATE Tab_Cripto SET MKT_Cap_Rank = :MKT_Cap_Rank WHERE ID_Cripto = :id_Cripto ";
 
             case "insertDadosHist":
                 return "INSERT INTO tab_valor_hist (ID_Cripto, Close_Price, Total_Volume, Close_Mkt_Cap, DataHR_Inc) VALUES (:ID_Cripto, :CRT_Price, :Total_Volume, :MKT_Cap, :DataHR_Inc )";
