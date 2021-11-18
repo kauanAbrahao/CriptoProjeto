@@ -39,7 +39,7 @@ public class HistBusiness {
         System.out.println("Dados antigos deletados da Tab_valor");
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 53 21 * * ?")
     public void populaTabValorHist() throws IOException, InterruptedException {
        // gsonReceiver.getHistoryJson()
        LocalDate localDate = LocalDate.of(2021,01,01);
@@ -50,9 +50,12 @@ public class HistBusiness {
             while(localDate.isBefore(LocalDate.now())) {
                 ld = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 CriptoValorHistParser criptovalor = rest.meuObjeto(e.getId(), ld);
+                System.out.println("Fez o request");
                 TimeUnit.SECONDS.sleep(3);
-                if (criptovalor.getId() == null) {
+                while (criptovalor.getId() == null) {
                     criptovalor = rest.meuObjeto(e.getId(), ld);
+                    System.out.println("Refez o request");
+                    TimeUnit.SECONDS.sleep(3);
                 }
                 ld = localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 System.out.println(criptovalor.getId() + " "+ ld);

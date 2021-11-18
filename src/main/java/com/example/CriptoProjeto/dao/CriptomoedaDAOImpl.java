@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,9 +63,9 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
         String sql = getSql("insertDadosHist");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptoValor.getId());
-        params.addValue("CRT_Price", criptoValor.getMarketData().getCurrentPrice().getBrl());
-        params.addValue("MKT_Cap", criptoValor.getMarketData().getMarketCap().getBrl());
-        params.addValue("Total_Volume", criptoValor.getMarketData().getTotalVolume().getBrl());
+        params.addValue("CRT_Price", Double.valueOf(criptoValor.getMarketData().getCurrentPrice().getBrl()));
+        params.addValue("MKT_Cap", Double.valueOf(criptoValor.getMarketData().getMarketCap().getBrl()));
+        params.addValue("Total_Volume", Double.valueOf(criptoValor.getMarketData().getTotalVolume().getBrl()));
         params.addValue("DataHR_Inc", DataHR);
         try {
             namedParameterJdbcTemplate.update(sql, params);
