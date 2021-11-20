@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrentPrice {
 
-    @JsonProperty("brl")
+    @JsonProperty("usd")
     private String brl;
 
     public String getBrl() {
