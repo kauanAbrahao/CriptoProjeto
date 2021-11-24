@@ -39,7 +39,7 @@ public class HistBusiness {
         System.out.println("Dados antigos deletados da Tab_valor");
     }
 
-    @Scheduled(cron = "0 53 21 * * ?")
+//    @Scheduled(cron = "0 53 21 * * ?")
     public void populaTabValorHist() throws IOException, InterruptedException {
        // gsonReceiver.getHistoryJson()
        LocalDate localDate = LocalDate.of(2021,01,01);
