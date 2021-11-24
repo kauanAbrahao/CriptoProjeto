@@ -18,7 +18,7 @@ public class CriptoValorHistDTO {
     private Long open_mkt_cap;
     private Long close_mkt_cap;
     private BigDecimal avg_mkt_cap;
-    private BigInteger total_volume;
+    private Long total_volume;
     private LocalDate reference_date;
 
     public String getId() {
@@ -77,11 +77,11 @@ public class CriptoValorHistDTO {
         this.avg_mkt_cap = avg_mkt_cap;
     }
 
-    public BigInteger getTotal_volume() {
+    public Long getTotal_volume() {
         return total_volume;
     }
 
-    public void setTotal_volume(BigInteger total_volume) {
+    public void setTotal_volume(Long total_volume) {
         this.total_volume = total_volume;
     }
 

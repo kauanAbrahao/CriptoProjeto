@@ -26,7 +26,7 @@ public class CriptoValorHistRowMapper implements RowMapper<CriptoValorHistDTO> {
         criptoValorHistDTO.setOpen_mkt_cap(resultSet.getLong("Open_Mkt_Cap"));
         criptoValorHistDTO.setAvg_mkt_cap(new BigDecimal(resultSet.getInt("Avg_Mkt_cap")));
         criptoValorHistDTO.setClose_mkt_cap(resultSet.getLong("Close_Mkt_Cap"));
-        criptoValorHistDTO.setTotal_volume(resultSet.getObject("Total_Volume", BigInteger.class));
+        criptoValorHistDTO.setTotal_volume(resultSet.getObject("Total_Volume", Long.class));
         criptoValorHistDTO.setHigh_price(resultSet.getObject("High", BigDecimal.class));
         criptoValorHistDTO.setLow_price(resultSet.getObject("Low", BigDecimal.class));
         criptoValorHistDTO.setReference_date(resultSet.getObject("Datahr_Inc", LocalDate.class));
