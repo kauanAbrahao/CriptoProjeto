@@ -99,7 +99,7 @@ public abstract class AbstractDAO {
 
             case "getRangeDateId":
                 return "SELECT DISTINCT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto and CAST (te.DataHR_Inc AS DATE))\n" +
+                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto and CAST (te.DataHR_Inc AS DATE) = CAST (tvh.DataHR_Inc AS DATE))\n" +
                         " WHERE CAST (tvh.Datahr_Inc AS DATE) BETWEEN :dtInicial and :dtFim\n" +
                         " and tvh.ID_Cripto = :idCripto;";
 
