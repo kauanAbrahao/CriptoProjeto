@@ -73,8 +73,8 @@ public abstract class AbstractDAO {
 //                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh \n "+
 //                        "JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n"+
 //                    " WHERE DATE (tvh.Datahr_Inc) = :dtRef and DATE(te.DataHR_Inc) = :dtRef;";
-                 return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                         "                        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                 return "SELECT DISTINCT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                         "                        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto and CAST (te.DataHR_Inc AS DATE)\n" +
                          "                 WHERE CAST(tvh.Datahr_Inc AS DATE) = :dtRef and CAST(te.DataHR_Inc AS DATE) = :dtRef;";
 
             case "getIdDate":
@@ -83,8 +83,8 @@ public abstract class AbstractDAO {
 //                        " WHERE DATE (tvh.Datahr_Inc) = :dtRef\n" +
 //                        "   and DATE(te.DataHR_Inc) = :dtRef\n" +
 //                        "   and tvh.ID_Cripto = :idCripto;";
-                    return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                            "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                    return "SELECT DISTINCT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                            "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto and CAST (te.DataHR_Inc AS DATE)\n" +
                             " WHERE CAST (tvh.Datahr_Inc AS DATE) = :dtRef\n" +
                             "   and CAST (te.DataHR_Inc AS DATE) = :dtRef\n" +
                             "   and tvh.ID_Cripto = :idCripto;";
@@ -93,13 +93,13 @@ public abstract class AbstractDAO {
 //                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
 //                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
 //                        " WHERE DATE (tvh.Datahr_Inc) BETWEEN :dtInicial and :dtFim;";
-                  return  "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                          "     JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto) \n" +
-                          "                     WHERE CAST (tvh.Datahr_Inc AS DATE) BETWEEN :dtInicial and :dtFim;";
+                  return " SELECT DISTINCT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                          "                        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto and CAST (te.DataHR_Inc AS DATE) =  CAST (tvh.DataHR_Inc AS DATE))\n" +
+                          "                                     WHERE CAST (tvh.Datahr_Inc AS DATE) BETWEEN :dtInicial and :dtFim;";
 
             case "getRangeDateId":
-                return "SELECT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
-                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto)\n" +
+                return "SELECT DISTINCT tvh.*, te.High, te.Low from tab_valor_hist tvh\n" +
+                        "        JOIN tab_extremos te ON (tvh.ID_Cripto = te.ID_Cripto and CAST (te.DataHR_Inc AS DATE)\n" +
                         " WHERE CAST (tvh.Datahr_Inc AS DATE) BETWEEN :dtInicial and :dtFim\n" +
                         " and tvh.ID_Cripto = :idCripto;";
 
