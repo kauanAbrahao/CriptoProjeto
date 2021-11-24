@@ -1,5 +1,6 @@
 package com.example.CriptoProjeto.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Component
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CriptoValorHistDTO {
 
     private String id;
@@ -30,7 +32,7 @@ public class CriptoValorHistDTO {
     }
 
     public BigDecimal getOpen_price() {
-        return open_price;
+        return open_price == null ? new BigDecimal(0) : open_price;
     }
 
     public void setOpen_price(BigDecimal open_price) {
@@ -38,7 +40,7 @@ public class CriptoValorHistDTO {
     }
 
     public BigDecimal getAvg_price() {
-        return avg_price;
+        return avg_price == null ? new BigDecimal(0) : avg_price;
     }
 
     public void setAvg_price(BigDecimal avg_price) {
