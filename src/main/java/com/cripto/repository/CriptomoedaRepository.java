@@ -1,22 +1,17 @@
-package com.example.CriptoProjeto.dao;
+package com.cripto.repository;
 
 import com.cripto.entity.Criptomoeda;
 import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
-import com.example.CriptoProjeto.entity.*;
+import com.example.CriptoProjeto.entity.CriptoExtremo;
+import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.dto.CriptoValorHistParser;
-import com.example.CriptoProjeto.entity.enums.EnumHighLow;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
-@Component
-public class CriptomoedaDAOImpl extends AbstractDAO {
+@Repository
+public class CriptomoedaRepository extends AbstractRespository {
 
     public void adicionaCriptomoedas(Criptomoeda criptomoeda){
         String sql = getSql("insertCriptomoedas");
@@ -90,10 +85,9 @@ public class CriptomoedaDAOImpl extends AbstractDAO {
     }
 
 
-    public List<Criptomoeda> getAll() {
+    public List<com.cripto.entity.Criptomoeda> buscarCriptomoedas() {
         String sql = getSql("buscarCriptomoedas");
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        List<Criptomoeda> c = null;
+        List<com.cripto.entity.Criptomoeda> c = null;
         try{
             c = (namedParameterJdbcTemplate.query(sql, new CriptomoedaRowMapper()));
         } catch (Exception e){

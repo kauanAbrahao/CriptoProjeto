@@ -2,3 +2,6 @@ schedule:
   timeRequest: '120000'
 spring:
   url: "v1/api-cripto"
+
+coingecko:
+  get: " "
