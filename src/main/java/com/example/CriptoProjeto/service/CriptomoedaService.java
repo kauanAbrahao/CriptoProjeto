@@ -1,9 +1,7 @@
 package com.example.CriptoProjeto.service;
 
 import com.example.CriptoProjeto.dao.CriptomoedaDAOImpl;
-import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.Criptomoeda;
-import com.example.CriptoProjeto.entity.dto.CriptoValorDTO;
 import com.example.CriptoProjeto.entity.dto.CriptomoedaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

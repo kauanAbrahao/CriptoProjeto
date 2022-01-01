@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto.dao.rowmapper;
+package com.cripto.repository.rowmapper;
 
 import com.cripto.entity.Criptomoeda;
 import org.springframework.jdbc.core.RowMapper;

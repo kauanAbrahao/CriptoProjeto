@@ -1,9 +1,9 @@
 package com.cripto.repository;
 
 import com.cripto.entity.Criptomoeda;
-import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
+import com.cripto.repository.rowmapper.CriptomoedaRowMapper;
 import com.example.CriptoProjeto.entity.CriptoExtremo;
-import com.example.CriptoProjeto.entity.CriptoValor;
+import com.cripto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.dto.CriptoValorHistParser;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;

@@ -25,11 +25,8 @@ public class CriptomoedaController implements CriptomoedaResource {
 
     @GetMapping(path = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CriptomoedaDTO>> buscaTodasCriptomoedas(){
-
         try{
-
             return criptomoedaService.getAll();
-
         } catch (Exception e){
             log.error("==> Exception no GET /list. " + e.getMessage());
             throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR,

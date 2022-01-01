@@ -1,18 +1,13 @@
 package com.example.CriptoProjeto.dao;
 
+import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
-import com.example.CriptoProjeto.dao.rowmapper.CriptomoedaRowMapper;
+import com.cripto.repository.rowmapper.CriptomoedaRowMapper;
 import com.example.CriptoProjeto.entity.*;
 import com.example.CriptoProjeto.entity.dto.CriptoValorHistParser;
-import com.example.CriptoProjeto.entity.enums.EnumHighLow;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 @Component

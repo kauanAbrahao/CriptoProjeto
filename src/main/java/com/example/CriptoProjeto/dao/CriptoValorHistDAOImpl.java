@@ -1,7 +1,6 @@
 package com.example.CriptoProjeto.dao;
 
-import com.example.CriptoProjeto.dao.rowmapper.CriptoValorHistRowMapper;
-import com.example.CriptoProjeto.entity.CriptoValor;
+import com.cripto.repository.rowmapper.CriptoValorHistRowMapper;
 import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

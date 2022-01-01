@@ -1,17 +1,12 @@
-package com.example.CriptoProjeto.dao.rowmapper;
+package com.cripto.repository.rowmapper;
 
-import com.example.CriptoProjeto.entity.CriptoModelo;
-import com.example.CriptoProjeto.entity.CriptoValor;
-import org.apache.tomcat.jni.Local;
+import com.cripto.entity.CriptoValor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @Component
 public class CriptoValorRowMapper implements RowMapper<CriptoValor> {

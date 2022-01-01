@@ -2,7 +2,7 @@ package com.example.CriptoProjeto.business.endpoint;
 
 import com.example.CriptoProjeto.business.endpoint.resource.CriptoValorResource;
 import com.example.CriptoProjeto.service.CriptoValorHistService;
-import com.example.CriptoProjeto.service.CriptoValorService;
+import com.cripto.service.CriptoValorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

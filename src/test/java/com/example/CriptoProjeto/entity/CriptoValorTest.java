@@ -1,5 +1,6 @@
 package com.example.CriptoProjeto.entity;
 
+import com.cripto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.enums.EnumCripto;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;

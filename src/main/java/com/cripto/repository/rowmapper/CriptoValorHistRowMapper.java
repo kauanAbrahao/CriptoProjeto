@@ -1,16 +1,13 @@
-package com.example.CriptoProjeto.dao.rowmapper;
+package com.cripto.repository.rowmapper;
 
-import com.example.CriptoProjeto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Component
 public class CriptoValorHistRowMapper implements RowMapper<CriptoValorHistDTO> {

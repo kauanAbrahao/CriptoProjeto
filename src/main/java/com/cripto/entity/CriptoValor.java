@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto.entity;
+package com.cripto.entity;
 
 import com.google.gson.annotations.SerializedName;
 

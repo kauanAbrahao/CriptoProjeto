@@ -3,7 +3,7 @@ package com.example.CriptoProjeto.business;
 import com.cripto.entity.Criptomoeda;
 import com.example.CriptoProjeto.dao.CriptomoedaDAOImpl;
 import com.example.CriptoProjeto.entity.CriptoExtremo;
-import com.example.CriptoProjeto.entity.CriptoValor;
+import com.cripto.entity.CriptoValor;
 import com.example.CriptoProjeto.entity.enums.EnumCripto;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;

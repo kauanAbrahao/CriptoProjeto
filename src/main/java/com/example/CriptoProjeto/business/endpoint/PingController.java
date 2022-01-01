@@ -1,9 +1,7 @@
 package com.example.CriptoProjeto.business.endpoint;
 
 import com.example.CriptoProjeto.SwaggerConfig;
-import com.example.CriptoProjeto.entity.dto.CriptoValorDTO;
 import io.swagger.annotations.*;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

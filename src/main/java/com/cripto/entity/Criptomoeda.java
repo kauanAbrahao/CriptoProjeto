@@ -1,6 +1,5 @@
 package com.cripto.entity;
 
-import com.example.CriptoProjeto.entity.CriptoValor;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

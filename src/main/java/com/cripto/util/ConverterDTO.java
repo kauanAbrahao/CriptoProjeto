@@ -1,6 +1,8 @@
 package com.cripto.util;
 
+import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
+import com.cripto.entity.dto.CriptoValorDTO;
 import com.cripto.entity.dto.CriptomoedaDTO;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +17,11 @@ public class ConverterDTO {
     public static List<CriptomoedaDTO> entityToDTO(List<Criptomoeda> criptomoedas){
         return criptomoedas.stream().map(criptomoeda -> new CriptomoedaDTO(criptomoeda.getId(), criptomoeda.getSymbol(),
                 criptomoeda.getName(), criptomoeda.getMktCapRank())).collect(Collectors.toList());
+    }
+
+    public static List<CriptoValorDTO> entityToDTO(List<CriptoValor> criptoValores){
+        return criptoValores.stream().map(valores -> new CriptoValorDTO(valores.getId(), valores.getCurrentPrice(),
+                valores.getMktCap(), valores.getTotalVolume())).collect(Collectors.toList());
     }
 
 }

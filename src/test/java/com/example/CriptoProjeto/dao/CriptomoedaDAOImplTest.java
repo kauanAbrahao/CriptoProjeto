@@ -1,6 +1,6 @@
 package com.example.CriptoProjeto.dao;
 
-import com.example.CriptoProjeto.entity.CriptoValor;
+import com.cripto.entity.CriptoValor;
 import com.example.CriptoProjeto.entrypoint.GsonParser;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;
 import org.junit.*;

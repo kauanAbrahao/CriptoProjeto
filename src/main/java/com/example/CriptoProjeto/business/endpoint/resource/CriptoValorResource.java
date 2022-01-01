@@ -1,17 +1,11 @@
 package com.example.CriptoProjeto.business.endpoint.resource;
 
 import com.example.CriptoProjeto.SwaggerConfig;
-import com.example.CriptoProjeto.entity.dto.CriptoValorDTO;
-import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
+import com.cripto.entity.dto.CriptoValorDTO;
 import io.swagger.annotations.*;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.sql.Date;
-import java.time.LocalDate;
 
 @Api(tags = {SwaggerConfig.CRIPTO_VALOR})
 public interface CriptoValorResource {

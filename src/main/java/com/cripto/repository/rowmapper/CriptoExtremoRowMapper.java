@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto.dao.rowmapper;
+package com.cripto.repository.rowmapper;
 
 import com.example.CriptoProjeto.entity.dto.CriptoExtremoDTO;
 import org.springframework.jdbc.core.RowMapper;

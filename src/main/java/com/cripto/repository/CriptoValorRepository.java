@@ -1,23 +1,22 @@
-package com.example.CriptoProjeto.dao;
+package com.cripto.repository;
 
 import com.cripto.repository.rowmapper.CriptoValorRowMapper;
 import com.cripto.entity.CriptoValor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class CriptoValorDAOImpl extends AbstractDAO {
+public class CriptoValorRepository extends AbstractRespository{
 
     @Autowired
     CriptoValorRowMapper criptoValorRowMapper;
 
+
     public List<CriptoValor> getAll(){
         String sql = getSql("getAllCriptoValor");
         try{
-           return namedParameterJdbcTemplate.query(sql, criptoValorRowMapper);
+            return namedParameterJdbcTemplate.query(sql, criptoValorRowMapper);
         } catch (Exception e){
             e.printStackTrace();
             return null;
@@ -30,19 +29,7 @@ public class CriptoValorDAOImpl extends AbstractDAO {
         params.addValue("idCripto", idCriptoValor);
         try {
             return namedParameterJdbcTemplate.queryForObject(sql, params, criptoValorRowMapper);
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public List<CriptoValor> getCriptoValorListPorRank(Integer mktRank) {
-        String sql = getSql("getCriptoValorListPorRank");
-        MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("mktRank", mktRank);
-        try {
-            return namedParameterJdbcTemplate.query(sql, params, criptoValorRowMapper);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
