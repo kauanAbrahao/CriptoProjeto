@@ -1,7 +1,6 @@
 package com.example.CriptoProjeto.business;
 
-import com.example.CriptoProjeto.CriptoProjetoApplication;
-import com.example.CriptoProjeto.entrypoint.GsonParser;
+import com.cripto.CriptoProjetoApplication;
 import com.example.CriptoProjeto.entrypoint.GsonReceiver;
 import org.junit.Test;
 import org.junit.runner.RunWith;

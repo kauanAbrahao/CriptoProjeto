@@ -22,7 +22,7 @@ public class CriptoValorService {
     CriptoValorRepository criptoValorRespository;
 
     @Autowired
-    CriptoValorHistDAOImpl criptoValorHistDAO;
+    CriptoValorRepository criptoValorRepository;
 
     public ResponseEntity<List<CriptoValorDTO>> buscaTodasCriptoValor() {
 
@@ -35,8 +35,23 @@ public class CriptoValorService {
         throw new RuntimeException("Falha ao buscar CriptoValores");
     }
 
-    public ResponseEntity<?> getCriptoValorPorId(String idCriptoValor) {
+    public ResponseEntity<CriptoValorDTO> getCriptoValorPorId(String idCriptoValor) {
 
-        return ResponseEntity.notFound().build();
+        CriptoValor criptoValor = criptoValorRespository.getPorId(idCriptoValor);
+        if(Objects.isNull(criptoValor)){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(ConverterDTO.entityToDTO(criptoValor));
     }
+
+    public ResponseEntity<List<CriptoValorDTO>> getCriptoValorListPorRank(Integer mktCapRank) {
+        var criptoValorListPorRank = criptoValorRespository.getCriptoValorListPorRank(mktCapRank);
+        if (criptoValorListPorRank.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(ConverterDTO.entityToDTO(criptoValorListPorRank));
+    }
+
 }

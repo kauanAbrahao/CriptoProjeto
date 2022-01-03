@@ -1,7 +1,7 @@
 package com.example.CriptoProjeto.business.endpoint;
 
 import com.example.CriptoProjeto.business.endpoint.resource.CriptoValorResource;
-import com.example.CriptoProjeto.service.CriptoValorHistService;
+import com.cripto.service.CriptoValorHistService;
 import com.cripto.service.CriptoValorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,12 +17,10 @@ public class CriptoValorController implements CriptoValorResource {
     @Autowired
     CriptoValorService criptoValorService;
 
-    @Autowired
-    CriptoValorHistService criptoValorHistService;
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(){
-        return criptoValorService.getAllCriptoValor();
+        return criptoValorService.buscaTodasCriptoValor();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )

@@ -21,7 +21,7 @@ public class CriptomoedaService {
         Optional<List<Criptomoeda>> criptomoedas = Optional.ofNullable(criptoRepo.buscarCriptomoedas());
 
         if(criptomoedas.isPresent() && !criptomoedas.get().isEmpty()){
-            List<CriptomoedaDTO> response = ConverterDTO.entityToDTO(criptomoedas.get());
+            List<CriptomoedaDTO> response = ConverterDTO.listEntityToListDTO(criptomoedas.get());
             return ResponseEntity.ok(response);
         }
 

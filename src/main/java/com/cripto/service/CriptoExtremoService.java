@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto.service;
+package com.cripto.service;
 
 import com.example.CriptoProjeto.dao.CriptoExtremoDAOImpl;
 import com.example.CriptoProjeto.entity.CriptoExtremo;
@@ -21,9 +21,8 @@ public class CriptoExtremoService {
     final static String BAD_REQUEST = " {\"message\": \"invalid request\"} ";
     final static String NOT_FOUND_BODY = " {\"code\": 404, \"message\": \"Not found\"} ";
 
-    public ResponseEntity<?> getAll(String dataRef) {
+    public ResponseEntity<?> getAll(LocalDate dtRef) {
         try {
-            LocalDate dtRef = LocalDate.parse(dataRef);
             if(!dtRef.isBefore(LocalDate.now())){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
             }

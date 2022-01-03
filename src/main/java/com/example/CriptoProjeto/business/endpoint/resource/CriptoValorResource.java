@@ -1,6 +1,6 @@
 package com.example.CriptoProjeto.business.endpoint.resource;
 
-import com.example.CriptoProjeto.SwaggerConfig;
+import com.cripto.SwaggerConfig;
 import com.cripto.entity.dto.CriptoValorDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;

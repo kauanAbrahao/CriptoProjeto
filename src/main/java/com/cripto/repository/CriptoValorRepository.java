@@ -2,11 +2,15 @@ package com.cripto.repository;
 
 import com.cripto.repository.rowmapper.CriptoValorRowMapper;
 import com.cripto.entity.CriptoValor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Slf4j
 public class CriptoValorRepository extends AbstractRespository{
 
     @Autowired
@@ -18,7 +22,7 @@ public class CriptoValorRepository extends AbstractRespository{
         try{
             return namedParameterJdbcTemplate.query(sql, criptoValorRowMapper);
         } catch (Exception e){
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -30,7 +34,19 @@ public class CriptoValorRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.queryForObject(sql, params, criptoValorRowMapper);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    public List<CriptoValor> getCriptoValorListPorRank(Integer mktRank) {
+        String sql = getSql("getCriptoValorListPorRank");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("mktRank", mktRank);
+        try {
+            return namedParameterJdbcTemplate.query(sql, params, criptoValorRowMapper);
+        } catch (Exception e){
+            log.error(e.getMessage());
             return null;
         }
     }

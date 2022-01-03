@@ -1,6 +1,6 @@
 package com.example.CriptoProjeto.dao;
 
-import com.example.CriptoProjeto.CriptoProjetoApplication;
+import com.cripto.CriptoProjetoApplication;
 import com.cripto.repository.rowmapper.CriptoValorRowMapper;
 import com.cripto.entity.CriptoValor;
 import org.junit.jupiter.api.extension.ExtendWith;

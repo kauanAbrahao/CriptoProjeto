@@ -14,7 +14,7 @@ public class ConverterDTO {
                                   criptomoeda.getName(), criptomoeda.getMktCapRank());
     }
 
-    public static List<CriptomoedaDTO> entityToDTO(List<Criptomoeda> criptomoedas){
+    public static List<CriptomoedaDTO> listEntityToListDTO(List<Criptomoeda> criptomoedas){
         return criptomoedas.stream().map(criptomoeda -> new CriptomoedaDTO(criptomoeda.getId(), criptomoeda.getSymbol(),
                 criptomoeda.getName(), criptomoeda.getMktCapRank())).collect(Collectors.toList());
     }
@@ -22,6 +22,11 @@ public class ConverterDTO {
     public static List<CriptoValorDTO> entityToDTO(List<CriptoValor> criptoValores){
         return criptoValores.stream().map(valores -> new CriptoValorDTO(valores.getId(), valores.getCurrentPrice(),
                 valores.getMktCap(), valores.getTotalVolume())).collect(Collectors.toList());
+    }
+
+    public static CriptoValorDTO entityToDTO(CriptoValor criptoValor){
+        return new CriptoValorDTO(criptoValor.getId(), criptoValor.getCurrentPrice(),
+                criptoValor.getMktCap(), criptoValor.getTotalVolume());
     }
 
 }

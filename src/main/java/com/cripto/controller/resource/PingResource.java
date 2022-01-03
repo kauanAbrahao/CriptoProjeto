@@ -1,7 +1,6 @@
 package com.cripto.controller.resource;
 
-import com.example.CriptoProjeto.SwaggerConfig;
-import com.example.CriptoProjeto.entity.CriptoExtremo;
+import com.cripto.SwaggerConfig;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

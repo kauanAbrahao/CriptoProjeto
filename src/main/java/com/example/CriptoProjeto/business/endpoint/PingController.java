@@ -1,6 +1,6 @@
 package com.example.CriptoProjeto.business.endpoint;
 
-import com.example.CriptoProjeto.SwaggerConfig;
+import com.cripto.SwaggerConfig;
 import io.swagger.annotations.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

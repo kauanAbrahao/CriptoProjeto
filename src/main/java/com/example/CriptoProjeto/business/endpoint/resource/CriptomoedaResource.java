@@ -1,6 +1,6 @@
 package com.example.CriptoProjeto.business.endpoint.resource;
 
-import com.example.CriptoProjeto.SwaggerConfig;
+import com.cripto.SwaggerConfig;
 import com.example.CriptoProjeto.entity.dto.CriptomoedaDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

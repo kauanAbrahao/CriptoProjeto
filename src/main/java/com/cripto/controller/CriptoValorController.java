@@ -37,11 +37,14 @@ public class CriptoValorController {
         try{
             return criptoValorService.getCriptoValorPorId(idCriptoValor);
         } catch (Exception e){
+            log.error("==> Exception no GET /list. " + e.getMessage());
+            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Unexpected error. Try again later");
         }
     }
 
     @GetMapping(path = "/mktRank", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAcimaRank(@RequestParam(name = "mkt_cap_rank") Integer mkt_cap_rank) {
-        return criptoValorService.getCriptoValorListPorRank(mkt_cap_rank);
+    public ResponseEntity<?> getAcimaRank(@RequestParam(name = "mktCapRank") Integer mktCapRank) {
+        return criptoValorService.getCriptoValorListPorRank(mktCapRank);
     }
 }

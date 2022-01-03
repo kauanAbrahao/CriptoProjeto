@@ -1,10 +1,11 @@
-package com.example.CriptoProjeto.business.endpoint.resource;
+package com.cripto.controller.resource;
 
-import com.example.CriptoProjeto.SwaggerConfig;
+import com.cripto.SwaggerConfig;
 import com.example.CriptoProjeto.entity.CriptoExtremo;
-import com.example.CriptoProjeto.entity.dto.CriptomoedaDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDate;
 
 @Api(tags = {SwaggerConfig.CRIPTO_EXTREMOS})
 public interface CriptoExtremosResource {
@@ -18,6 +19,6 @@ public interface CriptoExtremosResource {
             @ApiResponse(code = 504, message = "Timeout")
     })
     public ResponseEntity<?> getAll( @ApiParam(name = "data", example = "2021-11-01", type = "Date", required = true,
-            value = "data de referênca (formato yyyy-MM-dd)") String dataRef);
+            value = "data de referênca (formato yyyy-MM-dd)") LocalDate dataRef);
 
 }
