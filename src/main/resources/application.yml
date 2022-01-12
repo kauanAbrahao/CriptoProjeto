@@ -1,7 +1,25 @@
+server:
+  port: 4321
+
+logging:
+  level:
+    root: info
+
 schedule:
-  timeRequest: '120000'
+  timeRequest: '200'
+  cron: '59 59 23 * * ?'
+
 spring:
   url: "v1/api-cripto"
+  datasource:
+    url: "jdbc:sqlserver://modocripto.database.windows.net:1433;databaseName=modocripto"
+    username: "modocripto"
+    password: "cr1ptO321"
+    driver-class-name: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 
 coingecko:
-  get: " "
+  getListCriptoUrl: "https://api.coingecko.com/api/v3/coins/list"
+  getExtremosUrl: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+  getHistoryUrl: "https://api.coingecko.com/api/v3/coins/{id}/history"
+
+

@@ -1,7 +1,7 @@
 package com.cripto.controller.resource;
 
 import com.cripto.SwaggerConfig;
-import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
+import com.cripto.entity.dto.CriptoValorHistDTO;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -3,6 +3,7 @@ package com.cripto.util;
 import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
 import com.cripto.entity.dto.CriptoValorDTO;
+import com.cripto.entity.dto.CriptoValorHistDTO;
 import com.cripto.entity.dto.CriptomoedaDTO;
 import java.util.List;
 import java.util.stream.Collectors;

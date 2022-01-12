@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -28,9 +27,8 @@ public class CriptomoedaController implements CriptomoedaResource {
         try{
             return criptomoedaService.getAll();
         } catch (Exception e){
-            log.error("==> Exception no GET /list. " + e.getMessage());
-            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Unexpected error. Try again later");
+            log.error("==> Erro no GET /list. " + e.getMessage(), e.getCause());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }

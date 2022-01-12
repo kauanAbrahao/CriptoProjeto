@@ -1,16 +1,18 @@
 package com.cripto.repository;
 
+import com.cripto.entity.CriptoExtremo;
+import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
 import com.cripto.repository.rowmapper.CriptomoedaRowMapper;
-import com.example.CriptoProjeto.entity.CriptoExtremo;
-import com.cripto.entity.CriptoValor;
-import com.example.CriptoProjeto.entity.dto.CriptoValorHistParser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class CriptomoedaRepository extends AbstractRespository {
 
     public void adicionaCriptomoedas(Criptomoeda criptomoeda){
@@ -51,10 +53,12 @@ public class CriptomoedaRepository extends AbstractRespository {
         try {
             namedParameterJdbcTemplate.update(sql, params);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Erro no insertCriptoValor " + e.getMessage(), e.getCause());
         }
     }
 
+    //TODO - REFATORAR ESSE MÉTODO HORRÍVEL
+    /*
     public void adicionarCriptoValorHist(CriptoValorHistParser criptoValor, String DataHR) {
         String sql = getSql("insertDadosHist");
         MapSqlParameterSource params = new MapSqlParameterSource();
@@ -68,7 +72,7 @@ public class CriptomoedaRepository extends AbstractRespository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    } */
 
     public void adicionarCriptoExtremo(CriptoExtremo criptoExtremo){
         String sql = getSql("insertCriptoExtremo");
@@ -79,7 +83,7 @@ public class CriptomoedaRepository extends AbstractRespository {
         try{
             namedParameterJdbcTemplate.update(sql, params);
         } catch (Exception e){
-            e.printStackTrace();
+            log.error("Erro na atualização TAB_EXTREMOS. " + e.getMessage(), e.getCause());
         }
 
     }

@@ -1,8 +1,8 @@
 package com.cripto.controller;
 
+import com.cripto.controller.resource.CriptoValorResource;
 import com.cripto.entity.dto.CriptoValorDTO;
 import com.cripto.service.CriptoValorService;
-import com.cripto.entity.CriptoValor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("${spring.url}")
-public class CriptoValorController {
+public class CriptoValorController implements CriptoValorResource {
 
     @Autowired
     CriptoValorService criptoValorService;
@@ -26,9 +26,8 @@ public class CriptoValorController {
         try {
             return criptoValorService.buscaTodasCriptoValor();
         } catch (Exception e) {
-            log.error("==> Exception no GET /list. " + e.getMessage());
-            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Unexpected error. Try again later");
+            log.error("==> Exception no GET /all. " + e.getMessage(), e.getCause());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
@@ -37,14 +36,19 @@ public class CriptoValorController {
         try{
             return criptoValorService.getCriptoValorPorId(idCriptoValor);
         } catch (Exception e){
-            log.error("==> Exception no GET /list. " + e.getMessage());
-            throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Unexpected error. Try again later");
+            log.error("==> Exception no GET /{id}. " + e.getMessage(), e.getCause());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @GetMapping(path = "/mktRank", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAcimaRank(@RequestParam(name = "mktCapRank") Integer mktCapRank) {
-        return criptoValorService.getCriptoValorListPorRank(mktCapRank);
+
+        try{
+            return criptoValorService.getCriptoValorListPorRank(mktCapRank);
+        } catch (Exception e){
+            log.error("==> Exception no GET /mktRank. " + e.getMessage(), e.getCause());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

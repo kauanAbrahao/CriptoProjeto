@@ -1,4 +1,4 @@
-package com.example.CriptoProjeto;
+package com.cripto;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +10,8 @@ import java.time.Duration;
 @Configuration
 public class RestTemplateConfig {
 
+    @Bean
+    public RestTemplateBuilder restTemplateBuilder(){return new RestTemplateBuilder();}
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder){

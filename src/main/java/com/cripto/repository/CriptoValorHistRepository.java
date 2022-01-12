@@ -1,15 +1,18 @@
 package com.cripto.repository;
 
+import com.cripto.entity.dto.CriptoValorHistDTO;
 import com.cripto.repository.rowmapper.CriptoValorHistRowMapper;
-import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class CriptoValorHistRepository extends AbstractRespository{
 
     @Autowired
@@ -22,8 +25,8 @@ public class CriptoValorHistRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.query(sql, params, criptoValorHistRowMapper);
         } catch (Exception e){
-            e.printStackTrace();
-            return null;
+            log.error(e.getMessage(), e.getCause());
+            return new ArrayList<>();
         }
     }
 
@@ -35,8 +38,8 @@ public class CriptoValorHistRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.query(sql, params, criptoValorHistRowMapper);
         } catch (Exception e){
-            e.printStackTrace();
-            return null;
+            log.error(e.getMessage(), e.getCause());
+            return new ArrayList<>();
         }
     }
 
@@ -48,8 +51,8 @@ public class CriptoValorHistRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.query(sql, params, criptoValorHistRowMapper);
         } catch (Exception e){
-            e.printStackTrace();
-            return null;
+            log.error(e.getMessage(), e.getCause());
+            return new ArrayList<>();
         }
     }
 
@@ -62,8 +65,9 @@ public class CriptoValorHistRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.query(sql, params, criptoValorHistRowMapper);
         } catch (Exception e){
+            log.error(e.getMessage(), e.getCause());
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 }

@@ -1,16 +1,15 @@
 package com.cripto.service;
 
-import com.cripto.repository.CriptoValorRepository;
-import com.cripto.util.ConverterDTO;
-import com.example.CriptoProjeto.dao.CriptoValorHistDAOImpl;
 import com.cripto.entity.CriptoValor;
 import com.cripto.entity.dto.CriptoValorDTO;
+import com.cripto.repository.CriptoValorRepository;
+import com.cripto.util.ConverterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -27,12 +26,13 @@ public class CriptoValorService {
     public ResponseEntity<List<CriptoValorDTO>> buscaTodasCriptoValor() {
 
         Optional<List<CriptoValor>> criptoValores = Optional.ofNullable(criptoValorRespository.getAll());
+
         if(criptoValores.isPresent() && !criptoValores.get().isEmpty()){
             List<CriptoValorDTO> response = ConverterDTO.entityToDTO(criptoValores.get());
             return ResponseEntity.ok(response);
         }
 
-        throw new RuntimeException("Falha ao buscar CriptoValores");
+        throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao buscar CriptoValores");
     }
 
     public ResponseEntity<CriptoValorDTO> getCriptoValorPorId(String idCriptoValor) {

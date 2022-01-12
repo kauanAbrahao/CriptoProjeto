@@ -1,7 +1,7 @@
 package com.cripto.controller.resource;
 
 import com.cripto.SwaggerConfig;
-import com.example.CriptoProjeto.entity.CriptoExtremo;
+import com.cripto.entity.CriptoExtremo;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 

@@ -1,76 +1,78 @@
 package com.cripto.service;
 
 import com.cripto.repository.CriptoValorHistRepository;
-import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
+@Slf4j
 public class CriptoValorHistService {
 
     @Autowired
     CriptoValorHistRepository criptoValorHistRepository;
 
-    private final String NOT_FOUND_BODY = "Not found for given date";
-    private final String BAD_REQUEST = "Invalid Reference Date";
-
     public ResponseEntity<?> getAllCriptoValorDate(LocalDate dtRef) {
-        try {
-            if(!dtRef.isBefore(LocalDate.now())){
-                return ResponseEntity.badRequest().body(BAD_REQUEST);
-            }
-            return returnListOrNotFound(criptoValorHistRepository.getAllDate(dtRef));
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
+        if(!dtRef.isBefore(LocalDate.now())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+
+        var criptoExtremoDTOList = criptoValorHistRepository.getAllDate(dtRef);
+
+        if(criptoExtremoDTOList.isEmpty()){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        return  ResponseEntity.ok(criptoExtremoDTOList);
+
     }
 
     public ResponseEntity<?> getCriptoValorDatePorId(String idCripto, LocalDate dtRef) {
-        try {
-            if(!dtRef.isBefore(LocalDate.now())){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
-            }
-            return returnListOrNotFound(criptoValorHistRepository.getIdDate(idCripto, dtRef));
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
+        if(!dtRef.isBefore(LocalDate.now())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+
+        var criptoValorList = criptoValorHistRepository.getIdDate(idCripto, dtRef);
+
+        if(criptoValorList.isEmpty()){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        return ResponseEntity.ok(criptoValorList);
     }
 
     public ResponseEntity<?> getCriptoValorRangeDate(LocalDate dtInicial, LocalDate dtFim) {
-        try {
-            if(!dtInicial.isBefore(LocalDate.now()) || !dtFim.isBefore(LocalDate.now())){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
-            }
-            return returnListOrNotFound(criptoValorHistRepository.getRangeDate(dtInicial, dtFim));
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
+        if(!dtInicial.isBefore(LocalDate.now()) || !dtFim.isBefore(LocalDate.now())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+
+        var criptoValorList = criptoValorHistRepository.getRangeDate(dtInicial, dtFim);
+
+        if(criptoValorList.isEmpty()){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        return ResponseEntity.ok(criptoValorList);
     }
 
     public ResponseEntity<?> getCriptoValorRangeDateId(LocalDate dtInicial, LocalDate dtFim, String idCripto) {
-        try {
-            if(!dtInicial.isBefore(LocalDate.now()) || !dtFim.isBefore(LocalDate.now())){
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
-            }
-            return returnListOrNotFound(criptoValorHistRepository.getRangeDateId(dtInicial, dtFim, idCripto));
-        } catch (Exception ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(BAD_REQUEST);
+
+        if(!dtInicial.isBefore(LocalDate.now()) || !dtFim.isBefore(LocalDate.now())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-    }
+        var criptoValorList = criptoValorHistRepository.getRangeDateId(dtInicial, dtFim, idCripto);
 
-    private ResponseEntity<?> returnListOrNotFound(List<CriptoValorHistDTO> criptoList){
-        if(criptoList.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(NOT_FOUND_BODY);
+        if(criptoValorList.isEmpty()){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        else{
-            return ResponseEntity.ok(criptoList);
-        }
+
+        return ResponseEntity.ok(criptoValorList);
+
     }
 
 }

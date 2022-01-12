@@ -1,6 +1,6 @@
 package com.cripto.repository.rowmapper;
 
-import com.example.CriptoProjeto.entity.dto.CriptoValorHistDTO;
+import com.cripto.entity.dto.CriptoValorHistDTO;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

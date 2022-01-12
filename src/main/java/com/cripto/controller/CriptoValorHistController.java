@@ -1,5 +1,6 @@
 package com.cripto.controller;
 
+import com.cripto.controller.resource.CriptoValorHistResource;
 import com.cripto.service.CriptoValorHistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-public class CriptoValorHistController {
+public class CriptoValorHistController implements CriptoValorHistResource {
 
     @Autowired
     CriptoValorHistService criptoValorHistService;
