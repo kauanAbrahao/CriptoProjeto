@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -29,12 +28,10 @@ public class CriptomoedaRepository extends AbstractRespository {
         }
     }
 
-    public void atualizarCriptomoedas(Criptomoeda criptomoeda){
+    public void atualizarMktRankCrpiptomoedas(Criptomoeda criptomoeda){
         String sql = getSql("updateCriptomoeda");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptomoeda.getId());
-        params.addValue("Symbol", criptomoeda.getSymbol());
-        params.addValue("Nome_Cripto", criptomoeda.getName());
         params.addValue("MKT_Cap_Rank", criptomoeda.getMktCapRank());
         try{
             namedParameterJdbcTemplate.update(sql, params);

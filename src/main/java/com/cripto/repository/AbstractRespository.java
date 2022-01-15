@@ -23,7 +23,7 @@ public abstract class AbstractRespository {
                 return "INSERT INTO tab_cripto VALUES (:ID_Cripto, :Nome_Cripto, :MKT_Cap_Rank, :Symbol)";
 
             case "insertCriptoValor":
-                return "exec proc_insertTabValor(:ID_Cripto, :ID_Cripto, :CRT_Price, :MKT_Cap, :Total_Volume);";
+                return "exec proc_insertTabValor @cripto_id = :ID_Cripto, @CRT_Price = :CRT_Price, @MKT_Cap = :MKT_Cap, @Total_Volume = :Total_Volume;";
 
             case "insertCriptoExtremo":
 //                return "INSERT INTO tab_extremos VALUES (:ID_Cripto, :High, :Low, CURRENT_TIMESTAMP())";
@@ -32,7 +32,7 @@ public abstract class AbstractRespository {
 //                        "from tab_valor " +
 //                        "where cast(DataHR_Inc as date) = cast(current_timestamp as date) " +
 //                        "group by id_cripto,cast(DataHR_Inc as date) ;";
-                return "INSERT INTO tab_extremos VALUES (:ID_Cripto,:High, :Low, CURRENT_TIMESTAMP)";
+                return "exec proc_insertTabExtremos @cripto_id = :ID_Cripto, @High = :High, @Low = :Low;";
 
             case "getAllCriptoValor":
                 return "WITH top_row AS (\n" +

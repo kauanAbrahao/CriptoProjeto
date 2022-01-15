@@ -11,9 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class RequestService {
@@ -26,6 +24,9 @@ public class RequestService {
 
     @Value("${coingecko.getHistoryUrl")
     private String historyUrl;
+
+    @Value("${coingecko.getMktRankAllCripto}")
+    private String mktRankUrl;
 
 
     /**
@@ -51,6 +52,17 @@ public class RequestService {
 
     }
 
+    public List<Criptomoeda> criptoValorMktRankRequest() {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("vs_currency", "usd");
+
+        var response = restTemplate.getForEntity(mktRankUrl, Criptomoeda[].class, params);
+
+        verificaStatusResponse(response);
+
+        return Arrays.asList(response.getBody());
+    }
 
     private void verificaStatusResponse(ResponseEntity<?> response) {
 
@@ -58,4 +70,5 @@ public class RequestService {
             throw new ResponseStatusException(response.getStatusCode(), String.format("Erro no request %s", extremosUrl));
         }
     }
+
 }

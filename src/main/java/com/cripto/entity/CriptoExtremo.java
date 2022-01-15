@@ -1,33 +1,26 @@
 package com.cripto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class CriptoExtremo {
 
-    @SerializedName("id")
+    @JsonProperty("id")
     String id;
 
-    @SerializedName("high_24h")
+    @JsonProperty("high_24h")
     Double highValueDay;
 
-    @SerializedName("low_24h")
+    @JsonProperty("low_24h")
     Double lowValueDay;
-
-    LocalDateTime dthrInclusao;
-
-    public CriptoExtremo(String id, Double high_24h, Double low_24h, LocalDateTime data_hr) {
-        this.id = id;
-        this.highValueDay = high_24h;
-        this.lowValueDay = low_24h;
-        this.dthrInclusao = data_hr;
-    }
 }

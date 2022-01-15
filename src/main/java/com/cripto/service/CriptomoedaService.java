@@ -9,6 +9,7 @@ import com.cripto.util.ConverterDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -41,6 +42,7 @@ public class CriptomoedaService {
     }
 
     @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
+    @Async
     public void valorAtualRequest(){
         try{
             var criptoValorList = requestService.criptoValorRequest();
@@ -57,8 +59,9 @@ public class CriptomoedaService {
         }
     }
 
-    @Scheduled(cron = "${schedule.cron}")
-    public void maiorMenorValorRequest(){
+    @Scheduled(cron = ("${schedule.cron}"))
+    @Async
+    public void valoresExtremosFinalDoDia(){
         try {
             var criptoExtremosList = requestService.criptoExtremosRequest();
             for(CriptoExtremo criptoExtremo: criptoExtremosList){
@@ -67,6 +70,22 @@ public class CriptomoedaService {
             log.info("Atualização com sucesso TAB_EXTREMOS. Horário ==> " + LocalDateTime.now());
         } catch (Exception ex){
             log.error(ex.getMessage(), ex.getCause());
+        }
+    }
+
+    @Scheduled(cron = ("${schedule.cron}"))
+    @Async
+    public void atualizaMktRankCriptomoedas(){
+        log.info("atualizarMktRankCriptomoedas iniciado");
+        try{
+            var criptomoedaList = requestService.criptoValorMktRankRequest();
+            for(Criptomoeda criptomoeda : criptomoedaList){
+                criptoRepo.atualizarMktRankCrpiptomoedas(criptomoeda);
+            }
+
+            log.info("atualizarMktRankCriptomoedas concluído com sucesso!");
+        } catch (Exception e){
+            log.error("Erro no atualizarMktRankCriptomoedas ==>" + e.getMessage(), e.getCause());
         }
     }
 }
