@@ -1,5 +1,6 @@
 package com.cripto.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class Criptomoeda {
     private String symbol;
     private String name;
 
-    @SerializedName("market_cap_rank")
+    @JsonProperty("market_cap_rank")
     private Integer mktCapRank;
 
     private CriptoValor criptoValor;

@@ -73,6 +73,9 @@ public class CriptomoedaService {
         }
     }
 
+    /**
+     * Método que roda todo final de dia, atualizando o MktCapRank de todas as criptomoedas
+     */
     @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
     @Async
     public void atualizaMktRankCriptomoedas(){
