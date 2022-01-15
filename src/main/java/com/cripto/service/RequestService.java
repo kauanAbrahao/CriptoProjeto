@@ -5,6 +5,7 @@ import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -54,10 +55,7 @@ public class RequestService {
 
     public List<Criptomoeda> criptoValorMktRankRequest() {
 
-        Map<String, String> params = new HashMap<>();
-        params.put("vs_currency", "usd");
-
-        var response = restTemplate.getForEntity(mktRankUrl, Criptomoeda[].class, params);
+        var response = restTemplate.getForEntity(mktRankUrl + "?vs_currency=usd", Criptomoeda[].class);
 
         verificaStatusResponse(response);
 

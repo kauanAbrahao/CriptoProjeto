@@ -73,7 +73,7 @@ public class CriptomoedaService {
         }
     }
 
-    @Scheduled(cron = ("${schedule.cron}"))
+    @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
     @Async
     public void atualizaMktRankCriptomoedas(){
         log.info("atualizarMktRankCriptomoedas iniciado");
