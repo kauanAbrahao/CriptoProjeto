@@ -1,20 +1,29 @@
 package com.cripto.service;
 
+import com.cripto.entity.CriptoExtremo;
 import com.cripto.entity.dto.CriptoExtremoDTO;
 import com.cripto.repository.CriptoExtremoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CriptoExtremoService {
 
     @Autowired
     CriptoExtremoRepository criptoRepo;
+
+    @Autowired
+    RequestService requestService;
 
     public ResponseEntity<List<CriptoExtremoDTO>> getAll(LocalDate dtRef) {
 
@@ -30,5 +39,23 @@ public class CriptoExtremoService {
 
         return ResponseEntity.ok(criptoExtremoDTOList);
 
+    }
+
+    /**
+     * Método que roda ao final do dia, persistindo o high_24h e low_24h de cada criptomoeda
+     */
+    @Scheduled(cron = ("${schedule.cron}"))
+    @Async
+    public void valoresExtremosFinalDoDia(){
+        try {
+            log.info("==> Iniciada Atualização TAB_EXTREMOS ");
+            var criptoExtremosList = requestService.criptoExtremosRequest();
+            for(CriptoExtremo criptoExtremo: criptoExtremosList){
+                criptoRepo.adicionarCriptoExtremo(criptoExtremo);
+            }
+            log.info("==> Atualização TAB_EXTREMOS finalizada com sucesso");
+        } catch (Exception ex){
+            log.error("==> Erro na atualização TAB_EXTREMOS :" + ex.getMessage(), ex.getCause());
+        }
     }
 }

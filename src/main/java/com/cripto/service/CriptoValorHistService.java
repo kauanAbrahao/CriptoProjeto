@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -75,4 +77,15 @@ public class CriptoValorHistService {
 
     }
 
+    @Scheduled(cron = ("${schedule.cron}"))
+    @Async
+    public void movimentaCriptoValorParaHist(){
+        log.info("==> Iniciando movimentaCriptoValorParaHist");
+        try{
+            criptoValorHistRepository.movimentarParaCriptoValorHist();
+            log.info("==> movimentaCriptoValorParaHist finalizado com sucesso");
+        } catch (Exception e){
+            log.info("==> Erro no movimentaCriptoValorParaHist " + e.getMessage(), e.getCause());
+        }
+    }
 }

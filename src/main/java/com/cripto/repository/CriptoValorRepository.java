@@ -50,4 +50,18 @@ public class CriptoValorRepository extends AbstractRespository{
             return null;
         }
     }
+
+    public void adicionarCriptoValor(CriptoValor criptoValor) {
+        String sql = getSql("insertCriptoValor");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ID_Cripto", criptoValor.getId());
+        params.addValue("CRT_Price", criptoValor.getCurrentPrice());
+        params.addValue("MKT_Cap", criptoValor.getMktCap());
+        params.addValue("Total_Volume", criptoValor.getTotalVolume());
+        try {
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e) {
+            log.error("Erro no insertCriptoValor " + e.getMessage(), e.getCause());
+        }
+    }
 }

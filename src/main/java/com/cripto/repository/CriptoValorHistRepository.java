@@ -70,4 +70,14 @@ public class CriptoValorHistRepository extends AbstractRespository{
             return new ArrayList<>();
         }
     }
+
+    public void movimentarParaCriptoValorHist () {
+        String sql = getSql("toValorHist");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        try{
+            namedParameterJdbcTemplate.update(sql, params);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

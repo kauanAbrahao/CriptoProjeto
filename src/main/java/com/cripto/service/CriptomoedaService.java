@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -41,54 +42,32 @@ public class CriptomoedaService {
 
     }
 
-    @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
-    @Async
-    public void valorAtualRequest(){
-        try{
-            var criptoValorList = requestService.criptoValorRequest();
+    public ResponseEntity<Criptomoeda> getPorId(String idCriptomoeda) {
+        Criptomoeda criptomoeda = criptoRepo.buscarCriptomoedaPorId(idCriptomoeda);
 
-            log.info("Iniciando Request criptoValor");
-
-            for(CriptoValor criptoValor : criptoValorList){
-                criptoRepo.adicionarCriptoValor(criptoValor);
-            }
-
-            log.info("Request criptoValor: " + LocalDateTime.now());
-        } catch (ResponseStatusException ex){
-            log.error("Request criptoValor ERROR: " + ex.getMessage(), ex.getCause());
+        if(Objects.isNull(criptomoeda)){
+            throw new RuntimeException("Falha ao buscar criptomoedas");
         }
-    }
 
-    @Scheduled(cron = ("${schedule.cron}"))
-    @Async
-    public void valoresExtremosFinalDoDia(){
-        try {
-            var criptoExtremosList = requestService.criptoExtremosRequest();
-            for(CriptoExtremo criptoExtremo: criptoExtremosList){
-                criptoRepo.adicionarCriptoExtremo(criptoExtremo);
-            }
-            log.info("Atualização com sucesso TAB_EXTREMOS. Horário ==> " + LocalDateTime.now());
-        } catch (Exception ex){
-            log.error(ex.getMessage(), ex.getCause());
-        }
+        return ResponseEntity.ok(criptomoeda);
     }
 
     /**
-     * Método que roda todo final de dia, atualizando o MktCapRank de todas as criptomoedas
+     * Método que roda ao final do dia, atualizando o MktCapRank de todas as criptomoedas
      */
-    @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
+    @Scheduled(cron = ("${schedule.cron}"))
     @Async
     public void atualizaMktRankCriptomoedas(){
-        log.info("atualizarMktRankCriptomoedas iniciado");
+        log.info("==> Iniciando atualizarMktRankCriptomoedas");
         try{
             var criptomoedaList = requestService.criptoValorMktRankRequest();
             for(Criptomoeda criptomoeda : criptomoedaList){
                 criptoRepo.atualizarMktRankCrpiptomoedas(criptomoeda);
             }
 
-            log.info("atualizarMktRankCriptomoedas concluído com sucesso!");
+            log.info("==> atualizarMktRankCriptomoedas finalizado com sucesso!");
         } catch (Exception e){
-            log.error("Erro no atualizarMktRankCriptomoedas ==>" + e.getMessage(), e.getCause());
+            log.error("==> Erro no atualizarMktRankCriptomoedas " + e.getMessage(), e.getCause());
         }
     }
 }

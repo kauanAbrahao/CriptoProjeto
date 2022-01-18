@@ -43,7 +43,7 @@ public abstract class AbstractRespository {
             case "getPorIdCriptoValor":
                 return "SELECT TOP 1 * FROM tab_valor WHERE ID_Cripto = :idCripto ORDER BY DataHR_Inc desc ; ";
 
-            case "insertValorHist":
+            case "toValorHist":
 //                return "call to_valor_hist();";
                 return"exec to_valor_hist;";
 
@@ -102,6 +102,9 @@ public abstract class AbstractRespository {
             case "getAllCriptoExtremo":
 //                return "SELECT * from tab_extremos where DATE(DataHR_Inc) = :dtRef;";
                   return "SELECT * from tab_extremos where CAST(DataHr_Inc as DATE) = :dtRef;";
+
+            case "buscarCriptomoedaPorId":
+                return "SELECT * FROM TAB_CRIPTO WHERE ID_Cripto = :idCriptomoeda;";
         }
 
         return null;

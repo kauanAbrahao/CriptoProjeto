@@ -6,7 +6,7 @@ logging:
     root: info
 
 schedule:
-  timeRequest: '20000'
+  timeRequest: '200000'
   cron: '59 59 23 * * ?'
 
 spring:
