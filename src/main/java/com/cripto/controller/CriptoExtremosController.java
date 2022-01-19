@@ -2,6 +2,7 @@ package com.cripto.controller;
 
 import com.cripto.controller.resource.CriptoExtremosResource;
 import com.cripto.service.CriptoExtremoService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
@@ -23,5 +24,11 @@ public class CriptoExtremosController implements CriptoExtremosResource {
     @GetMapping(path ="/extr/{data}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(@PathVariable (name = "data") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataRef) {
         return criptoExtremoService.getAll(dataRef);
+    }
+
+    @GetMapping(path = "/extr/{data}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getById(@PathVariable(name = "data") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataRef,
+                                     @PathVariable(name = "id") String id){
+        return criptoExtremoService.getById(dataRef, id);
     }
 }

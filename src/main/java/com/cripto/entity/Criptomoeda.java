@@ -1,6 +1,9 @@
 package com.cripto.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +16,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Criptomoeda {
 
     private String id;
@@ -22,6 +26,6 @@ public class Criptomoeda {
     @JsonProperty("market_cap_rank")
     private Integer mktCapRank;
 
-    private CriptoValor criptoValor;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDateTime dthrInclusao;
 }

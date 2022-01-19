@@ -8,6 +8,7 @@ import com.cripto.repository.CriptomoedaRepository;
 import com.cripto.util.ConverterDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -38,15 +39,15 @@ public class CriptomoedaService {
             return ResponseEntity.ok(response);
         }
 
-        throw new RuntimeException("Falha ao buscar criptomoedas");
+        return ResponseEntity.internalServerError().body(null);
 
     }
 
-    public ResponseEntity<Criptomoeda> getPorId(String idCriptomoeda) {
+    public ResponseEntity<?> getPorId(String idCriptomoeda) {
         Criptomoeda criptomoeda = criptoRepo.buscarCriptomoedaPorId(idCriptomoeda);
 
         if(Objects.isNull(criptomoeda)){
-            throw new RuntimeException("Falha ao buscar criptomoedas");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Criptomoeda não encontrada");
         }
 
         return ResponseEntity.ok(criptomoeda);
@@ -65,7 +66,7 @@ public class CriptomoedaService {
                 criptoRepo.atualizarMktRankCrpiptomoedas(criptomoeda);
             }
 
-            log.info("==> atualizarMktRankCriptomoedas finalizado com sucesso!");
+            log.info("==> atualizarMktRankCriptomoedas finalizado com sucesso");
         } catch (Exception e){
             log.error("==> Erro no atualizarMktRankCriptomoedas " + e.getMessage(), e.getCause());
         }

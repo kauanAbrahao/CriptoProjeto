@@ -1,7 +1,6 @@
 package com.cripto.controller;
 
 import com.cripto.controller.resource.CriptomoedaResource;
-import com.cripto.entity.Criptomoeda;
 import com.cripto.entity.dto.CriptomoedaDTO;
 import com.cripto.service.CriptomoedaService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,21 +25,11 @@ public class CriptomoedaController implements CriptomoedaResource {
 
     @GetMapping(path = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CriptomoedaDTO>> buscaTodasCriptomoedas(){
-        try{
-            return criptomoedaService.getAll();
-        } catch (Exception e){
-            log.error("==> Erro no GET /list. " + e.getMessage(), e.getCause());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        return criptomoedaService.getAll();
     }
 
     @GetMapping(path = "/coin/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Criptomoeda> buscaCriptomoedaPorId(@PathVariable(name = "id") String idCriptomoeda){
-        try{
-            return criptomoedaService.getPorId(idCriptomoeda);
-        } catch (Exception e){
-            log.error("==> Erro no GET /coin/{id}. " + e.getMessage(), e.getCause());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    public ResponseEntity<?> buscaCriptomoedaPorId(@PathVariable(name = "id") String id){
+        return criptomoedaService.getPorId(id);
     }
 }

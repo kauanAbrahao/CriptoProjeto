@@ -3,11 +3,10 @@ package com.cripto.controller.resource;
 import com.cripto.entity.Criptomoeda;
 import com.cripto.entity.dto.CriptomoedaDTO;
 import com.cripto.SwaggerConfig;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.util.List;
 
 @Api(tags = {SwaggerConfig.CRIPTOMOEDAS})
@@ -31,5 +30,7 @@ public interface CriptomoedaResource {
             @ApiResponse(code = 503, message = "Service Unavailable"),
             @ApiResponse(code = 504, message = "Timeout")
     })
-    public ResponseEntity<Criptomoeda> buscaCriptomoedaPorId(String idCriptomoeda);
+    public ResponseEntity<?> buscaCriptomoedaPorId(@PathVariable(name = "id")
+            @ApiParam(name = "id", example = "bitcoin",
+    value = "ID da criptomoeda \n *Ffaz referência a /v1/api-criptomoedas/list", required = true) String id);
 }

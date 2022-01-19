@@ -105,6 +105,9 @@ public abstract class AbstractRespository {
 
             case "buscarCriptomoedaPorId":
                 return "SELECT * FROM TAB_CRIPTO WHERE ID_Cripto = :idCriptomoeda;";
+
+            case "getCriptoExtremoById":
+                return "SELECT * FROM TAB_EXTREMOS WHERE ID_Cripto = :idCripto and CAST(DataHr_Inc as DATE) = :dtRef;";
         }
 
         return null;

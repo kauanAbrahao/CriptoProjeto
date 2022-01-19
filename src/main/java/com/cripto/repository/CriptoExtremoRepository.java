@@ -46,4 +46,17 @@ public class CriptoExtremoRepository extends AbstractRespository {
 
     }
 
+    public CriptoExtremoDTO getCriptoExtremoById(LocalDate dtRef, String idCripto) {
+
+        String sql = getSql("getCriptoExtremoById");
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ID_Cripto", idCripto);
+        params.addValue("dtRef", dtRef.toString());
+
+        try{
+            return namedParameterJdbcTemplate.queryForObject(sql, params, new CriptoExtremoRowMapper());
+        } catch (Exception e){
+            return null;
+        }
+    }
 }

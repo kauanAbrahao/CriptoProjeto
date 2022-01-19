@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -39,6 +40,21 @@ public class CriptoExtremoService {
 
         return ResponseEntity.ok(criptoExtremoDTOList);
 
+    }
+
+    public ResponseEntity<CriptoExtremoDTO> getById(LocalDate dtRef, String idCripto) {
+
+        if(!dtRef.isBefore(LocalDate.now())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        CriptoExtremoDTO criptoExtremoDTO = criptoRepo.getCriptoExtremoById(dtRef, idCripto);
+
+        if(Objects.isNull(criptoExtremoDTO)){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        return ResponseEntity.ok(criptoExtremoDTO);
     }
 
     /**

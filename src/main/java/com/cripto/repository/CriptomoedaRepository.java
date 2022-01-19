@@ -81,6 +81,7 @@ public class CriptomoedaRepository extends AbstractRespository {
     public Criptomoeda buscarCriptomoedaPorId(String idCriptomoeda) {
         String sql = getSql("buscarCriptomoedaPorId");
         MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("idCriptomoeda", idCriptomoeda);
         try {
             return namedParameterJdbcTemplate.queryForObject(sql, params, new CriptomoedaRowMapper());
         } catch (Exception e) {

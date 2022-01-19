@@ -41,12 +41,13 @@ public class CriptoValorService {
             return ResponseEntity.ok(response);
         }
 
-        throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Falha ao buscar CriptoValores");
+        return ResponseEntity.internalServerError().body(null);
     }
 
     public ResponseEntity<CriptoValorDTO> getCriptoValorPorId(String idCriptoValor) {
 
         CriptoValor criptoValor = criptoValorRespository.getPorId(idCriptoValor);
+
         if(Objects.isNull(criptoValor)){
             return ResponseEntity.notFound().build();
         }
@@ -56,6 +57,7 @@ public class CriptoValorService {
 
     public ResponseEntity<List<CriptoValorDTO>> getCriptoValorListPorRank(Integer mktCapRank) {
         var criptoValorListPorRank = criptoValorRespository.getCriptoValorListPorRank(mktCapRank);
+
         if (criptoValorListPorRank.isEmpty()){
             return ResponseEntity.badRequest().build();
         }

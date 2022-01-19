@@ -31,7 +31,7 @@ public interface CriptoValorResource {
             @ApiResponse(code = 504, message = "Timeout")})
     ResponseEntity<?> getPorId(@PathVariable(name = "id")
                                @ApiParam(name = "id", example = "bitcoin", type = "String", required = true,
-                                       value = "id da criptomoeda \n *faz referência a /v1/api-criptomoedas") String idCriptoValor);
+                                       value = "id da criptomoeda \n *faz referência a /v1/api-criptomoedas/list") String idCriptoValor);
 
     @ApiOperation(value = "Retorna informações em tempo real de criptmoedas com market_cap_rank acima do informado")
     @ApiResponses(value = {

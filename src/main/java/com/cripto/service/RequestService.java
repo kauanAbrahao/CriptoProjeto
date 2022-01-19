@@ -3,6 +3,7 @@ package com.cripto.service;
 import com.cripto.entity.CriptoExtremo;
 import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
+@Slf4j
 public class RequestService {
 
     @Autowired
@@ -65,6 +67,7 @@ public class RequestService {
     private void verificaStatusResponse(ResponseEntity<?> response) {
 
         if(response.getStatusCode().isError() || Objects.isNull(response.getBody())){
+            log.error("HttpStatusRequest: " + response.getStatusCode());
             throw new ResponseStatusException(response.getStatusCode(), String.format("Erro no request %s", extremosUrl));
         }
     }
