@@ -23,4 +23,9 @@ coingecko:
   getHistoryUrl: "https://api.coingecko.com/api/v3/coins/{id}/history"
   getMktRankAllCripto: "https://api.coingecko.com/api/v3/coins/markets"
 
+coinMarketCap:
+  apikey: "a7dda90f-54f5-4f51-9b7b-f8257915a41e"
+  getLatestValues: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=150&convert=USD"
+
+
 

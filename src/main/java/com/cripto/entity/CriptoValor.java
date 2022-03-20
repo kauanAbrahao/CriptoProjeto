@@ -1,5 +1,6 @@
 package com.cripto.entity;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
@@ -16,13 +17,13 @@ public class CriptoValor {
 
     private String id;
 
-    @JsonProperty("current_price")
+    @JsonAlias({"current_price", "price"})
     private BigDecimal currentPrice;
 
     @JsonProperty("market_cap")
     private Long mktCap;
 
-    @JsonProperty("total_volume")
+    @JsonAlias({"total_volume", "volume_24"})
     private BigDecimal totalVolume;
 
     private LocalDateTime dthrInclusao;
