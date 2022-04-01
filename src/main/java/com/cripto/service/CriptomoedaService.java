@@ -1,7 +1,5 @@
 package com.cripto.service;
 
-import com.cripto.entity.CriptoExtremo;
-import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
 import com.cripto.entity.dto.CriptomoedaDTO;
 import com.cripto.repository.CriptomoedaRepository;
@@ -13,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,7 +24,7 @@ public class CriptomoedaService {
     CriptomoedaRepository criptoRepo;
 
     @Autowired
-    RequestService requestService;
+    CoinGeckoRequestService coinGeckoRequestService;
 
 
     public ResponseEntity<List<CriptomoedaDTO>> getAll(){
@@ -61,7 +57,7 @@ public class CriptomoedaService {
     public void atualizaMktRankCriptomoedas(){
         log.info("==> Iniciando atualizarMktRankCriptomoedas");
         try{
-            var criptomoedaList = requestService.criptoValorMktRankRequest();
+            var criptomoedaList = coinGeckoRequestService.criptoValorMktRankRequest();
             for(Criptomoeda criptomoeda : criptomoedaList){
                 criptoRepo.atualizarMktRankCrpiptomoedas(criptomoeda);
             }

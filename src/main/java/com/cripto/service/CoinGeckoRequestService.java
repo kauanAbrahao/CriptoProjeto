@@ -27,7 +27,7 @@ import java.util.Objects;
 
 @Service
 @Slf4j
-public class RequestService {
+public class CoinGeckoRequestService {
 
     @Autowired
     RestTemplate restTemplate;

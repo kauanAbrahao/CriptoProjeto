@@ -24,7 +24,7 @@ public class CriptoExtremoServiceTest {
     CriptoExtremoRepository criptoRepo;
 
     @Mock
-    RequestService requestService;
+    CoinGeckoRequestService coinGeckoRequestService;
 
     @InjectMocks
     CriptoExtremoService criptoExtremoService;

@@ -6,15 +6,12 @@ import com.cripto.repository.CriptoValorRepository;
 import com.cripto.util.ConverterDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,7 +27,7 @@ public class CriptoValorService {
     CriptoValorRepository criptoValorRepository;
 
     @Autowired
-    RequestService requestService;
+    CoinGeckoRequestService coinGeckoRequestService;
 
     public ResponseEntity<List<CriptoValorDTO>> buscaTodasCriptoValor() {
 
@@ -69,7 +66,7 @@ public class CriptoValorService {
     @Async
     public void valorAtualRequest(){
         try{
-            var criptoValorList = requestService.criptoValorRequest();
+            var criptoValorList = coinGeckoRequestService.criptoValorRequest();
 
             log.info("==> Iniciando GET valorAtualRequest");
 

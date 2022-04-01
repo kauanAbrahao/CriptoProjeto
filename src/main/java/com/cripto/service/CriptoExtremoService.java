@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +23,7 @@ public class CriptoExtremoService {
     CriptoExtremoRepository criptoRepo;
 
     @Autowired
-    RequestService requestService;
+    CoinGeckoRequestService coinGeckoRequestService;
 
     public ResponseEntity<List<CriptoExtremoDTO>> getAll(LocalDate dtRef) {
 
@@ -65,7 +64,7 @@ public class CriptoExtremoService {
     public void valoresExtremosFinalDoDia(){
         try {
             log.info("==> Iniciada Atualização TAB_EXTREMOS ");
-            var criptoExtremosList = requestService.criptoExtremosRequest();
+            var criptoExtremosList = coinGeckoRequestService.criptoExtremosRequest();
             for(CriptoExtremo criptoExtremo: criptoExtremosList){
                 criptoRepo.adicionarCriptoExtremo(criptoExtremo);
             }
