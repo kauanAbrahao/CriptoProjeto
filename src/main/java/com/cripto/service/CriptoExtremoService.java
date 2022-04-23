@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +29,7 @@ public class CriptoExtremoService {
     public ResponseEntity<List<CriptoExtremoDTO>> getAll(LocalDate dtRef) {
 
         if(!dtRef.isBefore(LocalDate.now())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data informada não deve ser futura");
         }
 
         List<CriptoExtremoDTO> criptoExtremoDTOList = criptoRepo.getAllCriptoExtremo(dtRef);
@@ -44,7 +45,7 @@ public class CriptoExtremoService {
     public ResponseEntity<CriptoExtremoDTO> getById(LocalDate dtRef, String idCripto) {
 
         if(!dtRef.isBefore(LocalDate.now())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data informada não deve ser futura");
         }
 
         CriptoExtremoDTO criptoExtremoDTO = criptoRepo.getCriptoExtremoById(dtRef, idCripto);

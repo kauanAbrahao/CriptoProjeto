@@ -21,12 +21,12 @@ public class CriptoExtremosController implements CriptoExtremosResource {
     @Autowired
     CriptoExtremoService criptoExtremoService;
 
-    @GetMapping(path ="/extr/{data}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path ="/highlow/{data}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll(@PathVariable (name = "data") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataRef) {
         return criptoExtremoService.getAll(dataRef);
     }
 
-    @GetMapping(path = "/extr/{data}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/highlow/{data}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getById(@PathVariable(name = "data") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataRef,
                                      @PathVariable(name = "id") String id){
         return criptoExtremoService.getById(dataRef, id);

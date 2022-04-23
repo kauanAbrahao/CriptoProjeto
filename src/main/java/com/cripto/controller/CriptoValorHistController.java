@@ -19,12 +19,12 @@ public class CriptoValorHistController implements CriptoValorHistResource {
     @Autowired
     CriptoValorHistService criptoValorHistService;
 
-    @GetMapping(path = "/refdate/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/history/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAllDate(@PathVariable(name = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataRef) {
         return criptoValorHistService.getAllCriptoValorDate(dataRef);
     }
 
-    @GetMapping(path = "/refdate/{id}/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/history/{id}/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getDateId(@PathVariable(name = "id") String idCripto, @PathVariable(name="date")
                              @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataRef){
         return criptoValorHistService.getCriptoValorDatePorId(idCripto, dataRef);

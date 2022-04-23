@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 
@@ -35,7 +36,7 @@ public class CriptoValorHistService {
 
     public ResponseEntity<?> getCriptoValorDatePorId(String idCripto, LocalDate dtRef) {
         if(!dtRef.isBefore(LocalDate.now())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data informada não deve ser futura");
         }
 
         var criptoValorList = criptoValorHistRepository.getIdDate(idCripto, dtRef);
@@ -49,7 +50,7 @@ public class CriptoValorHistService {
 
     public ResponseEntity<?> getCriptoValorRangeDate(LocalDate dtInicial, LocalDate dtFim) {
         if(!dtInicial.isBefore(LocalDate.now()) || !dtFim.isBefore(LocalDate.now())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data informada não deve ser futura");
         }
 
         var criptoValorList = criptoValorHistRepository.getRangeDate(dtInicial, dtFim);
@@ -64,7 +65,7 @@ public class CriptoValorHistService {
     public ResponseEntity<?> getCriptoValorRangeDateId(LocalDate dtInicial, LocalDate dtFim, String idCripto) {
 
         if(!dtInicial.isBefore(LocalDate.now()) || !dtFim.isBefore(LocalDate.now())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            throw  new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data(s) informada(s) inválida(s)");
         }
 
         var criptoValorList = criptoValorHistRepository.getRangeDateId(dtInicial, dtFim, idCripto);

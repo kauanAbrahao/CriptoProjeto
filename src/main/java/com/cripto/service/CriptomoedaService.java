@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Objects;
@@ -43,7 +44,7 @@ public class CriptomoedaService {
         Criptomoeda criptomoeda = criptoRepo.buscarCriptomoedaPorId(idCriptomoeda);
 
         if(Objects.isNull(criptomoeda)){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Criptomoeda não encontrada");
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Criptomoeda não encontrada");
         }
 
         return ResponseEntity.ok(criptomoeda);

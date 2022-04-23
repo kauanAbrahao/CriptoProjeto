@@ -6,6 +6,7 @@ import com.cripto.repository.CriptoValorRepository;
 import com.cripto.util.ConverterDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -46,7 +47,7 @@ public class CriptoValorService {
         CriptoValor criptoValor = criptoValorRespository.getPorId(idCriptoValor);
 
         if(Objects.isNull(criptoValor)){
-            return ResponseEntity.notFound().build();
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND, "Criptomoeda não encontrada");
         }
 
         return ResponseEntity.ok(ConverterDTO.entityToDTO(criptoValor));
@@ -56,7 +57,7 @@ public class CriptoValorService {
         var criptoValorListPorRank = criptoValorRespository.getCriptoValorListPorRank(mktCapRank);
 
         if (criptoValorListPorRank.isEmpty()){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.internalServerError().build();
         }
 
         return ResponseEntity.ok(ConverterDTO.entityToDTO(criptoValorListPorRank));

@@ -14,30 +14,22 @@ import java.util.List;
 @Slf4j
 public class CriptomoedaRepository extends AbstractRespository {
 
-    public void adicionaCriptomoedas(Criptomoeda criptomoeda){
+    public void adicionaCriptomoedas(Criptomoeda criptomoeda) throws Exception {
         String sql = getSql("insertCriptomoedas");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptomoeda.getId());
         params.addValue("Symbol", criptomoeda.getSymbol());
         params.addValue("Nome_Cripto", criptomoeda.getName());
         params.addValue("MKT_Cap_Rank", criptomoeda.getMktCapRank());
-        try{
-            namedParameterJdbcTemplate.update(sql, params);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        namedParameterJdbcTemplate.update(sql, params);
     }
 
-    public void atualizarMktRankCrpiptomoedas(Criptomoeda criptomoeda){
+    public void atualizarMktRankCrpiptomoedas(Criptomoeda criptomoeda) throws Exception {
         String sql = getSql("updateCriptomoeda");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("ID_Cripto", criptomoeda.getId());
         params.addValue("MKT_Cap_Rank", criptomoeda.getMktCapRank());
-        try{
-            namedParameterJdbcTemplate.update(sql, params);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        namedParameterJdbcTemplate.update(sql, params);
     }
 
     //TODO - Isso é para fazer o insert inicial na hist?
@@ -63,19 +55,15 @@ public class CriptomoedaRepository extends AbstractRespository {
         try{
             c = (namedParameterJdbcTemplate.query(sql, new CriptomoedaRowMapper()));
         } catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
         return c;
     }
 
-    public void deletarCriptoValor () {
+    public void deletarCriptoValor () throws Exception {
         String sql = getSql("deleteTabValor");
         MapSqlParameterSource params = new MapSqlParameterSource();
-        try{
-            namedParameterJdbcTemplate.update(sql, params);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        namedParameterJdbcTemplate.update(sql, params);
     }
 
     public Criptomoeda buscarCriptomoedaPorId(String idCriptomoeda) {
@@ -85,7 +73,6 @@ public class CriptomoedaRepository extends AbstractRespository {
         try {
             return namedParameterJdbcTemplate.queryForObject(sql, params, new CriptomoedaRowMapper());
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
