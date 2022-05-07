@@ -30,6 +30,9 @@ public class CriptoValorService {
     @Autowired
     CoinGeckoRequestService coinGeckoRequestService;
 
+    @Autowired
+    CoinMktCapRequestService coinMktCapRequestService;
+
     public ResponseEntity<List<CriptoValorDTO>> buscaTodasCriptoValor() {
 
         Optional<List<CriptoValor>> criptoValores = Optional.ofNullable(criptoValorRespository.getAll());

@@ -1,5 +1,6 @@
 package com.cripto.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -28,8 +29,12 @@ public class CriptoValorCoinMktCap {
     @Getter
     @Setter
     public static class USD{
+
+        @JsonProperty("slug")
+        private String id;
+
         private BigDecimal price;
         private Long volume_24h;
-        private BigDecimal market_cap;
+        private Long market_cap;
     }
 }

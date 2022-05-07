@@ -4,6 +4,7 @@ import com.cripto.entity.CriptoExtremo;
 import com.cripto.entity.CriptoValor;
 import com.cripto.entity.Criptomoeda;
 import com.cripto.entity.dto.CriptoValorCoinMktCap;
+import com.cripto.service.contracts.CoinRequest;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+import io.github.resilience4j.retry.annotation.Retry;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -27,7 +29,7 @@ import java.util.Objects;
 
 @Service
 @Slf4j
-public class CoinGeckoRequestService {
+public class CoinGeckoRequestService implements CoinRequest {
 
     @Autowired
     RestTemplate restTemplate;
@@ -52,6 +54,7 @@ public class CoinGeckoRequestService {
      * Requisição feita ao final do dia. Captura o maior e menor valor de cada criptomoeda para o dia de referência
      * @throws IOException
      */
+    @Retry(name = "criptoExtremoRetry", fallbackMethod = "criptoExtremoRequestErrorHandler")
     public List<CriptoExtremo> criptoExtremosRequest(){
 
         var response = restTemplate.getForEntity(extremosUrl, CriptoExtremo[].class);
@@ -59,6 +62,11 @@ public class CoinGeckoRequestService {
         verificaStatusResponse(response);
 
         return Arrays.asList(response.getBody());
+    }
+
+    public List<CriptoExtremo> criptoExtremoRequestErrorHandler(){
+        log.info("Política de retry criptoExtremoRetry iniciada");
+        return  this.criptoExtremosRequest();
     }
 
     public List<CriptoValor> criptoValorRequest(){
@@ -80,20 +88,6 @@ public class CoinGeckoRequestService {
         return Arrays.asList(response.getBody());
     }
 
-
-    public ResponseEntity<?> getLatestValueCoinMktCap(){
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("X-CMC_PRO_API_KEY", apiKey);
-
-        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
-
-        var response = restTemplate.exchange(coinMarketCapLatestUrl, HttpMethod.GET, entity,  CriptoValorCoinMktCap.class);
-
-        log.info(response.getStatusCode() + "\n" + response.getBody());
-
-        return response;
-    }
 
     private void verificaStatusResponse(ResponseEntity<?> response) {
 

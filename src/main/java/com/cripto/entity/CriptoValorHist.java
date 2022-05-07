@@ -1,4 +1,4 @@
-package com.cripto.entity.dto;
+package com.cripto.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CriptoValorHistDTO {
+public class CriptoValorHist {
 
     private String id;
     private BigDecimal open_price;

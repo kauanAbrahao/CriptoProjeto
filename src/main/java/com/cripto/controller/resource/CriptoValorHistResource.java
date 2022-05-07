@@ -1,7 +1,7 @@
 package com.cripto.controller.resource;
 
 import com.cripto.SwaggerConfig;
-import com.cripto.entity.dto.CriptoValorHistDTO;
+import com.cripto.entity.CriptoValorHist;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +14,7 @@ public interface CriptoValorHistResource {
 
     @ApiOperation(value = "Retorna informações históricas para determinada data e criptomoeda")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorHistDTO.class),
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorHist.class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Id Not Found"),
             @ApiResponse(code = 503, message = "Service Unavailable"),
@@ -28,7 +28,7 @@ public interface CriptoValorHistResource {
 
     @ApiOperation(value = "Retorna informações históricas para range de data")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorHistDTO[].class),
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorHist[].class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Invalid date(s)"),
             @ApiResponse(code = 503, message = "Service Unavailable"),
@@ -41,7 +41,7 @@ public interface CriptoValorHistResource {
 
     @ApiOperation(value = "Retorna informações históricas de uma criptomoeda específica em um range de data")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorHistDTO[].class),
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorHist[].class),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Invalid date(s)"),
             @ApiResponse(code = 503, message = "Service Unavailable"),
@@ -59,7 +59,7 @@ public interface CriptoValorHistResource {
 
     @ApiOperation(value = "Retorna informações históricas de todas as criptomoedas para determinada data")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "OK", response = CriptoValorHistDTO[].class),
+            @ApiResponse(code = 200, message = "OK", response = CriptoValorHist[].class),
             @ApiResponse(code = 400, message = "Bad Request - Invalid date"),
             @ApiResponse(code = 404, message = "Not found - Invalid date"),
             @ApiResponse(code = 503, message = "Service Unavailable"),

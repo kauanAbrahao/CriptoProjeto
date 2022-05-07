@@ -7,6 +7,12 @@ logging:
   level:
     root: info
 
+resilience4j:
+  retry:
+    instances:
+      criptoExtremoRetry:
+        wait-duration: 2s
+
 schedule:
   timeRequest: '200000'
   cron: '59 59 23 * * ?'

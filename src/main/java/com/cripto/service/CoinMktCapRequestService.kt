@@ -1,6 +1,11 @@
 package com.cripto.service
 
+import com.cripto.entity.CriptoExtremo
+import com.cripto.entity.CriptoValor
+import com.cripto.entity.Criptomoeda
 import com.cripto.entity.dto.CriptoValorCoinMktCap
+import com.cripto.service.contracts.CoinRequest
+import com.cripto.util.ConverterDTO
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,10 +16,11 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
+import java.util.Arrays.asList
 
 @Service
 @Slf4j
-class CoinMktCapRequestService {
+class CoinMktCapRequestService : CoinRequest {
 
     @Autowired
     lateinit var restTemplate: RestTemplate
@@ -27,7 +33,7 @@ class CoinMktCapRequestService {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    fun getLatestValueCoinMktCap(): ResponseEntity<*> {
+    override fun criptoValorRequest(): List<MutableList<CriptoValor>> {
 
         val httpHeaders = HttpHeaders();
         httpHeaders.set("X-CMC_PRO_API_KEY", apiKey)
@@ -38,7 +44,15 @@ class CoinMktCapRequestService {
                                              CriptoValorCoinMktCap::class.java)
 
         logger.info("CoinMktCap Latest Value respose: " + response.statusCode.toString());
-        return response;
+        return listOf(ConverterDTO.listCoinMktCapToEntity(response.body));
+    }
+
+    override fun criptoExtremosRequest(): MutableList<CriptoExtremo> {
+        TODO("Not yet implemented")
+    }
+
+    override fun criptoValorMktRankRequest(): MutableList<Criptomoeda> {
+        TODO("Not yet implemented")
     }
 
 }

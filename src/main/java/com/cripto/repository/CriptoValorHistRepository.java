@@ -1,6 +1,6 @@
 package com.cripto.repository;
 
-import com.cripto.entity.dto.CriptoValorHistDTO;
+import com.cripto.entity.CriptoValorHist;
 import com.cripto.repository.rowmapper.CriptoValorHistRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class CriptoValorHistRepository extends AbstractRespository{
     @Autowired
     CriptoValorHistRowMapper criptoValorHistRowMapper;
 
-    public List<CriptoValorHistDTO> getAllDate(LocalDate dtRef) {
+    public List<CriptoValorHist> getAllDate(LocalDate dtRef) {
         String sql = getSql("getAllDate");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("dtRef", dtRef.toString());
@@ -30,7 +30,7 @@ public class CriptoValorHistRepository extends AbstractRespository{
         }
     }
 
-    public List<CriptoValorHistDTO> getIdDate(String idCripto, LocalDate dtRef) {
+    public List<CriptoValorHist> getIdDate(String idCripto, LocalDate dtRef) {
         String sql = getSql("getIdDate");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("dtRef", dtRef.toString());
@@ -43,7 +43,7 @@ public class CriptoValorHistRepository extends AbstractRespository{
         }
     }
 
-    public List<CriptoValorHistDTO> getRangeDate(LocalDate dtInicial, LocalDate dtFim) {
+    public List<CriptoValorHist> getRangeDate(LocalDate dtInicial, LocalDate dtFim) {
         String sql = getSql("getRangeDate");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("dtInicial", dtInicial.toString());
@@ -56,7 +56,7 @@ public class CriptoValorHistRepository extends AbstractRespository{
         }
     }
 
-    public List<CriptoValorHistDTO> getRangeDateId(LocalDate dtInicial, LocalDate dtFim, String idCripto) {
+    public List<CriptoValorHist> getRangeDateId(LocalDate dtInicial, LocalDate dtFim, String idCripto) {
         String sql = getSql("getRangeDateId");
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("dtInicial", dtInicial.toString());
