@@ -14,9 +14,14 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import java.util.Arrays.asList
+import com.fasterxml.jackson.databind.ObjectMapper
+
+
+
 
 @Service
 @Slf4j
@@ -33,7 +38,7 @@ class CoinMktCapRequestService : CoinRequest {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    override fun criptoValorRequest(): List<MutableList<CriptoValor>> {
+    override fun criptoValorRequest(): List<CriptoValor> {
 
         val httpHeaders = HttpHeaders();
         httpHeaders.set("X-CMC_PRO_API_KEY", apiKey)
@@ -42,9 +47,11 @@ class CoinMktCapRequestService : CoinRequest {
 
         val response = restTemplate.exchange(coinMarketCapLatestUrl, HttpMethod.GET, entity,
                                              CriptoValorCoinMktCap::class.java)
+        val mapper = ObjectMapper()
+        val json = mapper.writeValueAsString(response.body);
 
         logger.info("CoinMktCap Latest Value respose: " + response.statusCode.toString());
-        return listOf(ConverterDTO.listCoinMktCapToEntity(response.body));
+        return ConverterDTO.listCoinMktCapToEntity(response.body);
     }
 
     override fun criptoExtremosRequest(): MutableList<CriptoExtremo> {

@@ -71,6 +71,7 @@ public class CriptoValorService {
     public void valorAtualRequest(){
         try{
             var criptoValorList = coinGeckoRequestService.criptoValorRequest();
+            coinMktCapRequestService.criptoValorRequest();
 
             log.info("==> Iniciando GET valorAtualRequest");
 

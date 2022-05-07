@@ -16,6 +16,10 @@ public class CriptoValorCoinMktCap {
     @Getter
     @Setter
     public static class Data{
+
+        @JsonProperty("slug")
+        private String id;
+
         private Quote quote;
     }
 
@@ -29,10 +33,6 @@ public class CriptoValorCoinMktCap {
     @Getter
     @Setter
     public static class USD{
-
-        @JsonProperty("slug")
-        private String id;
-
         private BigDecimal price;
         private Long volume_24h;
         private Long market_cap;

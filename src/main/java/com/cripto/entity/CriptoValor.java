@@ -26,4 +26,6 @@ public class CriptoValor {
     @JsonAlias({"total_volume", "volume_24"})
     private BigDecimal totalVolume;
 
+    private LocalDateTime dthrInclusao;
+
 }

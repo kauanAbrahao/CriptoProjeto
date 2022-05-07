@@ -5,6 +5,8 @@ import com.cripto.entity.Criptomoeda;
 import com.cripto.entity.dto.CriptoValorCoinMktCap;
 import com.cripto.entity.dto.CriptoValorDTO;
 import com.cripto.entity.dto.CriptomoedaDTO;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,13 +32,16 @@ public class ConverterDTO {
                 criptoValor.getMktCap(), criptoValor.getTotalVolume());
     }
 
+
     public static List<CriptoValor> listCoinMktCapToEntity(CriptoValorCoinMktCap criptos){
         return criptos.getData().stream()
-                .map(CriptoValorCoinMktCap.Data::getQuote)
-                .map(CriptoValorCoinMktCap.Quote::getUsd)
-                .map(criptoValor ->
-                        new CriptoValor(criptoValor.getId(),
-                        criptoValor.getPrice(), criptoValor.getMarket_cap(), criptoValor.getPrice()))
+                .map(data ->
+                        new CriptoValor(
+                                data.getId(),
+                                data.getQuote().getUsd().getPrice(),
+                                data.getQuote().getUsd().getMarket_cap(),
+                                data.getQuote().getUsd().getPrice(),
+                                LocalDateTime.now()))
                 .collect(Collectors.toList());
     }
 
