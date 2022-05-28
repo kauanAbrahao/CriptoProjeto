@@ -31,8 +31,6 @@ import java.util.Objects;
 @Slf4j
 public class CoinGeckoRequestService implements CoinRequest {
 
-    @Autowired
-    RestTemplate restTemplate;
 
     @Value("${coingecko.getExtremosUrl}")
     private String extremosUrl;
@@ -48,6 +46,12 @@ public class CoinGeckoRequestService implements CoinRequest {
 
     @Value("${coinMarketCap.apikey}")
     private String apiKey;
+
+    final RestTemplate restTemplate;
+
+    public CoinGeckoRequestService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
 
     /**

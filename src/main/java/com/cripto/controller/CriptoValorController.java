@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -20,8 +22,16 @@ public class CriptoValorController implements CriptoValorResource {
     CriptoValorService criptoValorService;
 
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CriptoValorDTO>> getAll() {
-        return criptoValorService.buscaTodasCriptoValor();
+    public ResponseEntity<List<CriptoValorDTO>> getAll(String sortingValue) {
+        var result = criptoValorService.buscaTodasCriptoValor();
+
+        if(sortingValue.equalsIgnoreCase("current_price")){
+            result.sort(Comparator.comparing(CriptoValorDTO::getCurrent_price).reversed());
+        }
+        else{
+            result.sort(Comparator.comparing(CriptoValorDTO::getMarket_cap).reversed());
+        }
+            return ResponseEntity.ok(result);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )

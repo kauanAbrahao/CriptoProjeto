@@ -22,7 +22,7 @@ public class CriptoValorRepository extends AbstractRespository{
         try{
             return namedParameterJdbcTemplate.query(sql, criptoValorRowMapper);
         } catch (Exception e){
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e.getCause());
             return null;
         }
     }
@@ -34,7 +34,7 @@ public class CriptoValorRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.queryForObject(sql, params, criptoValorRowMapper);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e.getCause());
             return null;
         }
     }
@@ -46,7 +46,7 @@ public class CriptoValorRepository extends AbstractRespository{
         try {
             return namedParameterJdbcTemplate.query(sql, params, criptoValorRowMapper);
         } catch (Exception e){
-            log.error(e.getMessage());
+            log.error(e.getMessage(), e.getCause());
             return null;
         }
     }

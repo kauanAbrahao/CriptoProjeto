@@ -20,11 +20,14 @@ import java.util.Objects;
 @Slf4j
 public class CriptoExtremoService {
 
-    @Autowired
-    CriptoExtremoRepository criptoRepo;
+    final CriptoExtremoRepository criptoRepo;
 
-    @Autowired
-    CoinGeckoRequestService coinGeckoRequestService;
+    final CoinGeckoRequestService coinGeckoRequestService;
+
+    public CriptoExtremoService(CriptoExtremoRepository criptoRepo, CoinGeckoRequestService coinGeckoRequestService) {
+        this.criptoRepo = criptoRepo;
+        this.coinGeckoRequestService = coinGeckoRequestService;
+    }
 
     public ResponseEntity<List<CriptoExtremoDTO>> getAll(LocalDate dtRef) {
 

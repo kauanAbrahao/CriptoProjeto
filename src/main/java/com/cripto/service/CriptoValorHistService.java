@@ -16,12 +16,15 @@ import java.time.LocalDate;
 @Slf4j
 public class CriptoValorHistService {
 
-    @Autowired
-    CriptoValorHistRepository criptoValorHistRepository;
+    final CriptoValorHistRepository criptoValorHistRepository;
+
+    public CriptoValorHistService(CriptoValorHistRepository criptoValorHistRepository) {
+        this.criptoValorHistRepository = criptoValorHistRepository;
+    }
 
     public ResponseEntity<?> getAllCriptoValorDate(LocalDate dtRef) {
         if(!dtRef.isBefore(LocalDate.now())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Data informada não deve ser futura");
         }
 
         var criptoExtremoDTOList = criptoValorHistRepository.getAllDate(dtRef);

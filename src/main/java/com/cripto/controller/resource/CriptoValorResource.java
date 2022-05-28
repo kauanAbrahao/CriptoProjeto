@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.awt.print.Pageable;
+
 @Api(tags = {SwaggerConfig.CRIPTO_VALOR})
 public interface CriptoValorResource {
 
@@ -19,7 +21,8 @@ public interface CriptoValorResource {
             @ApiResponse(code = 503, message = "Service Unavailable"),
             @ApiResponse(code = 504, message = "Timeout")
     })
-    public ResponseEntity<?> getAll();
+    public ResponseEntity<?> getAll(@RequestParam(name = "sortBy", defaultValue = "current_price", required = false)
+                                    @ApiParam(name = "sortBy", type = "String", allowableValues = "current_price, market_cap") String sortingValue);
 
 
     @ApiOperation(value = "Retorna informações em tempo real de uma criptomoeda específica")

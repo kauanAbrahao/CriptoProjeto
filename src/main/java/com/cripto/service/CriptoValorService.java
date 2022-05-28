@@ -5,7 +5,6 @@ import com.cripto.entity.dto.CriptoValorDTO;
 import com.cripto.repository.CriptoValorRepository;
 import com.cripto.util.ConverterDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -13,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,28 +21,30 @@ import java.util.Optional;
 @Slf4j
 public class CriptoValorService {
 
-    @Autowired
-    CriptoValorRepository criptoValorRespository;
+    final CriptoValorRepository criptoValorRespository;
 
-    @Autowired
-    CriptoValorRepository criptoValorRepository;
+    final CriptoValorRepository criptoValorRepository;
 
-    @Autowired
-    CoinGeckoRequestService coinGeckoRequestService;
+    final CoinGeckoRequestService coinGeckoRequestService;
 
-    @Autowired
-    CoinMktCapRequestService coinMktCapRequestService;
+    final CoinMktCapRequestService coinMktCapRequestService;
 
-    public ResponseEntity<List<CriptoValorDTO>> buscaTodasCriptoValor() {
+    public CriptoValorService(CriptoValorRepository criptoValorRespository, CriptoValorRepository criptoValorRepository, CoinGeckoRequestService coinGeckoRequestService, CoinMktCapRequestService coinMktCapRequestService) {
+        this.criptoValorRespository = criptoValorRespository;
+        this.criptoValorRepository = criptoValorRepository;
+        this.coinGeckoRequestService = coinGeckoRequestService;
+        this.coinMktCapRequestService = coinMktCapRequestService;
+    }
+
+    public List<CriptoValorDTO> buscaTodasCriptoValor() {
 
         Optional<List<CriptoValor>> criptoValores = Optional.ofNullable(criptoValorRespository.getAll());
 
         if(criptoValores.isPresent() && !criptoValores.get().isEmpty()){
-            List<CriptoValorDTO> response = ConverterDTO.entityToDTO(criptoValores.get());
-            return ResponseEntity.ok(response);
+            return ConverterDTO.entityToDTO(criptoValores.get());
         }
 
-        return ResponseEntity.internalServerError().body(null);
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, null);
     }
 
     public ResponseEntity<CriptoValorDTO> getCriptoValorPorId(String idCriptoValor) {
@@ -63,7 +65,10 @@ public class CriptoValorService {
             return ResponseEntity.internalServerError().build();
         }
 
-        return ResponseEntity.ok(ConverterDTO.entityToDTO(criptoValorListPorRank));
+        var result = ConverterDTO.entityToDTO(criptoValorListPorRank);
+        result.sort(Comparator.comparing(CriptoValorDTO::getMarket_cap).reversed());
+
+        return ResponseEntity.ok(result);
     }
 
     @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))

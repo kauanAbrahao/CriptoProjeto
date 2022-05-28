@@ -21,11 +21,16 @@ import java.util.Optional;
 @Slf4j
 public class CriptomoedaService {
 
-    @Autowired
+    final
     CriptomoedaRepository criptoRepo;
 
-    @Autowired
+    final
     CoinGeckoRequestService coinGeckoRequestService;
+
+    public CriptomoedaService(CriptomoedaRepository criptoRepo, CoinGeckoRequestService coinGeckoRequestService) {
+        this.criptoRepo = criptoRepo;
+        this.coinGeckoRequestService = coinGeckoRequestService;
+    }
 
 
     public ResponseEntity<List<CriptomoedaDTO>> getAll(){
