@@ -41,9 +41,6 @@ public class CoinGeckoRequestService implements CoinRequest {
     @Value("${coingecko.getMktRankAllCripto}")
     private String mktRankUrl;
 
-    @Value("${coinMarketCap.getLatestValues}")
-    private String coinMarketCapLatestUrl;
-
     @Value("${coinMarketCap.apikey}")
     private String apiKey;
 
