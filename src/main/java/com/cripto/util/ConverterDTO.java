@@ -7,6 +7,7 @@ import com.cripto.entity.dto.CriptoValorDTO;
 import com.cripto.entity.dto.CriptomoedaDTO;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +25,12 @@ public class ConverterDTO {
 
     public static List<CriptoValorDTO> entityToDTO(List<CriptoValor> criptoValores){
         return criptoValores.stream().map(valores -> new CriptoValorDTO(valores.getId(), valores.getCurrentPrice(),
-                valores.getMktCap(), valores.getTotalVolume())).collect(Collectors.toList());
+                valores.getMktCap(), valores.getTotalVolume(), valores.getDthrInclusao().truncatedTo(ChronoUnit.MINUTES))).collect(Collectors.toList());
     }
 
     public static CriptoValorDTO entityToDTO(CriptoValor criptoValor){
         return new CriptoValorDTO(criptoValor.getId(), criptoValor.getCurrentPrice(),
-                criptoValor.getMktCap(), criptoValor.getTotalVolume());
+                criptoValor.getMktCap(), criptoValor.getTotalVolume(), criptoValor.getDthrInclusao().truncatedTo(ChronoUnit.MINUTES));
     }
 
 

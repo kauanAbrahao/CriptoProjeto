@@ -3,14 +3,11 @@ package com.cripto.controller;
 import com.cripto.controller.resource.CriptoValorResource;
 import com.cripto.entity.dto.CriptoValorDTO;
 import com.cripto.service.CriptoValorService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
