@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@Slf4j
 @RequestMapping("${spring.url}")
 public class CriptomoedaController implements CriptomoedaResource {
 

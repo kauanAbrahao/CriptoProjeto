@@ -20,7 +20,7 @@ public interface CriptomoedaResource {
             @ApiResponse(code = 503, message = "Service Unavailable"),
             @ApiResponse(code = 504, message = "Timeout")
     })
-    public ResponseEntity<List<CriptomoedaDTO>> buscaTodasCriptomoedas();
+    ResponseEntity<List<CriptomoedaDTO>> buscaTodasCriptomoedas();
 
     @ApiOperation(value = "Retorna lista de informações básicas de uma criptomoeda específica suportada na API")
     @ApiResponses(value = {
@@ -30,7 +30,7 @@ public interface CriptomoedaResource {
             @ApiResponse(code = 503, message = "Service Unavailable"),
             @ApiResponse(code = 504, message = "Timeout")
     })
-    public ResponseEntity<?> buscaCriptomoedaPorId(@PathVariable(name = "id")
+    ResponseEntity<?> buscaCriptomoedaPorId(@PathVariable(name = "id")
             @ApiParam(name = "id", example = "bitcoin",
     value = "ID da criptomoeda \n *Ffaz referência a /v1/api-criptomoedas/list", required = true) String id);
 }
