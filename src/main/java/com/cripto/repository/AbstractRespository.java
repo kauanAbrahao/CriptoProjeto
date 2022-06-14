@@ -48,7 +48,7 @@ public abstract class AbstractRespository {
                 return"exec to_valor_hist;";
 
             case "deleteTabValor":
-                return "DELETE FROM Tab_Valor WHERE DATAHR_INC < cast(current_timestamp-1 as date);";
+                return "DELETE FROM Tab_Valor WHERE DATAHRC_INC < cast(current_timestamp-1 as date);";
 
             case "getCriptoValorListPorRank":
                 return "WITH top_row AS (\n" +
@@ -107,7 +107,7 @@ public abstract class AbstractRespository {
                 return "SELECT * FROM TAB_CRIPTO WHERE ID_Cripto = :idCriptomoeda;";
 
             case "getCriptoExtremoById":
-                return "SELECT * FROM TAB_EXTREMOS WHERE ID_Cripto = :idCripto and CAST(DataHr_Inc as DATE) = :dtRef;";
+                return "SELECT * FROM TAB_EXTREMOS WHERE ID_Cripto = :ID_Cripto and CAST(DataHr_Inc as DATE) = :dtRef;";
         }
 
         return null;
