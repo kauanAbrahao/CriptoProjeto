@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class CriptoExtremoServiceTest {
     @Test
     public void getAlLTest_dtRefValida_retornaDTO(){
         Mockito.when(criptoRepo.getAllCriptoExtremo(Mockito.any(LocalDate.class)))
-                .thenReturn(List.of(new CriptoExtremoDTO("bitcoin", 20.0, 30.0, LocalDate.now().minusDays(5))));
+                .thenReturn(List.of(new CriptoExtremoDTO("bitcoin", new BigDecimal(20),  new BigDecimal(30), LocalDate.now().minusDays(5))));
 
         var response = criptoExtremoService.getAll(LocalDate.now().minusDays(1));
 
