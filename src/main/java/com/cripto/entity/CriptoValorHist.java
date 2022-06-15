@@ -20,10 +20,10 @@ public class CriptoValorHist {
     private BigDecimal close_price;
     private BigDecimal high_price;
     private BigDecimal low_price;
-    private Long open_mkt_cap;
-    private Long close_mkt_cap;
+    private BigDecimal open_mkt_cap;
+    private BigDecimal close_mkt_cap;
     private BigDecimal avg_mkt_cap;
-    private Long total_volume;
+    private BigDecimal total_volume;
     private LocalDate reference_date;
 
 }

@@ -15,8 +15,8 @@ public class CriptoExtremoRowMapper implements RowMapper<CriptoExtremoDTO> {
     public CriptoExtremoDTO mapRow(ResultSet resultSet, int i) throws SQLException {
         CriptoExtremoDTO criptoExtremo = new CriptoExtremoDTO();
         criptoExtremo.setId(resultSet.getString("ID_Cripto"));
-        criptoExtremo.setHigh_value_day(resultSet.getDouble("High"));
-        criptoExtremo.setLow_value_day(resultSet.getDouble("Low"));
+        criptoExtremo.setHigh_value_day(resultSet.getBigDecimal("High"));
+        criptoExtremo.setLow_value_day(resultSet.getBigDecimal("Low"));
         criptoExtremo.setReference_date(resultSet.getObject("DataHR_Inc", LocalDate.class));
         return criptoExtremo;
     }

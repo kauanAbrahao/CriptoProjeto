@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class CriptoExtremoDTO {
 
     private String id;
-    private Double high_value_day;
-    private Double low_value_day;
+    private BigDecimal high_value_day;
+    private BigDecimal low_value_day;
     private LocalDate reference_date;
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,8 +20,8 @@ public class CriptoExtremo {
     String id;
 
     @JsonProperty("high_24h")
-    Double highValueDay;
+    BigDecimal highValueDay;
 
     @JsonProperty("low_24h")
-    Double lowValueDay;
+    BigDecimal lowValueDay;
 }
