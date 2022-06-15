@@ -75,4 +75,10 @@ public class CriptoExtremoServiceTest {
         Mockito.verify(criptoRepo, Mockito.times(0)).getAllCriptoExtremo(Mockito.any(LocalDate.class));
         Assert.assertEquals(400, response.getStatusCode().value());
     }
+
+    @Test
+    public void retryGetCriptoExtremo(){
+        criptoExtremoService.valoresExtremosFinalDoDia();
+        Mockito.verify(criptoRepo, Mockito.times(0)).getAllCriptoExtremo(Mockito.any(LocalDate.class));
+    }
 }

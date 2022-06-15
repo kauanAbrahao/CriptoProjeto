@@ -16,6 +16,7 @@ resilience4j:
 schedule:
   timeRequest: '200000'
   cron: '59 59 23 * * ?'
+  cronExtremo: '00 00 00 * * ?'
 
 spring:
   url: "v1/api-cripto"

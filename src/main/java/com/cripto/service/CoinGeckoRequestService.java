@@ -65,7 +65,7 @@ public class CoinGeckoRequestService implements CoinRequest {
         return Arrays.asList(response.getBody());
     }
 
-    public List<CriptoExtremo> criptoExtremoRequestErrorHandler(){
+    public List<CriptoExtremo> criptoExtremoRequestErrorHandler(Exception e){
         log.info("Política de retry criptoExtremoRetry iniciada");
         return  this.criptoExtremosRequest();
     }

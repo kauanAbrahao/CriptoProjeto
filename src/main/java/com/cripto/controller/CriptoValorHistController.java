@@ -36,7 +36,7 @@ public class CriptoValorHistController implements CriptoValorHistResource {
         return criptoValorHistService.getCriptoValorRangeDate(dtInicial, dtFim);
     }
 
-    @GetMapping(path="/history/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/history/coin/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getRangeDateId(@PathVariable(name = "id") String idCripto,
                                             @RequestParam(name = "from") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dtInicial,
                                             @RequestParam(name = "to")   @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dtFim) {

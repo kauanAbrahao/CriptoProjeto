@@ -63,7 +63,7 @@ public class CriptoExtremoService {
     /**
      * Método que roda ao final do dia, persistindo o high_24h e low_24h de cada criptomoeda
      */
-    @Scheduled(cron = ("${schedule.cron}"))
+    @Scheduled(cron = ("${schedule.cronExtremo}"))
     @Async
     public void valoresExtremosFinalDoDia(){
         try {

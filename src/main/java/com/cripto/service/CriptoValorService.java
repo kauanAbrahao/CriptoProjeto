@@ -71,7 +71,7 @@ public class CriptoValorService {
         return ResponseEntity.ok(result);
     }
 
-    @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
+//    @Scheduled(fixedDelayString = ("${schedule.timeRequest}"))
     @Async
     public void valorAtualRequest(){
         try{
