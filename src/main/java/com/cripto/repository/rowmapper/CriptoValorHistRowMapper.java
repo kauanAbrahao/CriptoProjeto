@@ -21,7 +21,7 @@ public class CriptoValorHistRowMapper implements RowMapper<CriptoValorHist> {
         criptoValorHist.setAvg_price(resultSet.getBigDecimal("Avg_Price"));
         criptoValorHist.setClose_price(resultSet.getBigDecimal("Close_Price"));
         criptoValorHist.setOpen_mkt_cap(resultSet.getBigDecimal("Open_Mkt_Cap"));
-        criptoValorHist.setAvg_mkt_cap(new BigDecimal(resultSet.getInt("Avg_Mkt_cap")));
+        criptoValorHist.setAvg_mkt_cap(new BigDecimal("Avg_Mkt_cap"));
         criptoValorHist.setClose_mkt_cap(resultSet.getBigDecimal("Close_Mkt_Cap"));
         criptoValorHist.setTotal_volume(resultSet.getBigDecimal("Total_Volume"));
         criptoValorHist.setHigh_price(resultSet.getObject("High", BigDecimal.class));
